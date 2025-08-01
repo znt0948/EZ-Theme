@@ -1447,7 +1447,7 @@ export default {
             url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
             break;
           case 'loon':
-            url = `loon://import?sub=${encodeURIComponent(subscribeUrl)}`;
+            url = `loon://import?nodelist=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'v2rayng':
             url = `v2rayng://install-sub?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
