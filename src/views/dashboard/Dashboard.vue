@@ -1426,76 +1426,76 @@ export default {
       try {
         switch (clientType) {
           case 'shadowrocket':
-            url = `shadowrocket://${subscribeUrl}`;
+            url = `shadowrocket://add/sub://${window.btoa(subscribeUrl + '&flag=shadowrocket').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}?remark=${encodeURIComponent(siteName)}`;
             break;
           case 'surge':
-            url = `surge://${subscribeUrl}`;
+            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'surge-mac':
-            url = `surge://${subscribeUrl}`;
+            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'stash':
-            url = `stash://${subscribeUrl}`;
+            url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'stash-mac':
-            url = `stash://${subscribeUrl}`;
+            url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'quantumultx':
-            url = `quantumult-x://${subscribeUrl}`;
+            url = `quantumult-x:///update-configuration?remote-resource=${encodeURIComponent(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
             break;
           case 'quantumultx-mac':
-            url = `quantumult-x://${subscribeUrl}`;
+            url = `quantumult-x:///update-configuration?remote-resource=${encodeURIComponent(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
             break;
           case 'loon':
-            url = `loon://${subscribeUrl}`;
+            url = `loon://import?sub=${encodeURIComponent(subscribeUrl)}`;
             break;
           case 'v2rayng':
-            url = `v2rayng://${subscribeUrl}`;
+            url = `v2rayng://install-sub?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
             break;
           case 'clash':
-            url = `clash://${subscribeUrl}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'clash-android':
-            url = `clash://${subscribeUrl}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'clash-meta-android':
-            url = `clashmeta://${subscribeUrl}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl+'&flag=meta')}&name=${siteName}`;
             break;
           case 'surfboard':
-            url = `surfboard://${subscribeUrl}`;
+            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'nekobox':
-            url = `clash://${subscribeUrl}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)+'&flag=meta'}&name=${siteName}`;
             break;
           case 'nekoray':
-            url = `clash://${subscribeUrl}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)+'&flag=meta'}&name=${siteName}`;
             break;
           case 'clashx':
-            url = `clash://${subscribeUrl}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'clashx-meta':
-            url = `clash://${subscribeUrl}`;
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl+'&flag=meta')}&name=${siteName}`;
             break;
           case 'singbox-ios':
-            url = `sing-box://${subscribeUrl}`;
+            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
             break;
           case 'singbox-android':
-            url = `sing-box://${subscribeUrl}`;
+            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
             break;
           case 'singbox-windows':
-            url = `sing-box://${subscribeUrl}`;
+            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
             break;
           case 'singbox-macos':
-            url = `sing-box://${subscribeUrl}`;
+            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
             break;
           case 'hiddify-android':
-            url = `hiddify://${subscribeUrl}`;
+            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
             break;
           case 'hiddify-windows':
-            url = `hiddify://${subscribeUrl}`;
+            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
             break;
           case 'hiddify-macos':
-            url = `hiddify://${subscribeUrl}`;
+            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
             break;
           default:
             navigator.clipboard.writeText(subscribeUrl)
