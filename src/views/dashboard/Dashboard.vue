@@ -1441,10 +1441,10 @@ export default {
             url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
           case 'quantumultx':
-            url = `quantumult-x:///update-configuration?remote-resource=${encodeURIComponent(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
+            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
             break;
           case 'quantumultx-mac':
-            url = `quantumult-x:///update-configuration?remote-resource=${encodeURIComponent(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
+            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
             break;
           case 'loon':
             url = `loon://import?nodelist=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
