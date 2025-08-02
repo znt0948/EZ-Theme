@@ -445,6 +445,25 @@ export const SHOP_CONFIG = mergeDeep(DEFAULT_SHOP_CONFIG, getConfig('SHOP_CONFIG
 
   // ===========================================================
 
+
+
+
+/**
+ * 商店二次确认
+ * 提交订单强制二次确认
+ */
+const DEFAULT_ORDER_CONFIG = {
+  // 是否启用二次确认
+  confirmOrder: true,
+  // 二次确认内容
+  confirmOrderContent: "<p>您确定要购买该套餐吗？</p>",
+};
+export const ORDER_CONFIG = mergeDeep(DEFAULT_ORDER_CONFIG, getConfig('ORDER_CONFIG'));
+  
+
+// ===========================================================
+
+
 /**
  * 仪表盘页面配置
  * 控制仪表盘页面的功能与显示
