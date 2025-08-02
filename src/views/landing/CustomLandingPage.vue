@@ -331,7 +331,6 @@ export default {
 
     return {
 
-      authStatus,
 
       customLandingPath,
 
