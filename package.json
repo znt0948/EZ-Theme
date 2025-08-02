@@ -5,7 +5,6 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
   },
   "keywords": [],
   "author": "",
@@ -50,15 +49,11 @@
     "@stagewise/toolbar-vue": "^0.4.7",
     "@types/qrcode": "^1.5.5",
     "@vue/cli-plugin-babel": "~5.0.8",
-    "@vue/cli-plugin-eslint": "~5.0.8",
     "@vue/cli-plugin-router": "~5.0.8",
     "@vue/cli-plugin-vuex": "~5.0.8",
     "@vue/cli-service": "~5.0.8",
     "@vue/compiler-sfc": "^3.2.37",
     "autoprefixer": "^10.4.21",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^9.4.0",
     "javascript-obfuscator": "^4.1.1",
     "postcss": "^8.5.3",
     "postcss-import": "^16.1.0",
