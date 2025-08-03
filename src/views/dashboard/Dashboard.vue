@@ -303,6 +303,10 @@
             <div v-if="activePlatform === 'android'" class="platform-section">
               <div class="platform-title">Android</div>
               <div v-if="hasAndroidClients" class="platform-options">
+                <div v-if="clientConfig.showFlClashAndroid" class="platform-option" @click="importToClient('flclash')">
+                  <img :src="flclashIcon" class="client-icon" alt="FlClash"/>
+                  <span>FlClash</span>
+                </div>
                 <div v-if="clientConfig.showV2rayNG" class="platform-option" @click="importToClient('v2rayng')">
                   <img :src="v2rayNGIcon" class="client-icon" alt="V2rayNG"/>
                   <span>V2rayNG</span>
