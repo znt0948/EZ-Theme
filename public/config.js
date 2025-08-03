@@ -287,10 +287,12 @@ window.EZ_CONFIG = {
     showSurge: true,
     showStash: true,
     showQuantumultX: true,
+    showHiddifyIOS: true,
     showSingboxIOS: true,
     showLoon: true,
     
     // Android平台客户端
+    showFlClashAndroid: true,
     showV2rayNG: true,
     showClashAndroid: true,
     showSurfboard: true,
@@ -300,12 +302,16 @@ window.EZ_CONFIG = {
     showHiddifyAndroid: true,
     
     // Windows平台客户端
+    showFlClashWindows: true,
+    showClashVergeWindows: true,
     showClashWindows: true,
     showNekoray: true,
     showSingboxWindows: true,
     showHiddifyWindows: true,
     
     // MacOS平台客户端
+    showFlClashMac: true,
+    showClashVergeMac: true,
     showClashX: true,
     showClashMetaX: true,
     showSurgeMac: true,

@@ -358,10 +358,12 @@ const DEFAULT_CLIENT_CONFIG = {
   showSurge: true,          // Surge
   showStash: true,          // Stash
   showQuantumultX: true,    // QuantumultX
+  showHiddifyIOS: true,     // Hiddify for IOS
   showSingboxIOS: true,     // SingBox for iOS
   showLoon: true,           // Loon
   
   // Android平台客户端
+  showFlClashAndroid: true,   // FlClash for Android
   showV2rayNG: true,          // V2rayNG
   showClashAndroid: true,     // Clash for Android
   showSurfboard: true,        // Surfboard
@@ -371,19 +373,23 @@ const DEFAULT_CLIENT_CONFIG = {
   showHiddifyAndroid: true,   // Hiddify for Android
   
   // Windows平台客户端
+  showFlClashWindows: true,   // FlClash for Windows
+  showClashVergeWindows: true,// ClashVerge for Windows
   showClashWindows: true,     // Clash for Windows
   showNekoray: true,          // Nekoray
   showSingboxWindows: true,   // SingBox for Windows
   showHiddifyWindows: true,   // Hiddify for Windows
   
   // MacOS平台客户端
+  showFlClashMac: true,       // FlClash for Mac
+  showClashVergeMac: true,    // ClashVerge for Mac
   showClashX: true,           // ClashX
   showClashMetaX: true,       // ClashX Meta
   showSurgeMac: true,         // Surge for Mac
   showStashMac: true,         // Stash for Mac
   showQuantumultXMac: true,   // QuantumultX for Mac
   showSingboxMac: true,       // SingBox for Mac
-  showHiddifyMac: true       // Hiddify for Mac
+  showHiddifyMac: true        // Hiddify for Mac
 }; 
 
 export const CLIENT_CONFIG = mergeDeep(DEFAULT_CLIENT_CONFIG, getConfig('CLIENT_CONFIG')); 

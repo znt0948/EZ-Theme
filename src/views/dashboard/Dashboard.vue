@@ -281,6 +281,10 @@
                   <img :src="quantumultIcon" class="client-icon" alt="Quantumult X"/>
                   <span>Quantumult X</span>
                 </div>
+                <div v-if="clientConfig.showHiddifyIOS" class="platform-option" @click="importToClient('hiddify-ios')">
+                  <img :src="hiddifyMacIcon" class="client-icon" alt="Hiddify"/>
+                  <span>Hiddify</span>
+                </div>
                 <div v-if="clientConfig.showSingboxIOS" class="platform-option" @click="importToClient('singbox-ios')">
                   <img :src="singboxIcon" class="client-icon" alt="Singbox"/>
                   <span>Singbox</span>
@@ -341,6 +345,14 @@
             <div v-if="activePlatform === 'windows'" class="platform-section">
               <div class="platform-title">Windows</div>
               <div v-if="hasWindowsClients" class="platform-options">
+                <div v-if="clientConfig.showFlClashWindows" class="platform-option" @click="importToClient('flclash')">
+                  <img :src="flclashIcon" class="client-icon" alt="FlClash"/>
+                  <span>FlClash</span>
+                </div>
+                <div v-if="clientConfig.showClashVergeWindows" class="platform-option" @click="importToClient('clashverge')">
+                  <img :src="clashvergeIcon" class="client-icon" alt="ClashVerge"/>
+                  <span>ClashVerge</span>
+                </div>
                 <div v-if="clientConfig.showClashWindows" class="platform-option" @click="importToClient('clash')">
                   <img :src="clashWindowsIcon" class="client-icon" alt="Clash"/>
                   <span>Clash</span>
@@ -369,6 +381,14 @@
             <div v-if="activePlatform === 'macos'" class="platform-section">
               <div class="platform-title">MacOS</div>
               <div v-if="hasMacOSClients" class="platform-options">
+                <div v-if="clientConfig.showFlClashWindows" class="platform-option" @click="importToClient('flclash')">
+                  <img :src="flclashIcon" class="client-icon" alt="FlClash"/>
+                  <span>FlClash</span>
+                </div>
+                <div v-if="clientConfig.showClashVergeWindows" class="platform-option" @click="importToClient('clashverge')">
+                  <img :src="clashvergeIcon" class="client-icon" alt="ClashVerge"/>
+                  <span>ClashVerge</span>
+                </div>
                 <div v-if="clientConfig.showClashX" class="platform-option" @click="importToClient('clashx')">
                   <img :src="clashXIcon" class="client-icon" alt="ClashX"/>
                   <span>ClashX</span>
@@ -736,6 +756,8 @@ import clashMetaAndroidIconImg from '@/assets/images/client-img-android/clashmet
 import nekoboxIconImg from '@/assets/images/client-img-android/nekobox.png';
 import singboxAndroidIconImg from '@/assets/images/client-img-android/singbox.png';
 import hiddifyAndroidIconImg from '@/assets/images/client-img-android/hiddify.png';
+import flclashIconImg from '@/assets/images/client-img-windows/flclash.png';
+import clashvergeIconImg from '@/assets/images/client-img-windows/clashverge.png';
 import clashWindowsIconImg from '@/assets/images/client-img-windows/clash.png';
 import nekorayIconImg from '@/assets/images/client-img-windows/nekoray.png';
 import singboxWindowsIconImg from '@/assets/images/client-img-windows/singbox.png';
@@ -860,6 +882,8 @@ export default {
     const singboxAndroidIcon = singboxAndroidIconImg;
     const hiddifyAndroidIcon = hiddifyAndroidIconImg;
 
+    const flclashIcon = flclashIconImg;
+    const clashvergeIcon = clashvergeIconImg;
     const clashWindowsIcon = clashWindowsIconImg;
     const nekorayIcon = nekorayIconImg;
     const singboxWindowsIcon = singboxWindowsIconImg;
@@ -1131,6 +1155,7 @@ export default {
           clientConfig.showSurge ||
           clientConfig.showStash ||
           clientConfig.showQuantumultX ||
+          clientConfig.showHiddifyIOS ||
           clientConfig.showSingboxIOS ||
           clientConfig.showLoon;
     });
@@ -1147,6 +1172,8 @@ export default {
 
     const hasWindowsClients = computed(() => {
       return clientConfig.showClashWindows ||
+          clientConfig.showFlClashWindows ||
+          clientConfig.showClashVergeWindows ||
           clientConfig.showNekoray ||
           clientConfig.showSingboxWindows ||
           clientConfig.showHiddifyWindows;
@@ -1154,6 +1181,8 @@ export default {
 
     const hasMacOSClients = computed(() => {
       return clientConfig.showClashX ||
+          clientConfig.showFlClashMac ||
+          clientConfig.showClashVergeMac ||
           clientConfig.showClashMetaX ||
           clientConfig.showSurgeMac ||
           clientConfig.showStashMac ||
@@ -1570,6 +1599,12 @@ export default {
           case 'surfboard':
             url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
             break;
+          case 'flclash':
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
+            break;
+          case 'clashverge':
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
+            break;
           case 'nekobox':
             url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
             break;
@@ -1601,6 +1636,9 @@ export default {
             url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
             break;
           case 'hiddify-macos':
+            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
+            break;
+          case 'hiddify-ios':
             url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
             break;
           default:
@@ -1915,6 +1953,8 @@ export default {
       nekoboxIcon,
       singboxAndroidIcon,
       hiddifyAndroidIcon,
+      flclashIcon,
+      clashvergeIcon,
       clashWindowsIcon,
       nekorayIcon,
       singboxWindowsIcon,
