@@ -1406,6 +1406,9 @@ export default {
           currentNoticeIndex.value = popupNoticeIndex;
           showNoticeDetails.value = true;
           sessionStorage.setItem(popupShownKey, 'true');
+          nextTick(() => {
+            updateModalHeight();
+          });
         }
       }
     };
