@@ -771,15 +771,7 @@ export default {
 
           if (config.is_recaptcha === 1) {
 
-            if (captchaConfig.type === 'google') {
-
-              captchaConfig.siteKey = response.data.recaptcha_site_key;
-
-            } else if (captchaConfig.type === 'cloudflare') {
-
-              captchaConfig.siteKey = CAPTCHA_CONFIG.cloudflare.siteKey;
-
-            }
+            captchaConfig.siteKey = config.recaptcha_site_key;
 
             
 
@@ -801,7 +793,7 @@ export default {
 
         console.error('无法获取网站配置:', error);
 
-        showToast(t('errors.configLoadFailed'), 'error');
+        showToast(t('messages.configLoadFailed'), 'error');
 
       } finally {
 
