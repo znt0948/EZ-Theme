@@ -313,7 +313,10 @@ const DEFAULT_TRAFFICLOG_CONFIG = {
     enableTrafficLog: true,
 
     // 显示多少天的流量记录
-    daysToShow: 30
+    daysToShow: 30,
+
+    // 流量趋势图是否聚合每日流量 (如果你的节点倍率全为1倍则无需开启)
+    sumDailyTraffic: false
 };
 
 export const TRAFFICLOG_CONFIG = mergeDeep(DEFAULT_TRAFFICLOG_CONFIG, getConfig('TRAFFICLOG_CONFIG'));
