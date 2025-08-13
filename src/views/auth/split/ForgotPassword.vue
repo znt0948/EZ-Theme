@@ -6,7 +6,7 @@
 
 
 
-      
+
 
       <!-- 左侧背景区域 -->
 
@@ -14,7 +14,7 @@
 
         <div class="left-content-overlay"></div>
 
-        <div class="site-name" v-if="showSiteName" :class="siteNameColorClass">
+        <div class="site-name" v-if="showSiteName" :class="siteNameColorClass" @click="goTo('/')">
 
           {{ SITE_CONFIG.siteName }}
 
@@ -28,7 +28,7 @@
 
       </div>
 
-      
+
 
       <!-- 右侧表单区域 -->
 
@@ -44,7 +44,7 @@
 
         </div>
 
-        
+
 
         <div class="auth-form-container" v-if="configLoading">
 
@@ -58,7 +58,7 @@
 
         </div>
 
-        
+
 
         <div class="auth-form-container" v-else>
 
@@ -66,13 +66,15 @@
 
             <div class="auth-logo">
 
-              <img 
+              <img
 
-                :src="logoPath" 
+                :src="logoPath"
 
-                alt="Logo" 
+                alt="Logo"
 
-                @error="handleLogoError" 
+                @error="handleLogoError"
+
+                @click="goTo('/')"
 
               />
 
@@ -84,7 +86,7 @@
 
           </div>
 
-          
+
 
           <form class="auth-form" @submit.prevent="handleSubmit">
 
@@ -116,7 +118,7 @@
 
             </div>
 
-            
+
 
             <div class="form-group">
 
@@ -168,7 +170,7 @@
 
             </div>
 
-            
+
 
             <div class="form-group">
 
@@ -206,7 +208,7 @@
 
             </div>
 
-            
+
 
             <div class="form-group">
 
@@ -244,7 +246,7 @@
 
             </div>
 
-            
+
 
             <button
 
@@ -274,7 +276,7 @@
 
           </form>
 
-          
+
 
           <div class="auth-footer">
 
@@ -284,7 +286,7 @@
 
             </div>
 
-            
+
 
             <router-link to="/login" class="btn btn-secondary btn-block" replace>
 
@@ -300,7 +302,7 @@
 
     </div>
 
-    
+
 
     <!-- 验证码弹窗 -->
 
@@ -326,7 +328,7 @@
 
           <p>{{ $t('auth.captchaRequired') }}</p>
 
-          
+
 
           <!-- Google reCAPTCHA -->
 
@@ -336,7 +338,7 @@
 
           </div>
 
-          
+
 
           <!-- Cloudflare Turnstile -->
 
@@ -352,7 +354,7 @@
 
     </div>
 
-    
+
 
     <!-- 自定义弹窗 -->
 
@@ -419,6 +421,7 @@ import { CAPTCHA_CONFIG, AUTH_LAYOUT_CONFIG, SITE_CONFIG, AUTH_CONFIG } from '@/
 import AuthPopup from '@/components/auth/AuthPopup.vue';
 
 import { shouldShowAuthPopup } from '@/utils/authPopupState';
+import { useNavigator } from "@/composables/useNavigator";
 
 
 
@@ -454,7 +457,7 @@ const getTimeBasedGreeting = () => {
 
   const hour = new Date().getHours();
 
-  
+
 
   if (hour >= 5 && hour < 12) {
 
@@ -516,7 +519,9 @@ export default {
 
     const { showToast } = useToast();
 
-    
+    const { goTo } = useNavigator()
+
+
 
     const loading = ref(false);
 
@@ -528,7 +533,7 @@ export default {
 
     const showPassword = ref(false);
 
-    
+
 
     const showCaptchaModal = ref(false);
 
@@ -536,7 +541,7 @@ export default {
 
     const isClosingModal = ref(false);
 
-    
+
 
     const showAuthPopup = ref(false);
 
@@ -552,7 +557,7 @@ export default {
 
     });
 
-    
+
 
     const handleAuthPopupClose = () => {
 
@@ -560,7 +565,7 @@ export default {
 
     };
 
-    
+
 
     const logoPath = ref('./images/logo.png');
 
@@ -570,17 +575,17 @@ export default {
 
     };
 
-    
 
 
 
-    
+
+
 
     const leftSideStyles = computed(() => {
 
       const backgroundImage = AUTH_LAYOUT_CONFIG?.splitLayout?.leftContent?.backgroundImage || '';
 
-      
+
 
       if (backgroundImage) {
 
@@ -604,7 +609,7 @@ export default {
 
     });
 
-    
+
 
     const showSiteName = computed(() => {
 
@@ -612,7 +617,7 @@ export default {
 
     });
 
-    
+
 
     const siteNameColorClass = computed(() => {
 
@@ -622,7 +627,7 @@ export default {
 
     });
 
-    
+
 
     const showGreeting = computed(() => {
 
@@ -630,7 +635,7 @@ export default {
 
     });
 
-    
+
 
     const greetingMessage = computed(() => {
 
@@ -638,7 +643,7 @@ export default {
 
     });
 
-    
+
 
     const greetingColorClass = computed(() => {
 
@@ -648,7 +653,7 @@ export default {
 
     });
 
-    
+
 
     const config = reactive({
 
@@ -660,7 +665,7 @@ export default {
 
     });
 
-    
+
 
     const captchaConfig = reactive({
 
@@ -672,7 +677,7 @@ export default {
 
     });
 
-    
+
 
     const formData = reactive({
 
@@ -686,7 +691,7 @@ export default {
 
     });
 
-    
+
 
     const errors = reactive({
 
@@ -700,19 +705,19 @@ export default {
 
     });
 
-    
+
 
     const showConfirmPassword = ref(false);
 
-    
+
 
     const captchaResponse = ref('');
 
-    
+
 
     const app = getCurrentInstance();
 
-    
+
 
     if (app && app.proxy) {
 
@@ -726,13 +731,13 @@ export default {
 
         handleCaptchaModalResponse: (response) => {
 
-          
+
 
           if (response && typeof response === 'string' && response.trim().length > 0) {
 
             captchaModalResponse.value = response;
 
-            
+
 
             setTimeout(() => {
 
@@ -740,7 +745,7 @@ export default {
 
               sendVerificationCodeWithCaptcha(response);
 
-            }, 300); 
+            }, 300);
           } else {
 
           }
@@ -751,7 +756,7 @@ export default {
 
     }
 
-    
+
 
     const fetchWebsiteConfig = async () => {
 
@@ -761,29 +766,29 @@ export default {
 
         const response = await getWebsiteConfig();
 
-        
+
 
         if (response && response.data) {
 
           Object.assign(config, response.data);
 
-          
+
 
           if (config.is_recaptcha === 1) {
 
             captchaConfig.siteKey = config.recaptcha_site_key;
 
-            
+
 
             await loadCaptchaScript();
 
           }
 
-          
+
 
           configLoaded.value = true;
 
-          
+
 
           showAuthPopup.value = shouldShowAuthPopup(AUTH_CONFIG.popup);
 
@@ -803,7 +808,7 @@ export default {
 
     };
 
-    
+
 
     const loadCaptchaScript = () => {
 
@@ -817,7 +822,7 @@ export default {
 
         }
 
-        
+
 
         if (captchaConfig.type === 'google' && window.grecaptcha) {
 
@@ -829,13 +834,13 @@ export default {
 
         }
 
-        
+
 
         if (window.turnstile && captchaConfig.type === 'cloudflare') {
 
           console.log('Turnstile已存在，尝试重置而不是重新加载脚本');
 
-          
+
 
           try {
 
@@ -845,7 +850,7 @@ export default {
 
             }
 
-            
+
 
             const modalContainer = document.getElementById('modal-turnstile');
 
@@ -853,7 +858,7 @@ export default {
 
               modalContainer.innerHTML = '';
 
-              
+
 
               setTimeout(() => {
 
@@ -873,14 +878,14 @@ export default {
 
                   'theme': document.body.classList.contains('dark-theme') ? 'dark' : 'light',
 
-                  'retry': 'auto', 
-                  'retry-interval': 5000, 
-                  'refresh-expired': 'manual', 
-                  'tabindex': 0, 
-                  'execution': 'render' 
+                  'retry': 'auto',
+                  'retry-interval': 5000,
+                  'refresh-expired': 'manual',
+                  'tabindex': 0,
+                  'execution': 'render'
                 });
 
-                
+
 
                 resolve();
 
@@ -898,7 +903,7 @@ export default {
 
         }
 
-        
+
 
         const cleanupExistingCaptcha = () => {
 
@@ -910,7 +915,7 @@ export default {
 
           }
 
-          
+
 
           const turnstileContainer = document.getElementById('modal-turnstile');
 
@@ -920,23 +925,23 @@ export default {
 
           }
 
-          
+
 
           isGoogleModalRecaptchaRendered = false;
 
         };
 
-        
+
 
         cleanupExistingCaptcha();
 
-        
+
 
         if (!window.turnstile || captchaConfig.type !== 'cloudflare') {
 
           const script = document.createElement('script');
 
-          
+
 
           if (captchaConfig.type === 'google') {
 
@@ -950,13 +955,13 @@ export default {
 
           }
 
-          
+
 
           script.async = true;
 
           script.defer = true;
 
-          
+
 
           window.captchaScriptLoaded = () => {
 
@@ -970,7 +975,7 @@ export default {
 
           };
 
-          
+
 
           document.head.appendChild(script);
 
@@ -984,7 +989,7 @@ export default {
 
     };
 
-    
+
 
     const showCaptchaModalDialog = () => {
 
@@ -992,7 +997,7 @@ export default {
 
       captchaModalResponse.value = '';
 
-      
+
 
       const renderCaptcha = async () => {
 
@@ -1000,7 +1005,7 @@ export default {
 
           await loadCaptchaScript();
 
-          
+
 
           setTimeout(() => {
 
@@ -1012,7 +1017,7 @@ export default {
 
                 container.innerHTML = '';
 
-                
+
 
                 try {
 
@@ -1054,7 +1059,7 @@ export default {
 
                 container.innerHTML = '';
 
-                
+
 
                 if (window.turnstile.reset) {
 
@@ -1070,7 +1075,7 @@ export default {
 
                 }
 
-                
+
 
                 try {
 
@@ -1090,18 +1095,18 @@ export default {
 
                     'theme': document.body.classList.contains('dark-theme') ? 'dark' : 'light',
 
-                    'retry': 'auto', 
-                    'retry-interval': 5000, 
-                    'refresh-expired': 'manual', 
-                    'tabindex': 0, 
-                    'execution': 'render' 
+                    'retry': 'auto',
+                    'retry-interval': 5000,
+                    'refresh-expired': 'manual',
+                    'tabindex': 0,
+                    'execution': 'render'
                   });
 
                 } catch (error) {
 
                   console.error('Turnstile渲染错误:', error);
 
-                  
+
 
                   const scripts = document.getElementsByTagName('script');
 
@@ -1115,7 +1120,7 @@ export default {
 
                   }
 
-                  
+
 
                   setTimeout(() => {
 
@@ -1141,11 +1146,11 @@ export default {
 
             } else {
 
-              console.error('验证码脚本未加载或配置不正确', { 
+              console.error('验证码脚本未加载或配置不正确', {
 
-                type: captchaConfig.type, 
+                type: captchaConfig.type,
 
-                hasGoogle: !!window.grecaptcha, 
+                hasGoogle: !!window.grecaptcha,
 
                 hasTurnstile: !!window.turnstile
 
@@ -1153,24 +1158,24 @@ export default {
 
             }
 
-          }, 300); 
+          }, 300);
         }
 
       };
 
-      
+
 
       renderCaptcha();
 
     };
 
-    
+
 
     const closeCaptchaModal = () => {
 
       isClosingModal.value = true;
 
-      
+
 
       setTimeout(() => {
 
@@ -1178,7 +1183,7 @@ export default {
 
         isClosingModal.value = false;
 
-        
+
 
         setTimeout(() => {
 
@@ -1198,17 +1203,17 @@ export default {
 
     };
 
-    
+
 
     const handleCaptchaModalResponse = (response) => {
 
-      
+
 
       if (response && typeof response === 'string' && response.trim().length > 0) {
 
         captchaModalResponse.value = response;
 
-        
+
 
         setTimeout(() => {
 
@@ -1216,14 +1221,14 @@ export default {
 
           sendVerificationCodeWithCaptcha(response);
 
-        }, 300); 
+        }, 300);
       } else {
 
       }
 
     };
 
-    
+
 
     const sendVerificationCodeWithCaptcha = async (captchaData) => {
 
@@ -1231,7 +1236,7 @@ export default {
 
         loading.value = true;
 
-        
+
 
         const sendData = {
 
@@ -1241,7 +1246,7 @@ export default {
 
         };
 
-        
+
 
         if (captchaData) {
 
@@ -1249,11 +1254,11 @@ export default {
 
         }
 
-        
+
 
         const response = await sendEmailVerify(sendData);
 
-        
+
 
         if (response && response.data === true) {
 
@@ -1261,7 +1266,7 @@ export default {
 
           showToast(response.message || t('auth.codeSent'), 'success');
 
-          
+
 
           if (AUTH_CONFIG.verificationCode && AUTH_CONFIG.verificationCode.showCheckSpamTip) {
 
@@ -1293,13 +1298,13 @@ export default {
 
     };
 
-    
+
 
     const sendVerificationCode = async () => {
 
       errors.email = '';
 
-      
+
 
       if (!formData.email) {
 
@@ -1309,7 +1314,7 @@ export default {
 
       }
 
-      
+
 
       if (!isValidEmail(formData.email)) {
 
@@ -1319,25 +1324,25 @@ export default {
 
       }
 
-      
+
 
       if (config.is_recaptcha === 1 && captchaConfig.siteKey) {
 
-        const captchaSuccessElement = document.querySelector('.cloudflare-success-message') || 
+        const captchaSuccessElement = document.querySelector('.cloudflare-success-message') ||
 
                                      document.querySelector('.recaptcha-success');
 
-        const isCaptchaVerified = !!captchaResponse.value || 
+        const isCaptchaVerified = !!captchaResponse.value ||
 
                                   (captchaSuccessElement && captchaSuccessElement.style.display !== 'none');
 
-        
+
 
         if (isCaptchaVerified) {
 
-          const captchaData = captchaResponse.value || 
+          const captchaData = captchaResponse.value ||
 
-                            document.querySelector('[name="g-recaptcha-response"]')?.value || 
+                            document.querySelector('[name="g-recaptcha-response"]')?.value ||
 
                             document.querySelector('[name="cf-turnstile-response"]')?.value;
 
@@ -1357,7 +1362,7 @@ export default {
 
     };
 
-    
+
 
     const startCooldown = () => {
 
@@ -1377,7 +1382,7 @@ export default {
 
     };
 
-    
+
 
     const handleSubmit = async () => {
 
@@ -1389,11 +1394,11 @@ export default {
 
       errors.confirmPassword = '';
 
-      
+
 
       let isValid = true;
 
-      
+
 
       if (!formData.email) {
 
@@ -1409,7 +1414,7 @@ export default {
 
       }
 
-      
+
 
       if (!formData.verificationCode) {
 
@@ -1419,7 +1424,7 @@ export default {
 
       }
 
-      
+
 
       if (!formData.newPassword) {
 
@@ -1435,7 +1440,7 @@ export default {
 
       }
 
-      
+
 
       if (!formData.confirmPassword) {
 
@@ -1451,17 +1456,17 @@ export default {
 
       }
 
-      
+
 
       if (!isValid) return;
 
-      
+
 
       try {
 
         loading.value = true;
 
-        
+
 
         const resetData = {
 
@@ -1473,7 +1478,7 @@ export default {
 
         };
 
-        
+
 
         if (config.is_recaptcha === 1) {
 
@@ -1483,7 +1488,7 @@ export default {
 
           } else {
 
-            const captchaElement = document.querySelector('[name="g-recaptcha-response"]') || 
+            const captchaElement = document.querySelector('[name="g-recaptcha-response"]') ||
 
                                   document.querySelector('[name="cf-turnstile-response"]');
 
@@ -1497,17 +1502,17 @@ export default {
 
         }
 
-        
+
 
         const response = await resetPassword(resetData);
 
-        
+
 
         if (response.data === true) {
 
           showToast(response.message || t('auth.passwordResetSuccess'), 'success');
 
-          
+
 
           router.push('/login');
 
@@ -1529,17 +1534,17 @@ export default {
 
     };
 
-    
+
 
     onMounted(() => {
 
 
 
-      
+
 
       fetchWebsiteConfig();
 
-      
+
 
       window.addEventListener('focus', () => {
 
@@ -1551,19 +1556,19 @@ export default {
 
       });
 
-      
+
 
       const urlParams = new URLSearchParams(window.location.search);
 
       const isJustLoggedOut = urlParams.get('logout') === 'true';
 
-      
+
 
       if (isJustLoggedOut) {
 
         showToast(t('auth.logoutSuccess'), 'success');
 
-        
+
 
         if (window.history && window.history.replaceState) {
 
@@ -1573,13 +1578,13 @@ export default {
 
         }
 
-        
+
 
         return;
 
       }
 
-      
+
 
       try {
 
@@ -1589,11 +1594,11 @@ export default {
 
         }
 
-        
+
 
         const loginStatus = checkLoginStatus();
 
-        
+
 
         if (loginStatus) {
 
@@ -1613,7 +1618,7 @@ export default {
 
     });
 
-    
+
 
     onActivated(() => {
 
@@ -1633,7 +1638,7 @@ export default {
 
               console.log('Turnstile重置失败，将重新渲染验证码组件');
 
-              
+
 
               const container = document.getElementById('modal-turnstile');
 
@@ -1641,7 +1646,7 @@ export default {
 
                 container.innerHTML = '';
 
-                
+
 
                 window.turnstile.render('#modal-turnstile', {
 
@@ -1675,13 +1680,13 @@ export default {
 
     });
 
-    
+
 
     onBeforeUnmount(() => {
 
       isGoogleModalRecaptchaRendered = false;
 
-      
+
 
       if (window.turnstile && window.turnstile.reset) {
 
@@ -1697,7 +1702,7 @@ export default {
 
       }
 
-      
+
 
       const turnstileContainer = document.getElementById('modal-turnstile');
 
@@ -1707,13 +1712,13 @@ export default {
 
       }
 
-      
+
 
       captchaResponse.value = '';
 
       captchaModalResponse.value = '';
 
-      
+
 
       window.captchaScriptLoaded = undefined;
 
@@ -1721,13 +1726,13 @@ export default {
 
       window.onCaptchaForgotPasswordModalVerified = undefined;
 
-      
+
 
       window._forgotPasswordInstance = null;
 
     });
 
-    
+
 
     return {
 
@@ -1789,7 +1794,9 @@ export default {
 
       authPopupConfig,
 
-      handleAuthPopupClose
+      handleAuthPopupClose,
+
+      goTo,
 
     };
 
@@ -1827,7 +1834,7 @@ export default {
 
   overflow: hidden;
 
-  
+
 
   @media (max-width: 992px) {
 
@@ -1879,7 +1886,7 @@ export default {
 
   height: 100%;
 
-  
+
 
   @media (max-width: 992px) {
 
@@ -1887,7 +1894,7 @@ export default {
 
   }
 
-  
+
 
   .left-content-overlay {
 
@@ -1907,7 +1914,7 @@ export default {
 
   }
 
-  
+
 
   .site-name {
 
@@ -1923,7 +1930,11 @@ export default {
 
     z-index: 2;
 
-    
+    cursor: pointer;
+
+    user-select: none;
+
+
 
     &.white {
 
@@ -1933,7 +1944,7 @@ export default {
 
     }
 
-    
+
 
     &.black {
 
@@ -1971,7 +1982,7 @@ export default {
 
   height: 100%;
 
-  
+
 
   @media (max-width: 992px) {
 
@@ -2025,7 +2036,7 @@ export default {
 
   z-index: 10;
 
-  
+
 
   @media (max-width: 992px) {
 
@@ -2055,7 +2066,7 @@ export default {
 
   justify-content: center;
 
-  
+
 
   @media (max-width: 992px) {
 
@@ -2097,7 +2108,7 @@ export default {
 
     color: var(--primary-text-color);
 
-    
+
 
     @media (min-width: 993px) {
 
@@ -2117,7 +2128,7 @@ export default {
 
     margin-bottom: 1.5rem;
 
-    
+
 
     @media (min-width: 993px) {
 
@@ -2145,7 +2156,7 @@ export default {
 
   min-height: 100vh;
 
-  
+
 
   .loading-spinner {
 
@@ -2165,7 +2176,7 @@ export default {
 
   }
 
-  
+
 
   p {
 
@@ -2199,7 +2210,7 @@ export default {
 
   width: 100%;
 
-  
+
 
   .input-icon {
 
@@ -2219,7 +2230,7 @@ export default {
 
   }
 
-  
+
 
   .password-toggle {
 
@@ -2245,7 +2256,7 @@ export default {
 
     transition: color 0.2s ease;
 
-    
+
 
     &:hover {
 
@@ -2255,7 +2266,7 @@ export default {
 
   }
 
-  
+
 
   .form-control {
 
@@ -2273,7 +2284,7 @@ export default {
 
     color: var(--primary-text-color);
 
-    
+
 
     &[type="password"],
 
@@ -2283,7 +2294,7 @@ export default {
 
     }
 
-    
+
 
     &:focus {
 
@@ -2297,7 +2308,7 @@ export default {
 
     }
 
-    
+
 
     &::placeholder {
 
@@ -2321,13 +2332,13 @@ export default {
 
   width: 100%;
 
-  
+
 
   .verification-input {
 
     flex: 1;
 
-    
+
 
     .form-control {
 
@@ -2341,7 +2352,7 @@ export default {
 
   }
 
-  
+
 
   .send-code-btn {
 
@@ -2381,7 +2392,7 @@ export default {
 
     transition: background-color 0.3s, opacity 0.3s, transform 0.3s;
 
-    
+
 
     &:hover:not(:disabled) {
 
@@ -2391,7 +2402,7 @@ export default {
 
     }
 
-    
+
 
     &:disabled {
 
@@ -2403,7 +2414,7 @@ export default {
 
     }
 
-    
+
 
     &:not(:disabled) {
 
@@ -2411,7 +2422,7 @@ export default {
 
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
-      
+
 
       &:hover {
 
@@ -2423,7 +2434,7 @@ export default {
 
     }
 
-    
+
 
     .icon-left {
 
@@ -2451,7 +2462,7 @@ export default {
 
   justify-content: center;
 
-  
+
 
   &.btn-primary {
 
@@ -2463,7 +2474,7 @@ export default {
 
     font-weight: 600;
 
-    
+
 
     &:hover:not(:disabled) {
 
@@ -2471,7 +2482,7 @@ export default {
 
     }
 
-    
+
 
     &:disabled {
 
@@ -2481,7 +2492,7 @@ export default {
 
     }
 
-    
+
 
     .icon-right {
 
@@ -2517,7 +2528,7 @@ export default {
 
   animation: modalFadeIn 0.3s ease;
 
-  
+
 
   &.closing {
 
@@ -2525,7 +2536,7 @@ export default {
 
   }
 
-  
+
 
   .captcha-modal-overlay {
 
@@ -2545,7 +2556,7 @@ export default {
 
   }
 
-  
+
 
   .captcha-modal-content {
 
@@ -2565,7 +2576,7 @@ export default {
 
     animation: modalSlideIn 0.3s ease;
 
-    
+
 
     &.closing {
 
@@ -2573,7 +2584,7 @@ export default {
 
     }
 
-    
+
 
     .captcha-modal-header {
 
@@ -2587,7 +2598,7 @@ export default {
 
       border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
 
-      
+
 
       h3 {
 
@@ -2599,7 +2610,7 @@ export default {
 
       }
 
-      
+
 
       .close-btn {
 
@@ -2627,7 +2638,7 @@ export default {
 
         transition: all 0.2s;
 
-        
+
 
         &:hover {
 
@@ -2639,13 +2650,13 @@ export default {
 
     }
 
-    
+
 
     .captcha-modal-body {
 
       padding: 20px;
 
-      
+
 
       p {
 
@@ -2657,7 +2668,7 @@ export default {
 
       }
 
-      
+
 
       .google-captcha,
 
@@ -2759,7 +2770,7 @@ export default {
 
   display: inline-block;
 
-  
+
 
   &:hover {
 
@@ -2793,7 +2804,7 @@ export default {
 
   transition: all 0.3s ease !important;
 
-  
+
 
   &:hover {
 
@@ -2825,15 +2836,15 @@ export default {
 
   transition: all 0.3s ease;
 
-  
+
 
   svg {
 
-    display: none; 
+    display: none;
 
   }
 
-  
+
 
   &::before {
 
@@ -2855,7 +2866,7 @@ export default {
 
   }
 
-  
+
 
   span {
 
@@ -2895,7 +2906,7 @@ export default {
 
   text-align: center;
 
-  
+
 
   @media (min-width: 993px) {
 
@@ -2903,7 +2914,7 @@ export default {
 
   }
 
-  
+
 
   img {
 
@@ -2918,6 +2929,10 @@ export default {
     border-radius: 12px;
 
     object-fit: cover;
+
+    cursor: pointer;
+
+    user-select: none;
 
   }
 
@@ -2935,7 +2950,7 @@ export default {
 
   }
 
-  
+
 
   .auth-form-container {
 
@@ -2945,13 +2960,13 @@ export default {
 
   }
 
-  
+
 
   .auth-header {
 
     margin-bottom: 1.5rem;
 
-    
+
 
     .auth-logo img {
 
@@ -2959,7 +2974,7 @@ export default {
 
     }
 
-    
+
 
     .auth-title {
 
@@ -2999,7 +3014,7 @@ export default {
 
     }
 
-    
+
 
     .form-control {
 
@@ -3007,7 +3022,7 @@ export default {
 
       border-color: var(--input-border-color, #444);
 
-      
+
 
       &:focus {
 
@@ -3017,7 +3032,7 @@ export default {
 
       }
 
-      
+
 
       &::placeholder {
 
@@ -3029,7 +3044,7 @@ export default {
 
   }
 
-  
+
 
   .input-with-button {
 
@@ -3037,7 +3052,7 @@ export default {
 
       background-color: var(--theme-color);
 
-      
+
 
       &:hover:not(:disabled) {
 
@@ -3049,13 +3064,13 @@ export default {
 
   }
 
-  
+
 
   .btn-primary {
 
     background-color: var(--theme-color);
 
-    
+
 
     &:hover:not(:disabled) {
 
@@ -3083,7 +3098,7 @@ export default {
 
   z-index: 2;
 
-  
+
 
   &.white {
 
@@ -3093,7 +3108,7 @@ export default {
 
   }
 
-  
+
 
   &.black {
 
@@ -3105,4 +3120,4 @@ export default {
 
 }
 
-</style> 
+</style>
