@@ -498,7 +498,10 @@ window.EZ_CONFIG = {
         enableTrafficLog: true, // 默认启用
 
         // 显示多少天的流量记录
-        daysToShow: 30 // 默认显示30天
+        daysToShow: 30, // 默认显示30天
+
+        // 流量趋势图是否聚合每日流量 (如果你的节点倍率全为1倍则无需开启)
+        sumDailyTraffic: false // 默认禁用
     },
 
     // 节点列表配置

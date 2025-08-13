@@ -48,6 +48,14 @@
 
           <h2 class="card-title">{{ $t('trafficLog.trafficChart') }}</h2>
 
+          <div v-if="TRAFFICLOG_CONFIG.sumDailyTraffic" class="chart-toggle-buttons">
+            <button @click="toggleDataView(false)" :class="{ active: !showOriginalData }">
+              <span class="">{{ $t('trafficLog.deductedTraffic') }}</span>
+            </button>
+            <button @click="toggleDataView(true)" :class="{ active: showOriginalData }">
+              <span class="">{{ $t('trafficLog.actualTraffic') }}</span>
+            </button>
+          </div>
         </div>
 
         <div class="card-body">
@@ -252,6 +260,7 @@ const chartRef = ref(null);
 
 let chartInstance = null;
 
+const showOriginalData = ref(false); // false: 显示倍率后, true: 显示实际
 
 
 const fetchTrafficData = async () => {
@@ -322,6 +331,10 @@ const fetchTrafficData = async () => {
 
 };
 
+const toggleDataView = (showOriginal) => {
+  showOriginalData.value = showOriginal;
+  initChart();
+};
 
 
 const initChart = () => {
@@ -354,9 +367,32 @@ const initChart = () => {
 
   const totalData = [];
 
-  
+  let sortedData;
 
-  const sortedData = [...trafficData.value].slice(0, 30).reverse();
+  if (TRAFFICLOG_CONFIG.sumDailyTraffic) {
+    // 对图表数据相同日期的流量合并
+    const dailyTraffic = {};
+    trafficData.value.forEach(item => {
+      const recordDate = item.record_at;
+      if (!dailyTraffic[recordDate]) {
+        dailyTraffic[recordDate] = {
+          record_at: recordDate,
+          u: 0,
+          d: 0,
+        };
+      }
+      if (showOriginalData.value) {
+        dailyTraffic[recordDate].u += item.u;
+        dailyTraffic[recordDate].d += item.d;
+      } else {
+        dailyTraffic[recordDate].u += item.u * parseFloat(item.server_rate);
+        dailyTraffic[recordDate].d += item.d * parseFloat(item.server_rate);
+      }
+    });
+    sortedData = Object.values(dailyTraffic).slice(0, 30);
+  }else {
+    sortedData = [...trafficData.value].slice(0, 30).reverse();
+  }
 
   
 
@@ -664,7 +700,7 @@ watch(trafficData, () => {
 let themeObserver = null;
 
 
-
+let isInitialThemeLoad = true;
 const setupThemeObserver = () => {
 
   if (themeObserver) {
@@ -678,7 +714,9 @@ const setupThemeObserver = () => {
   let debounceTimer = null;
 
   themeObserver = new MutationObserver(() => {
-
+    if (isInitialThemeLoad) {
+      return;
+    }
     clearTimeout(debounceTimer);
 
     debounceTimer = setTimeout(() => {
@@ -704,7 +742,10 @@ const setupThemeObserver = () => {
 
     attributeFilter: ['class', 'style'] 
   });
-
+  // 防抖
+  setTimeout(() => {
+    isInitialThemeLoad = false;
+  }, 800);
 };
 
 
@@ -751,19 +792,6 @@ onUnmounted(() => {
 
 
 
-watch(loading, (newVal) => {
-
-  if (!newVal && !error.value && trafficData.value.length > 0) {
-
-    nextTick(() => {
-
-      initChart();
-
-    });
-
-  }
-
-});
 
 </script>
 
@@ -822,7 +850,39 @@ watch(loading, (newVal) => {
       }
 
     }
+  }
 
+  .chart-toggle-buttons {
+    display: flex;
+    gap: 10px;
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background-color: rgba(var(--theme-color-rgb), 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--text-color);
+
+      &:hover {
+        background-color: rgba(var(--theme-color-rgb), 0.1);
+        transform: translateY(-1px);
+        border-color: rgba(var(--theme-color-rgb), 0.2);
+      }
+
+      &.active {
+        background-color: rgba(var(--theme-color-rgb), 0.15);
+        color: var(--theme-color);
+        border-color: var(--theme-color);
+        font-weight: 600;
+      }
+    }
   }
 
   
@@ -863,7 +923,8 @@ watch(loading, (newVal) => {
 
       margin-bottom: 15px;
 
-      
+      flex-wrap: wrap;
+      gap: 6px;
 
       .card-title {
 
