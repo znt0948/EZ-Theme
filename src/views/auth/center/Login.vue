@@ -6,7 +6,7 @@
 
 
 
-    
+
 
     <!-- 背景装饰 -->
 
@@ -20,7 +20,7 @@
 
     </div>
 
-    
+
 
     <!-- 顶部工具栏：语言选择器和主题切换 -->
 
@@ -32,7 +32,7 @@
 
     </div>
 
-    
+
 
     <div class="auth-card">
 
@@ -40,13 +40,15 @@
 
         <div class="auth-logo">
 
-          <img 
+          <img
 
-            :src="logoPath" 
+            :src="logoPath"
 
-            alt="Logo" 
+            alt="Logo"
 
-            @error="handleLogoError" 
+            @error="handleLogoError"
+
+            @click="goTo('/')"
 
           />
 
@@ -58,7 +60,7 @@
 
       </div>
 
-      
+
 
       <form class="auth-form" @submit.prevent="handleLogin">
 
@@ -92,7 +94,7 @@
 
         </div>
 
-        
+
 
         <div class="form-group">
 
@@ -132,7 +134,7 @@
 
         </div>
 
-        
+
 
         <div class="form-options">
 
@@ -158,7 +160,7 @@
 
         </div>
 
-        
+
 
         <button
 
@@ -188,7 +190,7 @@
 
       </form>
 
-      
+
 
       <div class="auth-footer">
 
@@ -198,7 +200,7 @@
 
         </div>
 
-        
+
 
         <router-link to="/register" class="btn btn-secondary btn-block">
 
@@ -210,7 +212,7 @@
 
     </div>
 
-    
+
 
     <!-- 自定义弹窗 -->
 
@@ -276,7 +278,7 @@ import AuthPopup from '@/components/auth/AuthPopup.vue';
 
 import { shouldShowAuthPopup } from '@/utils/authPopupState';
 
-
+import { useNavigator } from '@/composables/useNavigator'
 
 export default {
 
@@ -304,7 +306,7 @@ export default {
 
   },
 
-  
+
 
   setup() {
 
@@ -314,7 +316,9 @@ export default {
 
     const { showToast } = useToast();
 
-    
+    const { goTo } = useNavigator()
+
+
 
     const logoPath = ref('./images/logo.png');
 
@@ -324,7 +328,7 @@ export default {
 
     };
 
-    
+
 
     const formData = reactive({
 
@@ -336,7 +340,7 @@ export default {
 
     });
 
-    
+
 
     const errors = reactive({
 
@@ -346,15 +350,15 @@ export default {
 
     });
 
-    
+
 
     const loading = ref(false);
 
-    
+
 
     const showPassword = ref(false);
 
-    
+
 
     const showAuthPopup = ref(false);
 
@@ -370,7 +374,7 @@ export default {
 
     });
 
-    
+
 
     const handleAuthPopupClose = () => {
 
@@ -378,27 +382,27 @@ export default {
 
     };
 
-    
 
 
 
-    
+
+
 
     onMounted(async () => {
 
 
 
-      
+
 
       const hasToken = hasVerifyToken();
 
-      
+
 
       if (hasToken) {
 
         loading.value = true;
 
-        
+
 
         try {
 
@@ -412,9 +416,9 @@ export default {
 
           });
 
-          
 
-          
+
+
 
           if (tokenLoginResult.success) {
 
@@ -434,13 +438,13 @@ export default {
 
       }
 
-      
+
 
       const urlParams = new URLSearchParams(window.location.search);
 
       const isJustLoggedOut = urlParams.get('logout') === 'true';
 
-      
+
 
       if (isJustLoggedOut) {
 
@@ -448,7 +452,7 @@ export default {
 
         showToast(t('auth.logoutSuccess'), 'success', 3000);
 
-        
+
 
         if (window.history && window.history.replaceState) {
 
@@ -458,17 +462,17 @@ export default {
 
         }
 
-        
+
 
         return;
 
       }
 
-      
+
 
       showAuthPopup.value = shouldShowAuthPopup(AUTH_CONFIG.popup);
 
-      
+
 
       try {
 
@@ -480,11 +484,11 @@ export default {
 
         }
 
-        
+
 
         const loginStatus = checkLoginStatus();
 
-        
+
 
         if (loginStatus) {
 
@@ -508,19 +512,19 @@ export default {
 
     });
 
-    
+
 
     const validateForm = () => {
 
       let isValid = true;
 
-      
+
 
       errors.email = '';
 
       errors.password = '';
 
-      
+
 
       if (!validateRequired(formData.email)) {
 
@@ -536,7 +540,7 @@ export default {
 
       }
 
-      
+
 
       if (!validateRequired(formData.password)) {
 
@@ -546,13 +550,13 @@ export default {
 
       }
 
-      
+
 
       return isValid;
 
     };
 
-    
+
 
     const handleLogin = async () => {
 
@@ -562,21 +566,21 @@ export default {
 
       }
 
-      
+
 
       loading.value = true;
 
-      
+
 
       try {
 
         const response = await login(formData);
 
-        
+
 
         showToast(response.message || t('auth.loginSuccess'), 'success', 3000);
 
-        
+
 
         setTimeout(() => {
 
@@ -595,8 +599,6 @@ export default {
       }
 
     };
-
-    
 
     return {
 
@@ -620,7 +622,9 @@ export default {
 
       authPopupConfig,
 
-      handleAuthPopupClose
+      handleAuthPopupClose,
+
+      goTo
 
     };
 
@@ -672,7 +676,7 @@ export default {
 
   width: 100%;
 
-  
+
 
   .input-icon {
 
@@ -692,7 +696,7 @@ export default {
 
   }
 
-  
+
 
   .password-toggle {
 
@@ -718,7 +722,7 @@ export default {
 
     transition: color 0.2s ease;
 
-    
+
 
     &:hover {
 
@@ -728,7 +732,7 @@ export default {
 
   }
 
-  
+
 
   .form-control {
 
@@ -746,7 +750,7 @@ export default {
 
     color: var(--primary-text-color);
 
-    
+
 
     &[type="password"],
 
@@ -756,7 +760,7 @@ export default {
 
     }
 
-    
+
 
     &:focus {
 
@@ -770,7 +774,7 @@ export default {
 
     }
 
-    
+
 
     &::placeholder {
 
@@ -794,7 +798,7 @@ export default {
 
   margin-bottom: 1.5rem;
 
-  
+
 
   .remember-me .checkbox-container {
 
@@ -810,7 +814,7 @@ export default {
 
     user-select: none;
 
-    
+
 
     input {
 
@@ -824,7 +828,7 @@ export default {
 
       width: 0;
 
-      
+
 
       &:checked ~ .checkmark {
 
@@ -832,7 +836,7 @@ export default {
 
         border-color: var(--theme-color);
 
-        
+
 
         &:after {
 
@@ -844,7 +848,7 @@ export default {
 
     }
 
-    
+
 
     .checkmark {
 
@@ -866,7 +870,7 @@ export default {
 
       transition: all 0.2s ease;
 
-      
+
 
       &:after {
 
@@ -894,7 +898,7 @@ export default {
 
     }
 
-    
+
 
     .checkbox-label {
 
@@ -906,7 +910,7 @@ export default {
 
   }
 
-  
+
 
   .forgot-password {
 
@@ -918,7 +922,7 @@ export default {
 
     transition: color 0.3s ease, opacity 0.3s ease;
 
-    
+
 
     &:hover {
 
@@ -946,7 +950,7 @@ export default {
 
   justify-content: center;
 
-  
+
 
   &.btn-primary {
 
@@ -958,7 +962,7 @@ export default {
 
     font-weight: 600;
 
-    
+
 
     &:hover:not(:disabled) {
 
@@ -966,7 +970,7 @@ export default {
 
     }
 
-    
+
 
     &:disabled {
 
@@ -976,7 +980,7 @@ export default {
 
     }
 
-    
+
 
     .icon-right {
 
@@ -1014,7 +1018,7 @@ export default {
 
   }
 
-  
+
 
   .form-options {
 
@@ -1028,7 +1032,7 @@ export default {
 
     gap: 0.5rem;
 
-    
+
 
     .remember-me {
 
@@ -1036,7 +1040,7 @@ export default {
 
     }
 
-    
+
 
     .forgot-password {
 
@@ -1078,7 +1082,7 @@ export default {
 
     }
 
-    
+
 
     .form-control {
 
@@ -1086,7 +1090,7 @@ export default {
 
       border-color: var(--input-border-color, #444);
 
-      
+
 
       &:focus {
 
@@ -1096,7 +1100,7 @@ export default {
 
       }
 
-      
+
 
       &::placeholder {
 
@@ -1108,7 +1112,7 @@ export default {
 
   }
 
-  
+
 
   .checkbox-container {
 
@@ -1118,7 +1122,7 @@ export default {
 
     }
 
-    
+
 
     .checkmark {
 
@@ -1180,7 +1184,7 @@ export default {
 
   transition: all 0.3s ease;
 
-  
+
 
   &:hover {
 
@@ -1212,7 +1216,7 @@ export default {
 
   transition: all 0.3s ease;
 
-  
+
 
   svg {
 
@@ -1220,7 +1224,7 @@ export default {
 
   }
 
-  
+
 
   &::before {
 
@@ -1242,7 +1246,7 @@ export default {
 
   }
 
-  
+
 
   span {
 
@@ -1318,8 +1322,6 @@ export default {
 
   text-align: center;
 
-  
-
   img {
 
     width: 60px;
@@ -1334,8 +1336,12 @@ export default {
 
     object-fit: cover;
 
+    cursor: pointer;
+
+    user-select: none;
+
   }
 
 }
 
-</style> 
+</style>

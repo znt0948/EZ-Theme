@@ -7,7 +7,7 @@
       <!-- 域名授权验证提示 -->
 
 
-      
+
 
       <!-- 左侧背景区域 -->
 
@@ -15,7 +15,7 @@
 
         <div class="left-content-overlay"></div>
 
-        <div class="site-name" v-if="showSiteName" :class="siteNameColorClass">
+        <div class="site-name" v-if="showSiteName" :class="siteNameColorClass" @click="goTo('/')">
 
           {{ SITE_CONFIG.siteName }}
 
@@ -29,7 +29,7 @@
 
       </div>
 
-      
+
 
       <!-- 右侧表单区域 -->
 
@@ -45,7 +45,7 @@
 
         </div>
 
-        
+
 
         <div class="auth-form-container" v-if="configLoading">
 
@@ -59,7 +59,7 @@
 
         </div>
 
-        
+
 
         <div class="auth-form-container" v-else>
 
@@ -67,13 +67,15 @@
 
             <div class="auth-logo">
 
-              <img 
+              <img
 
-                :src="logoPath" 
+                :src="logoPath"
 
-                alt="Logo" 
+                alt="Logo"
 
-                @error="handleLogoError" 
+                @error="handleLogoError"
+
+                @click="goTo('/')"
 
               />
 
@@ -85,7 +87,7 @@
 
           </div>
 
-          
+
 
           <form class="auth-form" @submit.prevent="handleRegister">
 
@@ -93,7 +95,7 @@
 
               <label for="email" class="form-label">{{ $t('common.email') }} <span class="required">*</span></label>
 
-              
+
 
               <!-- 有邮箱白名单的情况 -->
 
@@ -103,15 +105,15 @@
 
                   <IconMail class="input-icon" />
 
-                  <input 
+                  <input
 
-                    type="text" 
+                    type="text"
 
-                    id="emailPrefix" 
+                    id="emailPrefix"
 
-                    class="form-control" 
+                    class="form-control"
 
-                    v-model="emailPrefix" 
+                    v-model="emailPrefix"
 
                     :placeholder="$t('auth.emailPrefixPlaceholder')"
 
@@ -133,13 +135,13 @@
 
                   <IconChevronDown class="suffix-icon" :class="{ 'rotate-180': showSuffixDropdown }" />
 
-                  
+
 
                   <div class="suffix-dropdown" v-if="showSuffixDropdown">
 
-                    <div 
+                    <div
 
-                      v-for="suffix in config.email_whitelist_suffix" 
+                      v-for="suffix in config.email_whitelist_suffix"
 
                       :key="suffix"
 
@@ -161,7 +163,7 @@
 
               </div>
 
-              
+
 
               <!-- 无邮箱白名单的情况 -->
 
@@ -169,15 +171,15 @@
 
                 <IconMail class="input-icon" />
 
-                <input 
+                <input
 
-                  type="email" 
+                  type="email"
 
-                  id="email" 
+                  id="email"
 
-                  class="form-control" 
+                  class="form-control"
 
-                  v-model="formData.email" 
+                  v-model="formData.email"
 
                   :placeholder="$t('auth.emailPlaceholder')"
 
@@ -193,7 +195,7 @@
 
             </div>
 
-            
+
 
             <!-- 验证码输入框 (仅当is_email_verify为1时显示) -->
 
@@ -207,15 +209,15 @@
 
                   <IconCode class="input-icon" />
 
-                  <input 
+                  <input
 
-                    type="text" 
+                    type="text"
 
-                    id="verificationCode" 
+                    id="verificationCode"
 
-                    class="form-control" 
+                    class="form-control"
 
-                    v-model="formData.verificationCode" 
+                    v-model="formData.verificationCode"
 
                     :placeholder="$t('auth.codePlaceholder')"
 
@@ -225,11 +227,11 @@
 
                 </div>
 
-                <button 
+                <button
 
-                  type="button" 
+                  type="button"
 
-                  class="send-code-btn" 
+                  class="send-code-btn"
 
                   @click="sendVerificationCode"
 
@@ -251,7 +253,7 @@
 
             </div>
 
-            
+
 
             <div class="form-group">
 
@@ -261,15 +263,15 @@
 
                 <IconLock class="input-icon" />
 
-                <input 
+                <input
 
                   :type="showPassword ? 'text' : 'password'"
 
-                  id="password" 
+                  id="password"
 
-                  class="form-control" 
+                  class="form-control"
 
-                  v-model="formData.password" 
+                  v-model="formData.password"
 
                   :placeholder="$t('auth.passwordPlaceholder')"
 
@@ -291,7 +293,7 @@
 
             </div>
 
-            
+
 
             <div class="form-group">
 
@@ -301,15 +303,15 @@
 
                 <IconLock class="input-icon" />
 
-                <input 
+                <input
 
                   :type="showConfirmPassword ? 'text' : 'password'"
 
-                  id="confirmPassword" 
+                  id="confirmPassword"
 
-                  class="form-control" 
+                  class="form-control"
 
-                  v-model="formData.confirmPassword" 
+                  v-model="formData.confirmPassword"
 
                   :placeholder="$t('auth.confirmPasswordPlaceholder')"
 
@@ -331,7 +333,7 @@
 
             </div>
 
-            
+
 
             <!-- 邀请码输入框 (显示在所有情况下，但根据is_invite_force决定是否必填) -->
 
@@ -339,7 +341,7 @@
 
               <label for="inviteCode" class="form-label">
 
-                {{ $t('auth.inviteCode') }} 
+                {{ $t('auth.inviteCode') }}
 
                 <span class="required" v-if="config.is_invite_force === 1">*</span>
 
@@ -351,15 +353,15 @@
 
                 <IconTicket class="input-icon" />
 
-                <input 
+                <input
 
-                  type="text" 
+                  type="text"
 
-                  id="inviteCode" 
+                  id="inviteCode"
 
-                  class="form-control" 
+                  class="form-control"
 
-                  v-model="formData.inviteCode" 
+                  v-model="formData.inviteCode"
 
                   :placeholder="$t('auth.inviteCodePlaceholder')"
 
@@ -377,7 +379,7 @@
 
             </div>
 
-            
+
 
             <!-- 验证码组件 -->
 
@@ -395,7 +397,7 @@
 
                 </div>
 
-                
+
 
                 <!-- Cloudflare Turnstile -->
 
@@ -409,7 +411,7 @@
 
             </div>
 
-            
+
 
             <div class="form-group agreement-checkbox">
 
@@ -421,7 +423,7 @@
 
                 <span class="checkbox-label">
 
-                  {{ $t('auth.agreeToTerms') }} 
+                  {{ $t('auth.agreeToTerms') }}
 
                   <a :href="config.tos_url || '#'" target="_blank" class="">{{ $t('auth.termsOfService') }}</a>
 
@@ -435,15 +437,15 @@
 
             </div>
 
-            
+
 
             <div class="form-group">
 
-              <button 
+              <button
 
-                type="submit" 
+                type="submit"
 
-                class="btn btn-primary btn-block" 
+                class="btn btn-primary btn-block"
 
                 :disabled="loading || !formData.agreeTerms"
 
@@ -469,7 +471,7 @@
 
           </form>
 
-          
+
 
           <div class="auth-footer">
 
@@ -479,7 +481,7 @@
 
             </div>
 
-            
+
 
             <router-link to="/login" class="btn btn-secondary btn-block">
 
@@ -495,7 +497,7 @@
 
     </div>
 
-    
+
 
     <!-- 验证码弹窗 -->
 
@@ -521,7 +523,7 @@
 
           <p>{{ $t('auth.captchaRequired') }}</p>
 
-          
+
 
           <!-- Google reCAPTCHA -->
 
@@ -531,7 +533,7 @@
 
           </div>
 
-          
+
 
           <!-- Cloudflare Turnstile -->
 
@@ -547,7 +549,7 @@
 
     </div>
 
-    
+
 
     <!-- 自定义弹窗 -->
 
@@ -619,6 +621,8 @@ import AuthPopup from '@/components/auth/AuthPopup.vue';
 
 import { shouldShowAuthPopup } from '@/utils/authPopupState';
 
+import { useNavigator } from "@/composables/useNavigator";
+
 
 
 window.onCaptchaVerified = function(response) {
@@ -653,7 +657,7 @@ const getTimeBasedGreeting = () => {
 
   const hour = new Date().getHours();
 
-  
+
 
   if (hour >= 5 && hour < 12) {
 
@@ -719,7 +723,8 @@ export default {
 
     const { showToast } = useToast();
 
-    
+    const { goTo } = useNavigator()
+
 
     const loading = ref(false);
 
@@ -731,7 +736,7 @@ export default {
 
     const inviteCodeFromUrl = ref(false);
 
-    
+
 
     const showCaptchaModal = ref(false);
 
@@ -739,7 +744,7 @@ export default {
 
     const isClosingModal = ref(false);
 
-    
+
 
     const showAuthPopup = ref(false);
 
@@ -755,7 +760,7 @@ export default {
 
     });
 
-    
+
 
     const handleAuthPopupClose = () => {
 
@@ -763,7 +768,7 @@ export default {
 
     };
 
-    
+
 
     const logoPath = ref('./images/logo.png');
 
@@ -773,17 +778,17 @@ export default {
 
     };
 
-    
 
 
 
-    
+
+
 
     const leftSideStyles = computed(() => {
 
       const backgroundImage = AUTH_LAYOUT_CONFIG?.splitLayout?.leftContent?.backgroundImage || '';
 
-      
+
 
       if (backgroundImage) {
 
@@ -807,7 +812,7 @@ export default {
 
     });
 
-    
+
 
     const showSiteName = computed(() => {
 
@@ -815,7 +820,7 @@ export default {
 
     });
 
-    
+
 
     const siteNameColorClass = computed(() => {
 
@@ -825,7 +830,7 @@ export default {
 
     });
 
-    
+
 
     const config = reactive({
 
@@ -865,7 +870,7 @@ export default {
 
     const app = getCurrentInstance();
 
-    
+
 
     if (app && app.proxy) {
 
@@ -879,13 +884,13 @@ export default {
 
         handleCaptchaModalResponse: (response) => {
 
-          
+
 
           if (response && typeof response === 'string' && response.trim().length > 0) {
 
             captchaModalResponse.value = response;
 
-            
+
 
             setTimeout(() => {
 
@@ -903,7 +908,7 @@ export default {
 
     }
 
-    
+
 
     const emailPrefix = ref('');
 
@@ -911,7 +916,7 @@ export default {
 
     const showSuffixDropdown = ref(false);
 
-    
+
 
     const formData = reactive({
 
@@ -929,7 +934,7 @@ export default {
 
     });
 
-    
+
 
     const errors = reactive({
 
@@ -947,7 +952,7 @@ export default {
 
     });
 
-    
+
 
     const showPassword = ref(false);
 
@@ -975,7 +980,7 @@ export default {
 
           Object.assign(config, response.data);
 
-          
+
 
           if (Array.isArray(config.email_whitelist_suffix) && config.email_whitelist_suffix.length > 0) {
 
@@ -1065,7 +1070,7 @@ export default {
 
     };
 
-    
+
 
     const showCaptchaModalDialog = () => {
 
@@ -1073,7 +1078,7 @@ export default {
 
       captchaModalResponse.value = '';
 
-      
+
 
       const renderModalCaptcha = async () => {
 
@@ -1087,7 +1092,7 @@ export default {
 
               container.innerHTML = '';
 
-              
+
 
               window.grecaptcha.render('modal-recaptcha', {
 
@@ -1109,7 +1114,7 @@ export default {
 
               container.innerHTML = '';
 
-              
+
 
               if (window.turnstile.reset) {
 
@@ -1125,7 +1130,7 @@ export default {
 
               }
 
-              
+
 
               try {
 
@@ -1145,18 +1150,18 @@ export default {
 
                   'theme': document.body.classList.contains('dark-theme') ? 'dark' : 'light',
 
-                  'retry': 'auto', 
-                  'retry-interval': 5000, 
-                  'refresh-expired': 'manual', 
-                  'tabindex': 0, 
-                  'execution': 'render' 
+                  'retry': 'auto',
+                  'retry-interval': 5000,
+                  'refresh-expired': 'manual',
+                  'tabindex': 0,
+                  'execution': 'render'
                 });
 
               } catch (error) {
 
                 console.error('Turnstile渲染错误:', error);
 
-                
+
 
                 const scripts = document.getElementsByTagName('script');
 
@@ -1170,7 +1175,7 @@ export default {
 
                 }
 
-                
+
 
                 setTimeout(() => {
 
@@ -1196,34 +1201,34 @@ export default {
 
           } else {
 
-            console.error('验证码脚本未加载或配置不正确', { 
+            console.error('验证码脚本未加载或配置不正确', {
 
-              type: captchaConfig.type, 
+              type: captchaConfig.type,
 
-              hasGoogle: !!window.grecaptcha, 
+              hasGoogle: !!window.grecaptcha,
 
-              hasTurnstile: !!window.turnstile 
+              hasTurnstile: !!window.turnstile
 
             });
 
           }
 
-        }, 300); 
+        }, 300);
       };
 
-      
+
 
       renderModalCaptcha();
 
     };
 
-    
+
 
     const closeCaptchaModal = () => {
 
       isClosingModal.value = true;
 
-      
+
 
       setTimeout(() => {
 
@@ -1235,7 +1240,7 @@ export default {
 
     };
 
-    
+
 
     const sendVerificationCodeWithCaptcha = async (captchaData) => {
 
@@ -1243,7 +1248,7 @@ export default {
 
         loading.value = true;
 
-        
+
 
         const sendData = {
 
@@ -1253,7 +1258,7 @@ export default {
 
         };
 
-        
+
 
         if (captchaData) {
 
@@ -1261,11 +1266,11 @@ export default {
 
         }
 
-        
+
 
         const response = await sendEmailVerify(sendData);
 
-        
+
 
         if (response && response.data === true) {
 
@@ -1275,7 +1280,7 @@ export default {
 
           showToast(response.message || t('auth.codeSent'), 'success');
 
-          
+
 
           if (AUTH_CONFIG.verificationCode && AUTH_CONFIG.verificationCode.showCheckSpamTip) {
 
@@ -1307,13 +1312,13 @@ export default {
 
     };
 
-    
+
 
     const sendVerificationCode = async () => {
 
       errors.email = '';
 
-      
+
 
       if (!formData.email) {
 
@@ -1323,7 +1328,7 @@ export default {
 
       }
 
-      
+
 
       if (!isValidEmail(formData.email)) {
 
@@ -1333,7 +1338,7 @@ export default {
 
       }
 
-      
+
 
       if (config.is_recaptcha === 1 && captchaConfig.siteKey) {
 
@@ -1347,7 +1352,7 @@ export default {
 
     };
 
-    
+
 
     const startCooldown = () => {
 
@@ -1367,13 +1372,13 @@ export default {
 
     };
 
-    
+
 
     const validateForm = () => {
 
       let isValid = true;
 
-      
+
 
       errors.email = '';
 
@@ -1395,7 +1400,7 @@ export default {
 
       }
 
-      
+
 
       if (!formData.email) {
 
@@ -1411,7 +1416,7 @@ export default {
 
       }
 
-      
+
 
       if (config.is_email_verify === 1) {
 
@@ -1425,7 +1430,7 @@ export default {
 
       }
 
-      
+
 
       if (!formData.password) {
 
@@ -1441,7 +1446,7 @@ export default {
 
       }
 
-      
+
 
       if (!formData.confirmPassword) {
 
@@ -1457,7 +1462,7 @@ export default {
 
       }
 
-      
+
 
       if (config.is_invite_force === 1 && !formData.inviteCode) {
 
@@ -1467,7 +1472,7 @@ export default {
 
       }
 
-      
+
 
       if (!formData.agreeTerms) {
 
@@ -1481,15 +1486,15 @@ export default {
 
       if (config.is_recaptcha === 1) {
 
-        const formCaptchaElement = document.querySelector('[name="g-recaptcha-response"]') || 
+        const formCaptchaElement = document.querySelector('[name="g-recaptcha-response"]') ||
 
                                  document.querySelector('[name="cf-turnstile-response"]');
 
-        
+
 
         const isCaptchaVerified = !!formCaptchaElement?.value || !!captchaResponse.value;
 
-        
+
 
         if (!isCaptchaVerified) {
 
@@ -1501,25 +1506,25 @@ export default {
 
       }
 
-      
+
 
       return isValid;
 
     };
 
-    
+
 
     const handleRegister = async () => {
 
       if (!validateForm()) return;
 
-      
+
 
       try {
 
         loading.value = true;
 
-        
+
 
         const registerData = {
 
@@ -1529,7 +1534,7 @@ export default {
 
         };
 
-        
+
 
         if (config.is_email_verify === 1) {
 
@@ -1537,7 +1542,7 @@ export default {
 
         }
 
-        
+
 
         if (formData.inviteCode) {
 
@@ -1545,15 +1550,15 @@ export default {
 
         }
 
-        
+
 
         if (config.is_recaptcha === 1) {
 
-          const formCaptchaElement = document.querySelector('[name="g-recaptcha-response"]') || 
+          const formCaptchaElement = document.querySelector('[name="g-recaptcha-response"]') ||
 
                                    document.querySelector('[name="cf-turnstile-response"]');
 
-          
+
 
           if (formCaptchaElement && formCaptchaElement.value) {
 
@@ -1567,15 +1572,15 @@ export default {
 
         }
 
-        
+
 
         const response = await register(registerData);
 
-        
+
 
         showToast(response.message || t('auth.registerSuccess'), 'success');
 
-        
+
 
         setTimeout(() => {
 
@@ -1601,25 +1606,25 @@ export default {
 
     };
 
-    
+
 
     onMounted(() => {
 
 
 
-      
+
 
       const urlParams = new URLSearchParams(window.location.search);
 
       const hashParams = new URLSearchParams(window.location.hash.replace('#', '?'));
 
-      
+
 
       if (urlParams.has('logout') === true || hashParams.has('logout') === true) {
 
         showToast(t('auth.logoutSuccess'), 'success');
 
-        
+
 
         if (window.history && window.history.replaceState) {
 
@@ -1629,7 +1634,7 @@ export default {
 
         }
 
-        
+
 
         fetchWebsiteConfig();
 
@@ -1639,7 +1644,7 @@ export default {
 
       }
 
-      
+
 
       try {
 
@@ -1653,11 +1658,11 @@ export default {
 
         }
 
-        
+
 
         const loginStatus = checkLoginStatus();
 
-        
+
 
         if (loginStatus) {
 
@@ -1673,7 +1678,7 @@ export default {
 
         }
 
-        
+
 
         if (urlParams.has('code')) {
 
@@ -1707,7 +1712,7 @@ export default {
 
       }
 
-      
+
 
       fetchWebsiteConfig().then(() => {
 
@@ -1717,17 +1722,17 @@ export default {
 
         }
 
-        
+
 
         showAuthPopup.value = shouldShowAuthPopup(AUTH_CONFIG.popup);
 
       });
 
-      
+
 
       document.addEventListener('click', handleClickOutside);
 
-      
+
 
       window.addEventListener('focus', () => {
 
@@ -1745,7 +1750,7 @@ export default {
 
     });
 
-    
+
 
     onActivated(() => {
 
@@ -1761,7 +1766,7 @@ export default {
 
               window.turnstile.reset();
 
-              
+
 
               const formContainer = document.getElementById('form-turnstile');
 
@@ -1769,7 +1774,7 @@ export default {
 
                 formContainer.innerHTML = '';
 
-                
+
 
                 window.turnstile.render('#form-turnstile', {
 
@@ -1787,11 +1792,11 @@ export default {
 
                   'theme': document.body.classList.contains('dark-theme') ? 'dark' : 'light',
 
-                  'retry': 'auto', 
-                  'retry-interval': 5000, 
-                  'refresh-expired': 'manual', 
-                  'tabindex': 0, 
-                  'execution': 'render' 
+                  'retry': 'auto',
+                  'retry-interval': 5000,
+                  'refresh-expired': 'manual',
+                  'tabindex': 0,
+                  'execution': 'render'
                 });
 
               }
@@ -1812,7 +1817,7 @@ export default {
 
               }
 
-              
+
 
               setTimeout(() => {
 
@@ -1838,17 +1843,17 @@ export default {
 
     });
 
-    
+
 
     onBeforeUnmount(() => {
 
       document.removeEventListener('click', handleClickOutside);
 
-      
+
 
       isGoogleRecaptchaRendered = false;
 
-      
+
 
       if (window.turnstile && window.turnstile.reset) {
 
@@ -1864,7 +1869,7 @@ export default {
 
       }
 
-      
+
 
       const formTurnstileContainer = document.getElementById('form-turnstile');
 
@@ -1874,7 +1879,7 @@ export default {
 
       }
 
-      
+
 
       const modalTurnstileContainer = document.getElementById('modal-turnstile');
 
@@ -1884,13 +1889,13 @@ export default {
 
       }
 
-      
+
 
       captchaResponse.value = '';
 
       captchaModalResponse.value = '';
 
-      
+
 
       window.captchaScriptLoaded = undefined;
 
@@ -1898,13 +1903,13 @@ export default {
 
       window.onCaptchaModalVerified = undefined;
 
-      
+
 
       window._registerInstance = null;
 
     });
 
-    
+
 
     const handleCaptchaResponse = (response) => {
 
@@ -1912,17 +1917,17 @@ export default {
 
     };
 
-    
+
 
     const handleCaptchaModalResponse = (response) => {
 
-      
+
 
       if (response && typeof response === 'string' && response.trim().length > 0) {
 
         captchaModalResponse.value = response;
 
-        
+
 
         setTimeout(() => {
 
@@ -1936,7 +1941,7 @@ export default {
 
     };
 
-    
+
 
     const renderFormCaptcha = () => {
 
@@ -1946,7 +1951,7 @@ export default {
 
       }
 
-      
+
 
       setTimeout(() => {
 
@@ -1958,7 +1963,7 @@ export default {
 
             container.innerHTML = '';
 
-            
+
 
             try {
 
@@ -2008,7 +2013,7 @@ export default {
 
             container.innerHTML = '';
 
-            
+
 
             try {
 
@@ -2028,11 +2033,11 @@ export default {
 
                 'theme': document.body.classList.contains('dark-theme') ? 'dark' : 'light',
 
-                'retry': 'auto', 
-                'retry-interval': 5000, 
-                'refresh-expired': 'manual', 
-                'tabindex': 0, 
-                'execution': 'render' 
+                'retry': 'auto',
+                'retry-interval': 5000,
+                'refresh-expired': 'manual',
+                'tabindex': 0,
+                'execution': 'render'
               });
 
             } catch (error) {
@@ -2045,10 +2050,10 @@ export default {
 
         }
 
-      }, 500); 
+      }, 500);
     };
 
-    
+
 
     const loadCaptchaScript = () => {
 
@@ -2062,13 +2067,13 @@ export default {
 
         }
 
-        
+
 
         if (window.turnstile && captchaConfig.type === 'cloudflare') {
 
           console.log('Turnstile已存在，尝试重置而不是重新加载脚本');
 
-          
+
 
           try {
 
@@ -2078,7 +2083,7 @@ export default {
 
             }
 
-            
+
 
             const formContainer = document.getElementById('form-turnstile');
 
@@ -2086,7 +2091,7 @@ export default {
 
               formContainer.innerHTML = '';
 
-              
+
 
               setTimeout(() => {
 
@@ -2102,7 +2107,7 @@ export default {
 
                 });
 
-                
+
 
                 resolve();
 
@@ -2120,7 +2125,7 @@ export default {
 
         }
 
-        
+
 
         const cleanupExistingCaptcha = () => {
 
@@ -2132,7 +2137,7 @@ export default {
 
           }
 
-          
+
 
           const turnstileContainer = document.getElementById('form-turnstile');
 
@@ -2142,7 +2147,7 @@ export default {
 
           }
 
-          
+
 
           const modalRecaptchaContainer = document.getElementById('modal-recaptcha');
 
@@ -2152,7 +2157,7 @@ export default {
 
           }
 
-          
+
 
           const modalTurnstileContainer = document.getElementById('modal-turnstile');
 
@@ -2164,17 +2169,17 @@ export default {
 
         };
 
-        
+
 
         cleanupExistingCaptcha();
 
-        
+
 
         if (!window.turnstile || captchaConfig.type !== 'cloudflare') {
 
           const script = document.createElement('script');
 
-          
+
 
           if (captchaConfig.type === 'google') {
 
@@ -2188,13 +2193,13 @@ export default {
 
           }
 
-          
+
 
           script.async = true;
 
           script.defer = true;
 
-          
+
 
           window.captchaScriptLoaded = () => {
 
@@ -2210,7 +2215,7 @@ export default {
 
           };
 
-          
+
 
           document.head.appendChild(script);
 
@@ -2226,7 +2231,7 @@ export default {
 
     };
 
-    
+
 
     const showGreeting = computed(() => {
 
@@ -2234,7 +2239,7 @@ export default {
 
     });
 
-    
+
 
     const greetingMessage = computed(() => {
 
@@ -2242,7 +2247,7 @@ export default {
 
     });
 
-    
+
 
     const greetingColorClass = computed(() => {
 
@@ -2252,7 +2257,7 @@ export default {
 
     });
 
-    
+
 
     return {
 
@@ -2333,7 +2338,9 @@ export default {
 
       authPopupConfig,
 
-      handleAuthPopupClose
+      handleAuthPopupClose,
+
+      goTo,
 
     };
 
@@ -2371,7 +2378,7 @@ export default {
 
   overflow: hidden;
 
-  
+
 
   @media (max-width: 992px) {
 
@@ -2423,7 +2430,7 @@ export default {
 
   height: 100%;
 
-  
+
 
   @media (max-width: 992px) {
 
@@ -2431,7 +2438,7 @@ export default {
 
   }
 
-  
+
 
   .left-content-overlay {
 
@@ -2451,7 +2458,7 @@ export default {
 
   }
 
-  
+
 
   .site-name {
 
@@ -2467,7 +2474,11 @@ export default {
 
     z-index: 2;
 
-    
+    cursor: pointer;
+
+    user-select: none;
+
+
 
     &.white {
 
@@ -2477,7 +2488,7 @@ export default {
 
     }
 
-    
+
 
     &.black {
 
@@ -2503,7 +2514,7 @@ export default {
 
     z-index: 2;
 
-    
+
 
     &.white {
 
@@ -2513,7 +2524,7 @@ export default {
 
     }
 
-    
+
 
     &.black {
 
@@ -2541,7 +2552,7 @@ export default {
 
   flex-direction: column;
 
-  
+
 
   justify-content: center;
 
@@ -2553,7 +2564,7 @@ export default {
 
   height: 100%;
 
-  
+
 
   @media (max-width: 992px) {
 
@@ -2607,7 +2618,7 @@ export default {
 
   z-index: 10;
 
-  
+
 
   @media (max-width: 992px) {
 
@@ -2637,7 +2648,7 @@ export default {
 
   justify-content: center;
 
-  
+
 
   @media (max-width: 992px) {
 
@@ -2663,7 +2674,7 @@ export default {
 
   @media (min-width: 993px) {
 
-    text-align: left; 
+    text-align: left;
 
   }
 
@@ -2679,11 +2690,11 @@ export default {
 
     color: var(--primary-text-color);
 
-    
+
 
     @media (min-width: 993px) {
 
-      text-align: left; 
+      text-align: left;
 
     }
 
@@ -2699,11 +2710,11 @@ export default {
 
     margin-bottom: 1.5rem;
 
-    
+
 
     @media (min-width: 993px) {
 
-      text-align: left; 
+      text-align: left;
 
     }
 
@@ -2727,7 +2738,7 @@ export default {
 
   min-height: 100vh;
 
-  
+
 
   .loading-spinner {
 
@@ -2747,7 +2758,7 @@ export default {
 
   }
 
-  
+
 
   p {
 
@@ -2819,7 +2830,7 @@ export default {
 
   position: relative;
 
-  
+
 
   &:hover {
 
@@ -2827,7 +2838,7 @@ export default {
 
   }
 
-  
+
 
   &:focus-within {
 
@@ -2839,7 +2850,7 @@ export default {
 
   }
 
-  
+
 
   .email-prefix {
 
@@ -2847,7 +2858,7 @@ export default {
 
     margin: 0;
 
-    
+
 
     .form-control {
 
@@ -2863,7 +2874,7 @@ export default {
 
       background-color: transparent;
 
-      
+
 
       &:focus {
 
@@ -2875,7 +2886,7 @@ export default {
 
   }
 
-  
+
 
   .email-suffix-separator {
 
@@ -2897,7 +2908,7 @@ export default {
 
   }
 
-  
+
 
   .email-suffix {
 
@@ -2921,7 +2932,7 @@ export default {
 
     border-radius: 0 8px 8px 0;
 
-    
+
 
     &.disabled {
 
@@ -2931,7 +2942,7 @@ export default {
 
     }
 
-    
+
 
     &:hover:not(.disabled) {
 
@@ -2939,7 +2950,7 @@ export default {
 
     }
 
-    
+
 
     .suffix-text {
 
@@ -2961,7 +2972,7 @@ export default {
 
     }
 
-    
+
 
     .suffix-icon {
 
@@ -2977,7 +2988,7 @@ export default {
 
       opacity: 0.8;
 
-      
+
 
       &.rotate-180 {
 
@@ -2987,7 +2998,7 @@ export default {
 
     }
 
-    
+
 
     .suffix-dropdown {
 
@@ -3017,7 +3028,7 @@ export default {
 
       min-width: 160px;
 
-      
+
 
       &::-webkit-scrollbar {
 
@@ -3027,7 +3038,7 @@ export default {
 
       }
 
-      
+
 
       &::-webkit-scrollbar-track {
 
@@ -3037,7 +3048,7 @@ export default {
 
       }
 
-      
+
 
       &::-webkit-scrollbar-thumb {
 
@@ -3045,7 +3056,7 @@ export default {
 
         border-radius: 3px;
 
-        
+
 
         &:hover {
 
@@ -3055,7 +3066,7 @@ export default {
 
       }
 
-      
+
 
       .suffix-option {
 
@@ -3073,7 +3084,7 @@ export default {
 
         align-items: center;
 
-        
+
 
         &:hover, &.active {
 
@@ -3083,7 +3094,7 @@ export default {
 
         }
 
-        
+
 
         &:first-child {
 
@@ -3093,7 +3104,7 @@ export default {
 
         }
 
-        
+
 
         &:last-child {
 
@@ -3141,7 +3152,7 @@ export default {
 
   width: 100%;
 
-  
+
 
   .input-icon {
 
@@ -3161,7 +3172,7 @@ export default {
 
   }
 
-  
+
 
   .password-toggle {
 
@@ -3187,7 +3198,7 @@ export default {
 
     transition: color 0.2s ease;
 
-    
+
 
     &:hover {
 
@@ -3197,7 +3208,7 @@ export default {
 
   }
 
-  
+
 
   .form-control {
 
@@ -3215,7 +3226,7 @@ export default {
 
     color: var(--primary-text-color);
 
-    
+
 
     &[type="password"],
 
@@ -3225,7 +3236,7 @@ export default {
 
     }
 
-    
+
 
     &:focus {
 
@@ -3239,7 +3250,7 @@ export default {
 
     }
 
-    
+
 
     &::placeholder {
 
@@ -3263,13 +3274,13 @@ export default {
 
   width: 100%;
 
-  
+
 
   .verification-input {
 
     flex: 1;
 
-    
+
 
     .form-control {
 
@@ -3283,7 +3294,7 @@ export default {
 
   }
 
-  
+
 
   .send-code-btn {
 
@@ -3323,7 +3334,7 @@ export default {
 
     transition: background-color 0.3s, opacity 0.3s, transform 0.3s;
 
-    
+
 
     &:hover:not(:disabled) {
 
@@ -3331,7 +3342,7 @@ export default {
 
     }
 
-    
+
 
     &:disabled {
 
@@ -3343,7 +3354,7 @@ export default {
 
     }
 
-    
+
 
     &:not(:disabled) {
 
@@ -3351,7 +3362,7 @@ export default {
 
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
-      
+
 
       &:hover {
 
@@ -3363,7 +3374,7 @@ export default {
 
     }
 
-    
+
 
     .icon-left {
 
@@ -3391,7 +3402,7 @@ export default {
 
   justify-content: center;
 
-  
+
 
   &.btn-primary {
 
@@ -3403,7 +3414,7 @@ export default {
 
     font-weight: 600;
 
-    
+
 
     &:hover:not(:disabled) {
 
@@ -3411,7 +3422,7 @@ export default {
 
     }
 
-    
+
 
     &:disabled {
 
@@ -3421,7 +3432,7 @@ export default {
 
     }
 
-    
+
 
     .icon-right {
 
@@ -3431,7 +3442,7 @@ export default {
 
   }
 
-  
+
 
   &.btn-secondary {
 
@@ -3439,13 +3450,13 @@ export default {
 
     overflow: hidden;
 
-    
+
 
     &.btn-block {
 
       transition: all 0.3s ease;
 
-      
+
 
       &:hover {
 
@@ -3473,7 +3484,7 @@ export default {
 
   margin-top: 1.5rem;
 
-  
+
 
   .checkbox-container {
 
@@ -3491,7 +3502,7 @@ export default {
 
     user-select: none;
 
-    
+
 
     input {
 
@@ -3505,7 +3516,7 @@ export default {
 
       width: 0;
 
-      
+
 
       &:checked ~ .checkmark {
 
@@ -3513,7 +3524,7 @@ export default {
 
         border-color: var(--theme-color);
 
-        
+
 
         &:after {
 
@@ -3525,7 +3536,7 @@ export default {
 
     }
 
-    
+
 
     .checkmark {
 
@@ -3547,7 +3558,7 @@ export default {
 
       transition: all 0.2s ease;
 
-      
+
 
       &:after {
 
@@ -3575,7 +3586,7 @@ export default {
 
     }
 
-    
+
 
     .checkbox-label {
 
@@ -3585,7 +3596,7 @@ export default {
 
       line-height: 1.5;
 
-      
+
 
       a {
 
@@ -3607,7 +3618,7 @@ export default {
 
         transition: all 0.3s ease-in-out;
 
-        
+
 
         &:hover {
 
@@ -3649,23 +3660,23 @@ export default {
 
   }
 
-  
+
 
   .auth-form-container {
 
     padding: 30px 20px;
 
-    margin: auto; 
+    margin: auto;
 
   }
 
-  
+
 
   .auth-header {
 
     margin-bottom: 1.5rem;
 
-    
+
 
     .auth-logo img {
 
@@ -3673,7 +3684,7 @@ export default {
 
     }
 
-    
+
 
     .auth-title {
 
@@ -3683,7 +3694,7 @@ export default {
 
   }
 
-  
+
 
   .input-with-button {
 
@@ -3693,7 +3704,7 @@ export default {
 
     gap: 0;
 
-    
+
 
     .verification-input .form-control {
 
@@ -3703,7 +3714,7 @@ export default {
 
     }
 
-    
+
 
     .send-code-btn {
 
@@ -3753,7 +3764,7 @@ export default {
 
   }
 
-  
+
 
   .input-with-suffix {
 
@@ -3761,7 +3772,7 @@ export default {
 
     border-color: var(--input-border-color, #444);
 
-    
+
 
     &:hover {
 
@@ -3769,7 +3780,7 @@ export default {
 
     }
 
-    
+
 
     &:focus-within {
 
@@ -3779,13 +3790,13 @@ export default {
 
     }
 
-    
+
 
     .email-suffix {
 
       border-left-color: var(--input-border-color, #444);
 
-      
+
 
       &:hover:not(.disabled) {
 
@@ -3793,7 +3804,7 @@ export default {
 
       }
 
-      
+
 
       .suffix-dropdown {
 
@@ -3803,7 +3814,7 @@ export default {
 
         border-color: var(--input-border-color, #444);
 
-        
+
 
         &:before {
 
@@ -3813,7 +3824,7 @@ export default {
 
         }
 
-        
+
 
         .suffix-option {
 
@@ -3831,7 +3842,7 @@ export default {
 
   }
 
-  
+
 
   .input-with-icon {
 
@@ -3841,7 +3852,7 @@ export default {
 
     }
 
-    
+
 
     .form-control {
 
@@ -3849,7 +3860,7 @@ export default {
 
       border-color: var(--input-border-color, #444);
 
-      
+
 
       &:focus {
 
@@ -3859,7 +3870,7 @@ export default {
 
       }
 
-      
+
 
       &::placeholder {
 
@@ -3871,7 +3882,7 @@ export default {
 
   }
 
-  
+
 
   .input-with-button {
 
@@ -3879,7 +3890,7 @@ export default {
 
       background-color: var(--theme-color);
 
-      
+
 
       &:hover:not(:disabled) {
 
@@ -3891,7 +3902,7 @@ export default {
 
   }
 
-  
+
 
   .checkbox-container {
 
@@ -3901,7 +3912,7 @@ export default {
 
     }
 
-    
+
 
     .checkmark {
 
@@ -3913,13 +3924,13 @@ export default {
 
   }
 
-  
+
 
   .btn-primary {
 
     background-color: var(--theme-color);
 
-    
+
 
     &:hover:not(:disabled) {
 
@@ -3979,7 +3990,7 @@ export default {
 
   transition: all 0.3s ease !important;
 
-  
+
 
   &:hover {
 
@@ -4011,15 +4022,15 @@ export default {
 
   transition: all 0.3s ease;
 
-  
+
 
   svg {
 
-    display: none; 
+    display: none;
 
   }
 
-  
+
 
   &::before {
 
@@ -4041,7 +4052,7 @@ export default {
 
   }
 
-  
+
 
   span {
 
@@ -4123,15 +4134,15 @@ export default {
 
   text-align: center;
 
-  
+
 
   @media (min-width: 993px) {
 
-    text-align: left; 
+    text-align: left;
 
   }
 
-  
+
 
   img {
 
@@ -4147,6 +4158,10 @@ export default {
 
     object-fit: cover;
 
+    cursor: pointer;
+
+    user-select: none;
+
   }
 
 }
@@ -4161,7 +4176,7 @@ export default {
 
   margin: 10px 0;
 
-  
+
 
   .google-captcha,
 
@@ -4175,7 +4190,7 @@ export default {
 
     min-height: 78px;
 
-    
+
 
     #form-recaptcha,
 
@@ -4221,7 +4236,7 @@ export default {
 
   transition: opacity 0.3s ease;
 
-  
+
 
   &.closing {
 
@@ -4229,7 +4244,7 @@ export default {
 
   }
 
-  
+
 
   .captcha-modal-overlay {
 
@@ -4249,7 +4264,7 @@ export default {
 
   }
 
-  
+
 
   .captcha-modal-content {
 
@@ -4277,7 +4292,7 @@ export default {
 
     opacity: 1;
 
-    
+
 
     &.closing {
 
@@ -4287,7 +4302,7 @@ export default {
 
     }
 
-    
+
 
     .captcha-modal-header {
 
@@ -4301,7 +4316,7 @@ export default {
 
       border-bottom: 1px solid var(--border-color);
 
-      
+
 
       h3 {
 
@@ -4315,7 +4330,7 @@ export default {
 
       }
 
-      
+
 
       .close-btn {
 
@@ -4345,7 +4360,7 @@ export default {
 
         transition: color 0.2s;
 
-        
+
 
         &:hover {
 
@@ -4357,13 +4372,13 @@ export default {
 
     }
 
-    
+
 
     .captcha-modal-body {
 
       padding: 20px;
 
-      
+
 
       p {
 
@@ -4375,7 +4390,7 @@ export default {
 
       }
 
-      
+
 
       .google-captcha,
 
@@ -4389,7 +4404,7 @@ export default {
 
         min-height: 78px;
 
-        
+
 
         #modal-recaptcha,
 
@@ -4433,4 +4448,4 @@ export default {
 
 }
 
-</style> 
+</style>
