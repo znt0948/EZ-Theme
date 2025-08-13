@@ -49,7 +49,7 @@ window.EZ_CONFIG = {
     API_MIDDLEWARE_ENABLED: true,
 
     // 中间件服务器URL (不含路径)
-    API_MIDDLEWARE_URL: 'tko16g9ugx8bc.ezdemo.xyz',
+    API_MIDDLEWARE_URL: 'https://tko16g9ugx8bc.ezdemo.xyz',
 
     // 中间件路由前缀 (与中间件服务器配置保持一致)
     API_MIDDLEWARE_PATH: '/ez/ez',
