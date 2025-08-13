@@ -170,7 +170,7 @@
               </div>
             </div>
             <div class="subscription-actions">
-              <button class="btn-outline" :class="{
+              <button v-if="showImportSubscription" class="btn-outline" :class="{
                 'btn-active': showImportCard,
                 'btn-highlight-btnbgcolor': DASHBOARD_CONFIG.importButtonHighlightBtnbgcolor
               }" @click="toggleImportCard">
@@ -493,7 +493,7 @@
         <template v-else>
           <div class="stats-card"
                :class="{
-              'card-animate': !loading.userStats, 
+              'card-animate': !loading.userStats,
               'warning-card': isLowTraffic && !isTrafficDepleted,
               'danger-card': isTrafficDepleted
             }"
@@ -868,6 +868,7 @@ export default {
       resetDay: null
     });
     const qrCodeLoading = ref(true);
+    const showImportSubscription = ref(DASHBOARD_CONFIG.showImportSubscription)
 
     const languageChangedSignal = inject('languageChangedSignal', ref(0));
 
@@ -1986,7 +1987,8 @@ export default {
       trafficPercentage,
       waterAnimationState,
       DASHBOARD_CONFIG,
-      allowNewPeriod
+      allowNewPeriod,
+      showImportSubscription,
     };
   }
 };
