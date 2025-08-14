@@ -142,9 +142,6 @@ const DEFAULT_SECURITY_CONFIG = {
 
     // 是否启用授权码验证
     enableLicenseCheck: true,
-
-    // 是否启用反调试功能（阻止开发者工具和F12调试）
-    enableAntiDebugging: true
 };
 
 export const SECURITY_CONFIG = mergeDeep(DEFAULT_SECURITY_CONFIG, getConfig('SECURITY_CONFIG'));
@@ -877,4 +874,3 @@ const DEFAULT_AUTH_CONFIG = {
 };
 
 export const AUTH_CONFIG = mergeDeep(DEFAULT_AUTH_CONFIG, getConfig('AUTH_CONFIG'));
-
