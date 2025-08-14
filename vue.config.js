@@ -50,8 +50,6 @@ if (isProd && enableConfigJS) {
   extraScriptFileName = generateRandomFileName();
 }
 
-console.log(siteName, enableAntiDebugging, enableConfigJS, 999)
-
 module.exports = defineConfig({
   publicPath: "./",
   outputDir: "dist",
