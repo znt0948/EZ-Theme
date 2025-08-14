@@ -589,10 +589,6 @@ export const config  = {
             // 使用svgIcon属性插入自定义SVG代码，确保SVG代码中使用currentColor以适应主题色
         ]
     },
-    PACKAGING_CONFIGURATION: {
-      // 是否开启 打包后生成 public/123.afwd123d/js 即站点配置文件，如果为false，不会生成独立配置文件
-      enableConfigJS: true
-    }
 };
 
 window.EZ_CONFIG = config

@@ -3,36 +3,10 @@ const path = require("path");
 const fs = require("fs");
 const webpack = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
+const JavaScriptObfuscator = require("javascript-obfuscator");
 
 const isProd = process.env.NODE_ENV === "production";
-
-const getBaseConfig = () => {
-  try {
-    const content = fs.readFileSync(
-      path.resolve(__dirname, "src/utils/baseConfig.js"),
-      "utf-8"
-    );
-    
-    // 获取 siteName
-    const siteNameMatch = content.match(/siteName:\s*['"]([^'"]+)['"]/);
-    const siteName = siteNameMatch ? siteNameMatch[1] : "EZ THEME USER";
-    
-    // 获取 enableAntiDebugging
-    const antiDebugMatch = content.match(/enableAntiDebugging\s*:\s*(true|false)/);
-    const enableAntiDebugging = antiDebugMatch ? antiDebugMatch[1] === "true" : false;
-    
-    // 获取 enableConfigJS
-    const enableConfigJSMatch = content.match(/enableConfigJS\s*:\s*(true|false)/);
-    const enableConfigJS = enableConfigJSMatch ? enableConfigJSMatch[1] === "true" : false;
-    
-    return { siteName, enableAntiDebugging, enableConfigJS };
-  } catch (err) {
-    console.warn("读取 baseConfig 失败:", err);
-    return { siteName: "EZ THEME USER", enableAntiDebugging: false, enableConfigJS: false };
-  }
-};
-
-const { siteName, enableAntiDebugging, enableConfigJS } = getBaseConfig();
+const enableConfigJS = process.env.VUE_APP_CONFIGJS == "true";
 
 let extraScriptFileName = '';
 const generateRandomFileName = (length = 8) => {
@@ -70,15 +44,34 @@ module.exports = defineConfig({
     );
     
     if (isProd && enableConfigJS) {
-      // 生产环境生成随机 JS 文件到 dist/
       config.plugins.push({
         apply: (compiler) => {
           compiler.hooks.afterEmit.tap("GenerateExtraConfigPlugin", () => {
             const configPath = path.resolve(__dirname, "src/config/index.js");
             const distPath = path.resolve(compiler.options.output.path, extraScriptFileName);
+            
             try {
-              const content = fs.readFileSync(configPath, "utf-8");
-              fs.writeFileSync(distPath, content, "utf-8");
+              let content = fs.readFileSync(configPath, "utf-8");
+              content = content.replace(/window\.EZ_CONFIG\s*=\s*config\s*;?/g, "");
+              content = content.replace(/export\s+const\s+config\s*=/, "window.EZ_CONFIG =");
+              
+              const obfuscated = JavaScriptObfuscator.obfuscate(content, {
+                compact: true,
+                controlFlowFlattening: true,
+                controlFlowFlatteningThreshold: 0.75,
+                numbersToExpressions: true,
+                simplify: true,
+                stringArray: true,
+                stringArrayEncoding: ["rc4"],
+                stringArrayThreshold: 0.75,
+                transformObjectKeys: true,
+                unicodeEscapeSequence: true
+              }).getObfuscatedCode();
+              
+              // 写入 dist
+              fs.writeFileSync(distPath, obfuscated, "utf-8");
+              
+              console.log(`生成混淆独立 JS 文件: ${extraScriptFileName}`);
             } catch (err) {
               console.warn("生成独立 JS 文件失败:", err);
             }
@@ -115,7 +108,6 @@ module.exports = defineConfig({
         args[0].templateParameters = {
           ...args[0].templateParameters,
           injectCustomScript: `
-            ${enableAntiDebugging ? `<script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>` : ""}
             ${enableConfigJS ? `<script src="./${extraScriptFileName}"></script>` : ""}
           `,
         };
@@ -135,7 +127,7 @@ module.exports = defineConfig({
   },
   
   pages: {
-    index: { entry: "src/main.js", template: "public/index.html", filename: "index.html", title: siteName },
+    index: { entry: "src/main.js", template: "public/index.html", filename: "index.html" },
   },
   
   devServer: { client: { overlay: false } },

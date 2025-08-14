@@ -142,9 +142,6 @@ const DEFAULT_SECURITY_CONFIG = {
 
     // 是否启用授权码验证
     enableLicenseCheck: true,
-
-    // 是否启用反调试功能（阻止开发者工具和F12调试）
-    enableAntiDebugging: true
 };
 
 export const SECURITY_CONFIG = mergeDeep(DEFAULT_SECURITY_CONFIG, getConfig('SECURITY_CONFIG'));
@@ -877,11 +874,3 @@ const DEFAULT_AUTH_CONFIG = {
 };
 
 export const AUTH_CONFIG = mergeDeep(DEFAULT_AUTH_CONFIG, getConfig('AUTH_CONFIG'));
-
-// 打包配置
-const DEFAULT_PACKAGING_CONFIGURATION = {
-  enableConfigJS: false, // 是否开启 public/123.afwd123d/js 即站点配置文件，如果为false，不会生成独立配置文件
-}
-
-export const PACKAGING_CONFIGURATION = mergeDeep(DEFAULT_PACKAGING_CONFIGURATION, getConfig('PACKAGING_CONFIGURATION'));
-
