@@ -4,7 +4,7 @@
  * logo 摆放位置为 images/logo.png
  */
 
-window.EZ_CONFIG = {
+export const config  = {
     // 面板类型配置 - 请选择您使用的面板类型
     PANEL_TYPE: 'Xiao-V2board', // 可选值: 'V2board', 'Xiao-V2board' 或 'Xboard'
     // 说明:
@@ -588,5 +588,11 @@ window.EZ_CONFIG = {
             // 主题格式，最后一个逗号要去掉
             // 使用svgIcon属性插入自定义SVG代码，确保SVG代码中使用currentColor以适应主题色
         ]
+    },
+    PACKAGING_CONFIGURATION: {
+      // 是否开启 打包后生成 public/123.afwd123d/js 即站点配置文件，如果为false，不会生成独立配置文件
+      enableConfigJS: true
     }
 };
+
+window.EZ_CONFIG = config
