@@ -75,7 +75,7 @@
             <IconWallet :size="32" />
           </div>
           <div class="stats-info">
-              <div class="stats-value">{{ currencySymbol }}{{ inviteStats.availableCommission }}</div>
+              <div class="stats-value">{{ currencySymbol }}{{ inviteStats.validCommission }}</div>
             <div class="stats-label">{{ $t('invite.stats.availableCommission') }}</div>
           </div>
         </div>
