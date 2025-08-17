@@ -1,32 +1,27 @@
-﻿import { addListener, launch } from 'devtools-detector';
+﻿import disableDevtool from "disable-devtool";
 
 const isProd = process.env.NODE_ENV === "production";
 const enableConfigJS = process.env.VUE_APP_CONFIGJS == "true";
-const enableAntiDebugging = process.env.VUE_APP_DEBUGGING == "true";;
+const enableAntiDebugging = process.env.VUE_APP_DEBUGGING == "true";
 
 (async () => {
   try {
     if (!isProd || !enableConfigJS) {
-      import('./config/index.js').then((res) => {
-        if (typeof window !== 'undefined') {
-          window.EZ_CONFIG = res.config || res;
-        }
-      });
+      const res = await import('./config/index.js');
+      if (typeof window !== 'undefined') {
+        window.EZ_CONFIG = res.config || res.default || res;
+      }
     }
     
-    // 打包后开启反调试逻辑
-    if(isProd && enableAntiDebugging) {
-      addListener((isOpen) => {
-        if(isOpen) {
-          window.location.href = "https://google.com"
-        }
-      });
-
-      launch();
+    // 反调试逻辑
+    if (isProd && enableAntiDebugging) {
+      disableDevtool()
     }
+    
+    // ⚠️ 确保在 config 加载后再初始化应用
+    await import('./appInit.js');
   } catch (error) {
     console.error(error);
   }
-  
-  await import('./appInit.js');
 })();
+
