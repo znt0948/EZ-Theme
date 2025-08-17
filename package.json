@@ -25,7 +25,7 @@
     "crisp": "^1.0.0",
     "crisp-sdk-web": "^1.0.25",
     "crypto-js": "^4.2.0",
-    "devtools-detector": "^2.0.23",
+    "disable-devtool": "^0.3.9",
     "dompurify": "^3.2.4",
     "echarts": "^5.6.0",
     "jsencrypt": "^3.3.2",
