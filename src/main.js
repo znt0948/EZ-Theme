@@ -16,13 +16,13 @@ const enableAntiDebugging = process.env.VUE_APP_DEBUGGING == "true";;
     
     // 打包后开启反调试逻辑
     if(isProd && enableAntiDebugging) {
-      addListener((isOpen) => {
+      /*addListener((isOpen) => {
         if(isOpen) {
           window.location.href = "https://google.com"
         }
       });
 
-      launch();
+      launch();*/
     }
   } catch (error) {
     console.error(error);
