@@ -203,6 +203,7 @@ const DEFAULT_SITE_CONFIG = {
     // Landing页面多语言标语
     landingText: {
         'zh-CN': '探索全球网络无限可能',
+        'vi-VN': 'Khám phá khả năng vô hạn của mạng toàn cầu',
         'en-US': 'Explore Unlimited Possibilities of Global Network',
         'zh-TW': '探索全球網絡無限可能',
         'ja-JP': 'グローバルネットワークの無限の可能性',
