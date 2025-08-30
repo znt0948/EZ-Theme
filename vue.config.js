@@ -127,7 +127,7 @@ module.exports = defineConfig({
   },
   
   pages: {
-    index: { entry: "src/main.js", template: "public/index.html", filename: "index.html" },
+    index: { entry: "src/main.js", template: "public/index.html", filename: "index.html", title: process.env.VUE_APP_TITLE },
   },
   
   devServer: { client: { overlay: false } },
