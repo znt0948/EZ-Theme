@@ -480,7 +480,7 @@ export const config  = {
     // 工单配置
     TICKET_CONFIG: {
         // 是否在创建工单时发送用户基础信息 (true=发送, false=不发送)
-        includeUserInfoInTicket: true, // 默认发送用户信息
+        includeUserInfoInTicket: false, // 默认发送用户信息
         // 弹窗配置
         popup: {
             // 是否启用弹窗
@@ -493,6 +493,15 @@ export const config  = {
             cooldownHours: 24,
             // 等待时间（秒），用户需要等待多少秒才能关闭弹窗，设为0表示无需等待
             closeWaitSeconds: 0
+        },
+        // 工单上传图片配置
+        pictureUpload: {
+          // key 申请地址 https://www.nodeimage.com/
+          enabled: true,
+          host: {
+            url: 'http://localhost:3003/upload',
+            key: '94cc04d8aac6f209603042f9bf24dfe64370443fd32b75a448e5f4cb4955f2e5'
+          }
         }
     },
 
