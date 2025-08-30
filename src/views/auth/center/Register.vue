@@ -680,7 +680,7 @@ export default {
 
     const loading = ref(false);
 
-    const configLoading = ref(true);
+    const configLoading = ref(false);
 
     const codeSent = ref(false);
 
@@ -873,7 +873,9 @@ export default {
 
       try {
 
-        configLoading.value = true;
+        if(window.EZ_CONFIG.API_CONFIG.showCheckBackend) {
+          configLoading.value = true;
+        }
 
         const response = await getWebsiteConfig();
 
