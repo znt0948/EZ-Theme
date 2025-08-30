@@ -7,6 +7,7 @@ const JavaScriptObfuscator = require("javascript-obfuscator");
 
 const isProd = process.env.NODE_ENV === "production";
 const enableConfigJS = process.env.VUE_APP_CONFIGJS == "true";
+const enableObfuscation = process.env.VUE_APP_OBFUSCATION == "true";
 
 let extraScriptFileName = '';
 const generateRandomFileName = (length = 8) => {
@@ -68,8 +69,10 @@ module.exports = defineConfig({
                 unicodeEscapeSequence: true
               }).getObfuscatedCode();
               
+              const fileContent = enableObfuscation ? obfuscated : content;
+              
               // 写入 dist
-              fs.writeFileSync(distPath, obfuscated, "utf-8");
+              fs.writeFileSync(distPath, fileContent, "utf-8");
               
               console.log(`生成混淆独立 JS 文件: ${extraScriptFileName}`);
             } catch (err) {
