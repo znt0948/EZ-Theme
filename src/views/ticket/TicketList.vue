@@ -62,13 +62,13 @@
 
               <input
 
-                type="text"
+                  type="text"
 
-                v-model="searchQuery"
+                  v-model="searchQuery"
 
-                :placeholder="$t('tickets.searchPlaceholder')"
+                  :placeholder="$t('tickets.searchPlaceholder')"
 
-                @input="handleSearch"
+                  @input="handleSearch"
 
               >
 
@@ -92,19 +92,19 @@
 
             <div
 
-              v-for="ticket in filteredTickets"
+                v-for="ticket in filteredTickets"
 
-              :key="ticket.id"
+                :key="ticket.id"
 
-              class="ticket-item"
+                class="ticket-item"
 
-              :class="{
+                :class="{
 
                 'active': selectedTicket?.id === ticket.id
 
               }"
 
-              @click="selectTicket(ticket)"
+                @click="selectTicket(ticket)"
 
             >
 
@@ -120,9 +120,9 @@
 
                     <span
 
-                      class="status-badge"
+                        class="status-badge"
 
-                      :class="getStatusClass(ticket.status)"
+                        :class="getStatusClass(ticket.status)"
 
                     >
 
@@ -132,9 +132,9 @@
 
                     <span
 
-                      class="level-badge"
+                        class="level-badge"
 
-                      :class="getLevelClass(ticket.level)"
+                        :class="getLevelClass(ticket.level)"
 
                     >
 
@@ -196,9 +196,9 @@
 
                   <span
 
-                    class="status-badge"
+                      class="status-badge"
 
-                    :class="getStatusClass(selectedTicket.status)"
+                      :class="getStatusClass(selectedTicket.status)"
 
                   >
 
@@ -208,9 +208,9 @@
 
                   <span
 
-                    class="level-badge"
+                      class="level-badge"
 
-                    :class="getLevelClass(selectedTicket.level)"
+                      :class="getLevelClass(selectedTicket.level)"
 
                   >
 
@@ -234,13 +234,13 @@
 
                 <button
 
-                  v-if="selectedTicket.status === 0"
+                    v-if="selectedTicket.status === 0"
 
-                  class="close-ticket-btn"
+                    class="close-ticket-btn"
 
-                  @click="showCloseConfirm()"
+                    @click="showCloseConfirm()"
 
-                  :disabled="closingTicket"
+                    :disabled="closingTicket"
 
                 >
 
@@ -294,13 +294,13 @@
 
                   <div
 
-                    v-for="(message, index) in ticketMessages"
+                      v-for="(message, index) in ticketMessages"
 
-                    :key="message.id"
+                      :key="message.id"
 
-                    class="message-item"
+                      class="message-item"
 
-                    :class="{ 'admin-message': message.is_admin, 'user-message': !message.is_admin }"
+                      :class="{ 'admin-message': message.is_admin, 'user-message': !message.is_admin }"
 
                   >
 
@@ -350,40 +350,23 @@
 
               <textarea
 
-                v-model="replyMessage"
+                  v-model="replyMessage"
 
-                :placeholder="`${$t('tickets.replyPlaceholder')} 1212`"
+                  :placeholder="$t('tickets.replyPlaceholder')"
 
-                rows="3"
+                  rows="3"
 
-                @keydown.ctrl.enter="sendReply"
-                @paste="onPaste"
-                @focus="previewFocus = 'preview-focus'"
-                @blur="previewFocus = ''"
+                  @keydown.ctrl.enter="sendReply"
 
               ></textarea>
 
-              <div class="preview" title="预览" :class="previewFocus">
-                <svg class="svg" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
-                  <g>
-                    <path d="M51.8,25.1C47.1,15.6,37.3,9,26,9S4.9,15.6,0.2,25.1c-0.3,0.6-0.3,1.3,0,1.8C4.9,36.4,14.7,43,26,43
-                      s21.1-6.6,25.8-16.1C52.1,26.3,52.1,25.7,51.8,25.1z M26,37c-6.1,0-11-4.9-11-11s4.9-11,11-11s11,4.9,11,11S32.1,37,26,37z"/>
-                    <path d="M26,19c-3.9,0-7,3.1-7,7s3.1,7,7,7s7-3.1,7-7S29.9,19,26,19z"/>
-                  </g>
-                </svg>
-              </div>
-
-              <div class="up-loading" v-if="upLoading">
-                <LoadingSpinner class="spin" />
-              </div>
-
               <button
 
-                class="send-reply-btn"
+                  class="send-reply-btn"
 
-                @click="sendReply"
+                  @click="sendReply"
 
-                :disabled="!replyMessage.trim() || sendingReply"
+                  :disabled="!replyMessage.trim() || sendingReply"
 
               >
 
@@ -451,11 +434,11 @@
 
               <input
 
-                type="text"
+                  type="text"
 
-                v-model="newTicket.subject"
+                  v-model="newTicket.subject"
 
-                :placeholder="$t('tickets.subjectPlaceholder')"
+                  :placeholder="$t('tickets.subjectPlaceholder')"
 
               >
 
@@ -469,11 +452,11 @@
 
                 <div
 
-                  class="level-tag"
+                    class="level-tag"
 
-                  :class="{ 'active': newTicket.level === '0', 'level-low': true }"
+                    :class="{ 'active': newTicket.level === '0', 'level-low': true }"
 
-                  @click="newTicket.level = '0'"
+                    @click="newTicket.level = '0'"
 
                 >
 
@@ -487,11 +470,11 @@
 
                 <div
 
-                  class="level-tag"
+                    class="level-tag"
 
-                  :class="{ 'active': newTicket.level === '1', 'level-medium': true }"
+                    :class="{ 'active': newTicket.level === '1', 'level-medium': true }"
 
-                  @click="newTicket.level = '1'"
+                    @click="newTicket.level = '1'"
 
                 >
 
@@ -505,11 +488,11 @@
 
                 <div
 
-                  class="level-tag"
+                    class="level-tag"
 
-                  :class="{ 'active': newTicket.level === '2', 'level-high': true }"
+                    :class="{ 'active': newTicket.level === '2', 'level-high': true }"
 
-                  @click="newTicket.level = '2'"
+                    @click="newTicket.level = '2'"
 
                 >
 
@@ -531,11 +514,11 @@
 
               <textarea
 
-                v-model="newTicket.message"
+                  v-model="newTicket.message"
 
-                :placeholder="$t('tickets.messagePlaceholder')"
+                  :placeholder="$t('tickets.messagePlaceholder')"
 
-                rows="5"
+                  rows="5"
 
               ></textarea>
 
@@ -553,13 +536,13 @@
 
             <button
 
-              class="btn-submit"
+                class="btn-submit"
 
-              @click="submitTicket"
+                @click="submitTicket"
 
-              :disabled="isSubmitting"
+                :disabled="isSubmitting"
 
-              type="button"
+                type="button"
 
             >
 
@@ -611,11 +594,11 @@
 
             <button
 
-              class="btn-submit"
+                class="btn-submit"
 
-              @click="closeTicketHandler"
+                @click="closeTicketHandler"
 
-              :disabled="closingTicket"
+                :disabled="closingTicket"
 
             >
 
@@ -639,171 +622,24 @@
 
     <TicketPopup
 
-      :show-popup="showTicketPopup"
+        :show-popup="showTicketPopup"
 
-      :title="ticketPopupCfg.title"
+        :title="ticketPopupCfg.title"
 
-      :content="ticketPopupCfg.content"
+        :content="ticketPopupCfg.content"
 
-      :cooldown-hours="ticketPopupCfg.cooldownHours"
+        :cooldown-hours="ticketPopupCfg.cooldownHours"
 
-      :close-wait-seconds="ticketPopupCfg.closeWaitSeconds"
+        :close-wait-seconds="ticketPopupCfg.closeWaitSeconds"
 
-      @close="handleTicketPopupClose"
+        @close="handleTicketPopupClose"
 
     />
-
-    <div class="modal-overlay" v-if="showPreviewModal" @click="closePreviewModal" :class="{ 'show-overlay': overlayVisible }">
-
-      <div class="modal-content" :class="{ 'modal-close-animation': modalCloseAnimation }" @click.stop>
-
-        <div class="modal-header">
-
-          <h3>{{ $t('tickets.createNew') }}</h3>
-
-          <button class="modal-close" @click="closeModal">
-
-            <IconX :size="20" />
-
-          </button>
-
-        </div>
-
-        <div class="modal-body">
-
-          <div class="form-group">
-
-            <label>{{ $t('tickets.subject') }}</label>
-
-            <input
-
-                type="text"
-
-                v-model="newTicket.subject"
-
-                :placeholder="$t('tickets.subjectPlaceholder')"
-
-            >
-
-          </div>
-
-          <div class="form-group">
-
-            <label>{{ $t('tickets.level') }}</label>
-
-            <div class="level-tags">
-
-              <div
-
-                  class="level-tag"
-
-                  :class="{ 'active': newTicket.level === '0', 'level-low': true }"
-
-                  @click="newTicket.level = '0'"
-
-              >
-
-                <IconCircleCheck v-if="newTicket.level === '0'" :size="16" class="tag-icon" />
-
-                <IconCircle v-else :size="16" class="tag-icon" />
-
-                {{ $t('tickets.levelLow') }}
-
-              </div>
-
-              <div
-
-                  class="level-tag"
-
-                  :class="{ 'active': newTicket.level === '1', 'level-medium': true }"
-
-                  @click="newTicket.level = '1'"
-
-              >
-
-                <IconCircleCheck v-if="newTicket.level === '1'" :size="16" class="tag-icon" />
-
-                <IconCircle v-else :size="16" class="tag-icon" />
-
-                {{ $t('tickets.levelMedium') }}
-
-              </div>
-
-              <div
-
-                  class="level-tag"
-
-                  :class="{ 'active': newTicket.level === '2', 'level-high': true }"
-
-                  @click="newTicket.level = '2'"
-
-              >
-
-                <IconCircleCheck v-if="newTicket.level === '2'" :size="16" class="tag-icon" />
-
-                <IconCircle v-else :size="16" class="tag-icon" />
-
-                {{ $t('tickets.levelHigh') }}
-
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="form-group">
-
-            <label>{{ $t('tickets.message') }}</label>
-
-            <textarea
-
-                v-model="newTicket.message"
-
-                :placeholder="$t('tickets.messagePlaceholder')"
-
-                rows="5"
-
-            ></textarea>
-
-          </div>
-
-        </div>
-
-        <div class="modal-footer">
-
-          <button class="btn-cancel" @click="closeModal">
-
-            {{ $t('common.cancel') }}
-
-          </button>
-
-          <button
-
-              class="btn-submit"
-
-              @click="submitTicket"
-
-              :disabled="isSubmitting"
-
-              type="button"
-
-          >
-
-            <span v-if="isSubmitting" class="loader"></span>
-
-            {{ $t('common.submit') }}
-
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
 
   </div>
 
 </template>
+
 
 
 <script setup>
@@ -892,10 +728,6 @@ const loadingTickets = ref(false);
 
 const refreshInterval = ref(null);
 
-const upLoading = ref(false);
-
-const previewFocus = ref('');
-
 const errors = ref({
 
   subject: '',
@@ -926,15 +758,11 @@ const filteredTickets = computed(() => {
 
   return tickets.value.filter(ticket =>
 
-    ticket.subject.toLowerCase().includes(query)
+      ticket.subject.toLowerCase().includes(query)
 
   );
 
 });
-
-const enableImageUpload = computed(() => {
-  return TICKET_CONFIG.pictureUpload.enabled
-})
 
 
 
@@ -1028,11 +856,11 @@ const submitTicket = async () => {
 
     const userInfoText = formatUserInfoForTicket(
 
-      userInfoResponse,
+        userInfoResponse,
 
-      ipLocationResponse,
+        ipLocationResponse,
 
-      subscribeResponse
+        subscribeResponse
     );
 
 
@@ -1516,9 +1344,9 @@ const formatTimeShort = (timestamp) => {
 
   const isToday = date.getDate() === now.getDate() &&
 
-                 date.getMonth() === now.getMonth() &&
+      date.getMonth() === now.getMonth() &&
 
-                 date.getFullYear() === now.getFullYear();
+      date.getFullYear() === now.getFullYear();
 
 
 
@@ -1588,69 +1416,7 @@ const handleTicketPopupClose = () => {
 
 };
 
-const API_URL = TICKET_CONFIG.pictureUpload.host.url
-const API_KEY = TICKET_CONFIG.pictureUpload.host.key;
 
-const uploadImage = async (file) => {
-  const formData = new FormData();
-  formData.append("image", file);
-
-  try {
-    upLoading.value = true
-    const res = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "X-API-Key": API_KEY
-      },
-      body: formData
-    });
-
-    if (!res.ok) throw new Error("上传失败");
-
-    const data = await res.json();
-    if(data.success) {
-      showToast('上传成功', 'success', 3000);
-      return data.links;
-    } else {
-      showToast('上传失败', 'error', 3000);
-    }
-  } catch (err) {
-    showToast('上传失败', 'error', 3000);
-    console.error("上传出错:", err);
-    return null;
-  } finally {
-    upLoading.value = false;
-  }
-};
-
-const onPaste = (event) => {
-  if(!enableImageUpload) {
-    return
-  }
-  const items = (event.clipboardData || window.clipboardData).items;
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i];
-    if (item.kind === "file" && item.type.startsWith("image/")) {
-      event.preventDefault();
-      const file = item.getAsFile();
-      if(enableImageUpload.value) {
-        // 上传图片
-        uploadImage(file).then((res) => {
-          if (res) {
-            console.log("图床 URL:", res.markdown, res);
-
-            if(replyMessage.value == '') {
-              replyMessage.value += res.markdown
-            } else {
-              replyMessage.value += `\n${res.markdown}`
-            }
-          }
-        });
-      }
-
-    }
-  }
-};
 
 onMounted(() => {
 
@@ -2658,47 +2424,11 @@ onUnmounted(() => {
 
   background-color: var(--card-bg);
 
-  position: relative;
-
 
 
   @media (prefers-color-scheme: dark) {
 
     background-color: rgba(25, 30, 35, 0.8);
-
-  }
-
-  .preview {
-    position: absolute;
-    right: 154px;
-    bottom: 96px;
-    cursor: pointer;
-    transition: all 0.5s ease;
-    opacity: 0;
-
-    .svg {
-      color: var(--secondary-text-color);
-    }
-
-    &.preview-focus {
-      opacity: 1;
-      transform: translateY(-2px);
-    }
-  }
-
-  .up-loading {
-    position: absolute;
-    right: 154px;
-    bottom: 30px;
-
-    .spin {
-
-
-      :deep(.spinner) {
-        width: 20px;
-        height: 20px;
-      }
-    }
 
   }
 
@@ -3849,11 +3579,3 @@ onUnmounted(() => {
 }
 
 </style>
-
-
-
-
-
-
-
-
