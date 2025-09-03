@@ -64,6 +64,11 @@ export const getApiBaseUrl = () => {
             const formattedUrl = middlewareUrl.endsWith('/') ? middlewareUrl.slice(0, -1) : middlewareUrl;
             const formattedPath = middlewarePath.startsWith('/') ? middlewarePath : `/${middlewarePath}`;
 
+            const middlewareKey = window.EZ_CONFIG.API_MIDDLEWARE_KEY;
+            
+            if(middlewareKey) {
+              return formattedUrl;
+            }
             return formattedUrl + formattedPath;
         }
 

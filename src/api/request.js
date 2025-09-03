@@ -3,12 +3,16 @@ import axios from 'axios';
 import { API_BASE_URL, getApiBaseUrl, isXiaoV2board, isXboard, CUSTOM_HEADERS_CONFIG } from '@/utils/baseConfig';
 import { mapApiPath } from './utils/pathMapper';
 import { getAvailableApiUrl } from '@/utils/apiAvailabilityChecker';
+import { getEncrypUrl, randomIv } from "@/api/utils/encryption";
+
+const isEncrypted = window.EZ_CONFIG.API_MIDDLEWARE_KEY != '';
 
 const request = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 30000, 
+  timeout: 30000,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'X-IV': isEncrypted ? randomIv() : undefined,
   }
 });
 
@@ -19,14 +23,14 @@ request.interceptors.request.use(
     if (window.EZ_CONFIG && window.EZ_CONFIG.API_MIDDLEWARE_ENABLED) {
       const originalUrl = config.url;
       
-      config.url = mapApiPath(config.url);
+      config.url = isEncrypted ? btoa(getEncrypUrl(config.url)) : mapApiPath(config.url);
       
       if (process.env.NODE_ENV === 'development') {
         console.log(`API路径映射: ${originalUrl} -> ${config.url}`);
       }
-    } 
-    else if (window.EZ_CONFIG && window.EZ_CONFIG.API_BASE_URLS && 
-             Array.isArray(window.EZ_CONFIG.API_BASE_URLS) && 
+    }
+    else if (window.EZ_CONFIG && window.EZ_CONFIG.API_BASE_URLS &&
+             Array.isArray(window.EZ_CONFIG.API_BASE_URLS) &&
              window.EZ_CONFIG.API_BASE_URLS.length > 1) {
       const availableApiUrl = getAvailableApiUrl();
       if (availableApiUrl) {
@@ -167,4 +171,4 @@ request.interceptors.response.use(
   }
 );
 
-export default request; 
+export default request;
