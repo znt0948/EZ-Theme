@@ -50,11 +50,16 @@ export const config  = {
     // 是否启用中间件代理API请求
     // 设置为true时，所有API请求将通过中间件转发
     API_MIDDLEWARE_ENABLED: true,
+  
+    //=======================================================
+    // 中间件服务器URL (不含路径) 开源地址 https://github.com/codeman857/EZ-Encrypt-Middleware
+    API_MIDDLEWARE_URL: 'https://d2ijw202als7c.ezdemo.xyz',
+  
+    // 中间件加密KEY必须是16位的16进制字符串，必须和中间件key保持一致 在线生成地址 https://www.bejson.com/math/hex_gen/
+    API_MIDDLEWARE_KEY: '4c6f8e5f9467dc71',
+    //=======================================================
 
-    // 中间件服务器URL (不含路径)
-    API_MIDDLEWARE_URL: 'https://tko16g9ugx8bc.ezdemo.xyz',
-
-    // 中间件路由前缀 (与中间件服务器配置保持一致)
+    // 中间件路由前缀 (与中间件服务器配置保持一致) 如果使用加密中间件，这个设置可以忽略
     API_MIDDLEWARE_PATH: '/ez/ez',
 
     //=======================================================
@@ -493,7 +498,7 @@ export const config  = {
             cooldownHours: 24,
             // 等待时间（秒），用户需要等待多少秒才能关闭弹窗，设为0表示无需等待
             closeWaitSeconds: 0
-        }
+        },
     },
 
     // 流量明细配置

@@ -19,6 +19,7 @@
     "@vue/shared": "^3.5.13",
     "@vueuse/core": "^13.0.0",
     "@vueuse/motion": "^2.0.0-beta.12",
+    "aieditor": "^1.4.1",
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
     "core-js": "^3.25.0",
