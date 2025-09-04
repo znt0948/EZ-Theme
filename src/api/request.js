@@ -23,7 +23,9 @@ request.interceptors.request.use(
     if (window.EZ_CONFIG && window.EZ_CONFIG.API_MIDDLEWARE_ENABLED) {
       const originalUrl = config.url;
       
-      config.url = isEncrypted ? btoa(getEncrypUrl(config.url)) : mapApiPath(config.url);
+      const path = `${window.EZ_CONFIG.API_MIDDLEWARE_PATH}/${btoa(getEncrypUrl(config.url))}`
+      
+      config.url = isEncrypted ? path : mapApiPath(config.url);
       
       if (process.env.NODE_ENV === 'development') {
         console.log(`API路径映射: ${originalUrl} -> ${config.url}`);
