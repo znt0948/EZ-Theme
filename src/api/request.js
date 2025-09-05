@@ -15,7 +15,8 @@ const request = axios.create({
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
-    'X-IV': isEncrypted ? randomIv() : undefined,
+    // 只有在加密模式下才添加 X-IV 头
+    ...(isEncrypted && { 'X-IV': randomIv() }),
   }
 });
 
