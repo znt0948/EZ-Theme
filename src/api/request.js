@@ -5,7 +5,10 @@ import { mapApiPath } from './utils/pathMapper';
 import { getAvailableApiUrl } from '@/utils/apiAvailabilityChecker';
 import { getEncrypUrl, randomIv } from "@/api/utils/encryption";
 
-const isEncrypted = window.EZ_CONFIG.API_MIDDLEWARE_KEY != '';
+const isEncrypted = window.EZ_CONFIG &&
+  window.EZ_CONFIG.API_MIDDLEWARE_ENABLED &&
+  window.EZ_CONFIG.API_MIDDLEWARE_KEY &&
+  window.EZ_CONFIG.API_MIDDLEWARE_KEY !== '';
 
 const request = axios.create({
   baseURL: API_BASE_URL,
@@ -23,7 +26,7 @@ request.interceptors.request.use(
     if (window.EZ_CONFIG && window.EZ_CONFIG.API_MIDDLEWARE_ENABLED) {
       const originalUrl = config.url;
       
-      const path = `${window.EZ_CONFIG.API_MIDDLEWARE_PATH}/${btoa(getEncrypUrl(config.url))}`
+      const path = originalUrl.startsWith("http") ? mapApiPath(config.url) : `${window.EZ_CONFIG.API_MIDDLEWARE_PATH}/${btoa(getEncrypUrl(config.url))}`
       
       config.url = isEncrypted ? path : mapApiPath(config.url);
       
