@@ -24,11 +24,11 @@
 
     </div>
 
-    
 
-    <button 
 
-      class="language-btn" 
+    <button
+
+      class="language-btn"
 
       @click="toggleDropdown"
 
@@ -48,17 +48,17 @@
 
     </button>
 
-    
+
 
     <transition name="fade">
 
       <div class="language-dropdown" v-if="isOpen" ref="dropdown">
 
-        <div 
+        <div
 
-          v-for="lang in languages" 
+          v-for="lang in languages"
 
-          :key="lang.code" 
+          :key="lang.code"
 
           class="language-item"
 
@@ -123,23 +123,13 @@ export default {
 
     const dropdown = ref(null);
 
-    
+
 
     const languages = [
 
-      { 
+      {
 
-        code: 'vi-VN', 
-
-        name: 'Tiếng Việt',
-
-        flag: `<img src="${vnFlag}" alt="Tiếng Việt" class="flag-image" style="width: 100%; height: 100%; object-fit: cover;">`
-
-      },
-      
-      { 
-
-        code: 'zh-CN', 
+        code: 'zh-CN',
 
         name: '简体中文',
 
@@ -147,9 +137,9 @@ export default {
 
       },
 
-      { 
+      {
 
-        code: 'zh-TW', 
+        code: 'zh-TW',
 
         name: '繁體中文',
 
@@ -157,9 +147,9 @@ export default {
 
       },
 
-      { 
+      {
 
-        code: 'en-US', 
+        code: 'en-US',
 
         name: 'English',
 
@@ -167,9 +157,9 @@ export default {
 
       },
 
-      { 
+      {
 
-        code: 'ja-JP', 
+        code: 'ja-JP',
 
         name: '日本語',
 
@@ -177,9 +167,9 @@ export default {
 
       },
 
-      { 
+      {
 
-        code: 'ko-KR', 
+        code: 'ko-KR',
 
         name: '한국어',
 
@@ -187,9 +177,9 @@ export default {
 
       },
 
-      { 
+      {
 
-        code: 'ru-RU', 
+        code: 'ru-RU',
 
         name: 'Русский',
 
@@ -197,23 +187,33 @@ export default {
 
       },
 
-      { 
+      {
 
-        code: 'fa-IR', 
+        code: 'fa-IR',
 
         name: 'فارسی',
 
         flag: `<img src="${irFlag}" alt="فارسی" class="flag-image" style="width: 100%; height: 100%; object-fit: cover;">`
 
-      }
+      },
+
+      {
+
+        code: 'vi-VN',
+
+        name: 'Tiếng Việt',
+
+        flag: `<img src="${vnFlag}" alt="Tiếng Việt" class="flag-image" style="width: 100%; height: 100%; object-fit: cover;">`
+
+      },
 
     ];
 
-    
+
 
     const currentLanguage = computed(() => locale.value);
 
-    
+
 
     const getCurrentLanguageFlag = () => {
 
@@ -223,13 +223,13 @@ export default {
 
     };
 
-    
+
 
     const toggleDropdown = () => {
 
       isOpen.value = !isOpen.value;
 
-      
+
 
       if (isOpen.value) {
 
@@ -263,7 +263,7 @@ export default {
 
     };
 
-    
+
 
     const changeLanguage = (langCode) => {
 
@@ -271,7 +271,7 @@ export default {
 
       isOpen.value = false;
 
-      
+
 
       const event = new CustomEvent('languageChanged', { detail: langCode });
 
@@ -279,7 +279,7 @@ export default {
 
     };
 
-    
+
 
     const handleClickOutside = (event) => {
 
@@ -293,7 +293,7 @@ export default {
 
     };
 
-    
+
 
     onMounted(() => {
 
@@ -301,7 +301,7 @@ export default {
 
     });
 
-    
+
 
     onUnmounted(() => {
 
@@ -309,7 +309,7 @@ export default {
 
     });
 
-    
+
 
     return {
 
@@ -365,7 +365,7 @@ export default {
 
   z-index: -1000;
 
-  
+
 
   .preload-flag {
 
@@ -409,7 +409,7 @@ export default {
 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 
-  
+
 
   &:hover {
 
@@ -423,7 +423,7 @@ export default {
 
   }
 
-  
+
 
   .flag-icon {
 
@@ -441,7 +441,7 @@ export default {
 
     overflow: hidden;
 
-    
+
 
     .flag-container {
 
@@ -457,7 +457,7 @@ export default {
 
     }
 
-    
+
 
     img {
 
@@ -475,7 +475,7 @@ export default {
 
     }
 
-    
+
 
     svg {
 
@@ -543,7 +543,7 @@ export default {
 
   gap: 12px;
 
-  
+
 
   .flag-icon {
 
@@ -565,7 +565,7 @@ export default {
 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
-    
+
 
     img {
 
@@ -579,7 +579,7 @@ export default {
 
     }
 
-    
+
 
     svg {
 
@@ -593,7 +593,7 @@ export default {
 
   }
 
-  
+
 
   &:hover {
 
@@ -601,7 +601,7 @@ export default {
 
   }
 
-  
+
 
   &.active {
 
@@ -673,4 +673,4 @@ export default {
 
 }
 
-</style> 
+</style>
