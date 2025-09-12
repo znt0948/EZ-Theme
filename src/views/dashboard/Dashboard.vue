@@ -1611,7 +1611,7 @@ export default {
           case 'hiddify-windows':
           case 'hiddify-macos':
           case 'hiddify-ios':
-            url = `hiddify://import/${encodeURIComponent(subscribeUrl)}&flag=sing#${encodeURIComponent(siteName)}`;
+            url = `hiddify://import/${subscribeUrl}#${encodeURIComponent(siteName)}`;
             break;
           default:
             navigator.clipboard.writeText(subscribeUrl)
