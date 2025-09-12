@@ -312,7 +312,7 @@
                   <span>V2rayNG</span>
                 </div>
                 <div v-if="clientConfig.showClashAndroid" class="platform-option"
-                     @click="importToClient('clash-android')">
+                    @click="importToClient('clash-android')">
                   <img :src="clashAndroidIcon" class="client-icon" alt="Clash"/>
                   <span>Clash</span>
                 </div>
@@ -321,7 +321,7 @@
                   <span>Surfboard</span>
                 </div>
                 <div v-if="clientConfig.showClashMetaAndroid" class="platform-option"
-                     @click="importToClient('clash-meta-android')">
+                    @click="importToClient('clash-meta-android')">
                   <img :src="clashMetaAndroidIcon" class="client-icon" alt="Clash Meta"/>
                   <span>Clash Meta</span>
                 </div>
@@ -330,12 +330,12 @@
                   <span>Nekobox</span>
                 </div>
                 <div v-if="clientConfig.showSingboxAndroid" class="platform-option"
-                     @click="importToClient('singbox-android')">
+                    @click="importToClient('singbox-android')">
                   <img :src="singboxAndroidIcon" class="client-icon" alt="Singbox"/>
                   <span>Singbox</span>
                 </div>
                 <div v-if="clientConfig.showHiddifyAndroid" class="platform-option"
-                     @click="importToClient('hiddify-android')">
+                    @click="importToClient('hiddify-android')">
                   <img :src="hiddifyAndroidIcon" class="client-icon" alt="Hiddify"/>
                   <span>Hiddify</span>
                 </div>
@@ -366,12 +366,12 @@
                   <span>Nekoray</span>
                 </div>
                 <div v-if="clientConfig.showSingboxWindows" class="platform-option"
-                     @click="importToClient('singbox-windows')">
+                    @click="importToClient('singbox-windows')">
                   <img :src="singboxWindowsIcon" class="client-icon" alt="Singbox"/>
                   <span>Singbox</span>
                 </div>
                 <div v-if="clientConfig.showHiddifyWindows" class="platform-option"
-                     @click="importToClient('hiddify-windows')">
+                    @click="importToClient('hiddify-windows')">
                   <img :src="hiddifyWindowsIcon" class="client-icon" alt="Hiddify"/>
                   <span>Hiddify</span>
                 </div>
@@ -410,17 +410,17 @@
                   <span>Stash</span>
                 </div>
                 <div v-if="clientConfig.showQuantumultXMac" class="platform-option"
-                     @click="importToClient('quantumultx-mac')">
+                    @click="importToClient('quantumultx-mac')">
                   <img :src="quantumultXMacIcon" class="client-icon" alt="Quantumult X"/>
                   <span>Quantumult X</span>
                 </div>
                 <div v-if="clientConfig.showSingboxMac" class="platform-option"
-                     @click="importToClient('singbox-macos')">
+                    @click="importToClient('singbox-macos')">
                   <img :src="singboxMacIcon" class="client-icon" alt="Singbox"/>
                   <span>Singbox</span>
                 </div>
                 <div v-if="clientConfig.showHiddifyMac" class="platform-option"
-                     @click="importToClient('hiddify-macos')">
+                    @click="importToClient('hiddify-macos')">
                   <img :src="hiddifyMacIcon" class="client-icon" alt="Hiddify"/>
                   <span>Hiddify</span>
                 </div>
