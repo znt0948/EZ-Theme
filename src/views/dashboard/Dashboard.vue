@@ -385,11 +385,11 @@
             <div v-if="activePlatform === 'macos'" class="platform-section">
               <div class="platform-title">MacOS</div>
               <div v-if="hasMacOSClients" class="platform-options">
-                <div v-if="clientConfig.showFlClashWindows" class="platform-option" @click="importToClient('flclash')">
+                <div v-if="clientConfig.showFlClashMac" class="platform-option" @click="importToClient('flclash')">
                   <img :src="flclashIcon" class="client-icon" alt="FlClash"/>
                   <span>FlClash</span>
                 </div>
-                <div v-if="clientConfig.showClashVergeWindows" class="platform-option" @click="importToClient('clashverge')">
+                <div v-if="clientConfig.showClashVergeMac" class="platform-option" @click="importToClient('clashverge')">
                   <img :src="clashvergeIcon" class="client-icon" alt="ClashVerge"/>
                   <span>ClashVerge</span>
                 </div>
@@ -1567,7 +1567,7 @@ export default {
       try {
         switch (clientType) {
           case 'shadowrocket':
-            url = `shadowrocket://add/sub://${window.btoa(subscribeUrl + '&flag=shadowrocket').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}?remark=${encodeURIComponent(siteName)}`;
+            url = `shadowrocket://add/sub://${window.btoa(subscribeUrl).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}?remark=${encodeURIComponent(siteName)}`;
             break;
           case 'surge':
           case 'surge-mac':
