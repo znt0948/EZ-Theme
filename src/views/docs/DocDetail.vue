@@ -667,9 +667,9 @@ const handleDocClick = (event) => {
 
       (event.target.textContent.includes('复制') || 
 
-       event.target.textContent.includes('copy') ||
+      event.target.textContent.includes('copy') ||
 
-       event.target.textContent.includes('订阅'))) {
+      event.target.textContent.includes('订阅'))) {
 
     const subscribeUrl = getUserSubscribeUrl();
 
@@ -689,19 +689,38 @@ const handleDocClick = (event) => {
 
 
 
+// 构建“无访问权限”卡片 HTML（仪表盘同款结构）
+const buildNoAccessCardHtml = () => {
+  const title = t('docs.noAccessPrompt');
+  const buyText = t('dashboard.purchasePlan');
+  const supportText = t('dashboard.ticketSupport');
+  return `
+    <div class="dashboard-card stats-card no-plan-card card-animate" style="margin: 12px 0;">
+      <div class="no-plan-content">
+        <div class="no-plan-icon" aria-hidden="true"></div>
+        <div class="no-plan-message">
+          <div class="no-plan-title">${title}</div>
+          <div class="no-plan-actions">
+            <button class="action-button primary" data-href="/shop">
+              <span class="btn-icon"></span>
+              <span>${buyText}</span>
+            </button>
+            <button class="action-button secondary" data-href="/tickets">
+              <span class="btn-icon"></span>
+              <span>${supportText}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+};
+
+
+
 const renderedContent = computed(() => {
-
   let content = docData.value.body || '';
-
-  
-
-  if (!content) {
-
-    return '';
-
-  }
-
-  
+  if (!content) return '';
 
   try {
 
@@ -720,16 +739,16 @@ const renderedContent = computed(() => {
       console.error('Markdown渲染失败:', mdError);
 
       renderedMd = content;
-
+      
     }
 
-    
 
-    if (isComplexHtml(content) || isComplexHtml(renderedMd)) {
+
+    if (isComplexHtml(content) || isComplexHtml(renderedMd)) {     
 
       let processedContent = renderedMd;
 
-      
+
 
       const styleTagRegex = /<style[\s\S]*?<\/style>/gi;
 
@@ -1091,6 +1110,15 @@ const renderedContent = computed(() => {
 
       
 
+      // 3) 检测并替换 v2board-no-access 块为美化卡片
+      const noAccessEls = tempDiv.querySelectorAll('.v2board-no-access');
+      if (noAccessEls && noAccessEls.length > 0) {
+        const cardHtml = buildNoAccessCardHtml();
+        noAccessEls.forEach(el => {
+          el.outerHTML = cardHtml;
+        });
+      }
+
       return tempDiv.innerHTML;
 
     } else {
@@ -1102,7 +1130,7 @@ const renderedContent = computed(() => {
   } catch (err) {
 
     console.error('Error processing content:', err);
-
+    
     return `<p class="error-message">${t('docs.contentFormatError')}</p>`;
 
   }
@@ -2292,6 +2320,7 @@ onUnmounted(() => {
 <!-- 全局样式，不受scoped限制 -->
 
 <style lang="scss">
+@use '@/assets/styles/no-plan-card' as *;
 
 
 

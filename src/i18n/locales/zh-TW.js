@@ -759,6 +759,7 @@ export default {
   docs: {
     title: '文件中心',
     searchPlaceholder: '搜尋文件...',
+    noAccessPrompt: '您目前沒有有效的套餐，購買套餐後即可檢視該區域的內容',
     loading: '正在載入文件...',
     retry: '重試',
     clearSearch: '清除搜尋',

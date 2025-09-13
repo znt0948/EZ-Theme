@@ -768,6 +768,7 @@ export default {
     docs: {
         title: '文档中心',
         searchPlaceholder: '搜索文档...',
+        noAccessPrompt: '您目前没有有效的套餐，购买套餐后即可查看该区域的内容',
         loading: '正在加载文档...',
         retry: '重试',
         clearSearch: '清除搜索',

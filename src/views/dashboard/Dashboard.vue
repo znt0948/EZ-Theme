@@ -385,11 +385,11 @@
             <div v-if="activePlatform === 'macos'" class="platform-section">
               <div class="platform-title">MacOS</div>
               <div v-if="hasMacOSClients" class="platform-options">
-                <div v-if="clientConfig.showFlClashWindows" class="platform-option" @click="importToClient('flclash')">
+                <div v-if="clientConfig.showFlClashMac" class="platform-option" @click="importToClient('flclash')">
                   <img :src="flclashIcon" class="client-icon" alt="FlClash"/>
                   <span>FlClash</span>
                 </div>
-                <div v-if="clientConfig.showClashVergeWindows" class="platform-option" @click="importToClient('clashverge')">
+                <div v-if="clientConfig.showClashVergeMac" class="platform-option" @click="importToClient('clashverge')">
                   <img :src="clashvergeIcon" class="client-icon" alt="ClashVerge"/>
                   <span>ClashVerge</span>
                 </div>
@@ -1567,94 +1567,60 @@ export default {
       try {
         switch (clientType) {
           case 'shadowrocket':
-            url = `shadowrocket://add/sub://${window.btoa(subscribeUrl + '&flag=shadowrocket').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}?remark=${encodeURIComponent(siteName)}`;
+            url = `shadowrocket://add/sub://${window.btoa(subscribeUrl).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}?remark=${encodeURIComponent(siteName)}`;
             break;
           case 'surge':
-            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
           case 'surge-mac':
-            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${encodeURIComponent(siteName)}`;
             break;
           case 'stash':
-            url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
           case 'stash-mac':
-            url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `stash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${encodeURIComponent(siteName)}`;
             break;
           case 'quantumultx':
-            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
-            break;
           case 'quantumultx-mac':
-            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${siteName}`]}))}`;
+            url = `quantumult-x:///update-configuration?remote-resource=${encodeURI(JSON.stringify({server_remote: [`${subscribeUrl}, tag=${encodeURIComponent(siteName)}`,],}))}`;
             break;
           case 'loon':
-            url = `loon://import?nodelist=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
+            url = `loon://import?nodelist=${encodeURIComponent(subscribeUrl)}&name=${encodeURIComponent(siteName)}`;
             break;
           case 'v2rayng':
-            url = `v2rayng://install-sub?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
+            url = `v2rayng://install-sub?url=${encodeURIComponent(subscribeUrl)}#${encodeURIComponent(siteName)}`;
             break;
           case 'clash':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
           case 'clash-android':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
           case 'clash-meta-android':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl + '&flag=meta')}&name=${siteName}`;
+          case 'flclash':
+          case 'clashverge':
+          case 'nekobox':
+          case 'nekoray':
+          case 'clashx':
+          case 'clashx-meta':
+            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${encodeURIComponent(siteName)}`;
             break;
           case 'surfboard':
-            url = `surge:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
-          case 'flclash':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'clashverge':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'nekobox':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'nekoray':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl) + '&flag=meta'}&name=${siteName}`;
-            break;
-          case 'clashx':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl)}&name=${siteName}`;
-            break;
-          case 'clashx-meta':
-            url = `clash://install-config?url=${encodeURIComponent(subscribeUrl + '&flag=meta')}&name=${siteName}`;
+            url = `surfboard:///install-config?url=${encodeURIComponent(subscribeUrl)}&name=${encodeURIComponent(siteName)}`;
             break;
           case 'singbox-ios':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
-            break;
           case 'singbox-android':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
-            break;
           case 'singbox-windows':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
-            break;
           case 'singbox-macos':
-            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${siteName}`;
+            url = `sing-box://import-remote-profile?url=${encodeURIComponent(subscribeUrl)}#${encodeURIComponent(siteName)}`;
             break;
           case 'hiddify-android':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
-            break;
           case 'hiddify-windows':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
-            break;
           case 'hiddify-macos':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
-            break;
           case 'hiddify-ios':
-            url = `hiddify://import/${subscribeUrl}&flag=sing#${siteName}`;
+            url = `hiddify://import/${subscribeUrl}#${encodeURIComponent(siteName)}`;
             break;
           default:
             navigator.clipboard.writeText(subscribeUrl)
-                .then(() => {
-                  showToast(t('dashboard.subscriptionCopied'), 'success', 3000);
-                })
-                .catch(() => {
-                  showToast(t('dashboard.copyFailed'), 'error', 3000);
-                });
+              .then(() => {
+                showToast(t('dashboard.subscriptionCopied'), 'success', 3000);
+              })
+              .catch(() => {
+                showToast(t('dashboard.copyFailed'), 'error', 3000);
+              });
             return;
         }
 
@@ -3259,224 +3225,6 @@ export default {
 }
 
 
-.stats-card.no-plan-card {
-  border-color: #ff9800;
-  box-shadow: 0 4px 10px rgba(255, 152, 0, 0.15);
-  background: linear-gradient(145deg, rgba(255, 152, 0, 0.05) 0%, rgba(255, 152, 0, 0.1) 100%);
-  padding: 20px;
-  overflow: hidden;
-  position: relative;
-}
-
-.no-plan-content {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  position: relative;
-  z-index: 1;
-}
-
-.no-plan-icon {
-  background-color: rgba(255, 152, 0, 0.15);
-  color: #ff9800;
-  width: 80px;
-  height: 80px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 12px rgba(255, 152, 0, 0.1);
-  flex-shrink: 0;
-  transform: rotate(-5deg);
-  transition: all 0.3s ease;
-}
-
-.no-plan-card:hover .no-plan-icon {
-  transform: rotate(0deg) scale(1.05);
-}
-
-.no-plan-message {
-  flex: 1;
-}
-
-.no-plan-title {
-  color: #ff9800;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-  line-height: 1.4;
-}
-
-.no-plan-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.no-plan-actions .action-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.no-plan-actions .action-button.primary {
-  background-color: var(--theme-color);
-  color: white;
-  border: none;
-  box-shadow: 0 4px 10px rgba(var(--theme-color-rgb), 0.3);
-}
-
-.no-plan-actions .action-button.primary:hover {
-  background-color: var(--theme-hover-color);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(var(--theme-color-rgb), 0.4);
-}
-
-.no-plan-actions .action-button.secondary {
-  background-color: transparent;
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.no-plan-actions .action-button.secondary:hover {
-  background-color: rgba(var(--theme-color-rgb), 0.08);
-  color: var(--theme-color);
-  border-color: var(--theme-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(var(--theme-color-rgb), 0.2);
-}
-
-
-@media (max-width: 768px) {
-  .no-plan-content {
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-  }
-
-  .no-plan-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    text-align: center;
-  }
-
-  .no-plan-actions {
-    justify-content: center;
-    width: 100%;
-    gap: 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .no-plan-actions .action-button {
-    padding: 8px 15px;
-    min-width: 120px;
-    justify-content: center;
-  }
-
-  .stats-card.no-plan-card {
-    padding: 15px 12px;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .no-plan-content {
-    padding: 5px;
-    width: 100%;
-  }
-
-  .no-plan-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    margin: 0 auto;
-  }
-
-  .no-plan-icon .icon-cart {
-    width: 32px;
-    height: 32px;
-  }
-
-  .no-plan-title {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    width: 100%;
-    text-align: center;
-  }
-
-  .no-plan-message {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .no-plan-actions {
-    gap: 10px;
-    width: 100%;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .no-plan-actions .action-button {
-    padding: 10px 15px;
-    font-size: 14px;
-    justify-content: center;
-    width: 80%;
-    max-width: 200px;
-  }
-
-  .no-plan-actions .action-button .btn-icon {
-    width: 14px;
-    height: 14px;
-    margin-right: 4px;
-  }
-
-  .stats-card.no-plan-card {
-    padding: 15px 10px;
-  }
-}
-
-
-.no-plan-card::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: rgba(255, 152, 0, 0.08);
-  z-index: 0;
-}
-
-.no-plan-card::after {
-  content: '';
-  position: absolute;
-  bottom: -30px;
-  left: -30px;
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: rgba(255, 152, 0, 0.05);
-  z-index: 0;
-}
 
 
 .skeleton-card {
@@ -4215,6 +3963,7 @@ export default {
 
 <!-- 全局样式，不受scoped限制 -->
 <style lang="scss">
+@use '@/assets/styles/no-plan-card' as *;
 
 .stats-card.warning-card {
   border-color: #ff9800 !important;

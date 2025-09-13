@@ -763,6 +763,7 @@ export default {
     docs: {
         title: 'Trung tâm Tài liệu',
         searchPlaceholder: 'Tìm kiếm tài liệu...',
+        noAccessPrompt: 'Hiện bạn chưa có gói dịch vụ hợp lệ. Vui lòng mua gói để xem nội dung trong mục này',
         loading: 'Đang tải tài liệu...',
         retry: 'Thử lại',
         clearSearch: 'Xóa tìm kiếm',

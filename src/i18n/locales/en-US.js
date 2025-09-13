@@ -768,6 +768,7 @@ export default {
     docs: {
         title: 'Documentation Center',
         searchPlaceholder: 'Search documentation...',
+        noAccessPrompt: 'You currently have no active plan. Purchase a plan to view content in this section',
         loading: 'Loading documentation...',
         retry: 'Retry',
         clearSearch: 'Clear Search',
