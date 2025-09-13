@@ -763,6 +763,7 @@ export default {
   docs: {
     title: 'ドキュメントセンター',
     searchPlaceholder: 'ドキュメント検索...',
+    noAccessPrompt: '現在有効なプランがありません。プランを購入すると本セクションの内容を閲覧できます',
     loading: 'ドキュメント読み込み中...',
     retry: '再試行',
     clearSearch: '検索クリア',

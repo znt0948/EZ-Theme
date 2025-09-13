@@ -764,6 +764,7 @@ export default {
   docs: {
     title: '문서 센터',
     searchPlaceholder: '문서 검색...',
+    noAccessPrompt: '현재 유효한 플랜이 없습니다. 플랜을 구매하면 이 영역의 콘텐츠를 볼 수 있습니다',
     loading: '문서 로딩 중...',
     retry: '재시도',
     clearSearch: '검색 지우기',

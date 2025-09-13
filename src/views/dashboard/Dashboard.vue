@@ -312,7 +312,7 @@
                   <span>V2rayNG</span>
                 </div>
                 <div v-if="clientConfig.showClashAndroid" class="platform-option"
-                    @click="importToClient('clash-android')">
+                     @click="importToClient('clash-android')">
                   <img :src="clashAndroidIcon" class="client-icon" alt="Clash"/>
                   <span>Clash</span>
                 </div>
@@ -321,7 +321,7 @@
                   <span>Surfboard</span>
                 </div>
                 <div v-if="clientConfig.showClashMetaAndroid" class="platform-option"
-                    @click="importToClient('clash-meta-android')">
+                     @click="importToClient('clash-meta-android')">
                   <img :src="clashMetaAndroidIcon" class="client-icon" alt="Clash Meta"/>
                   <span>Clash Meta</span>
                 </div>
@@ -330,12 +330,12 @@
                   <span>Nekobox</span>
                 </div>
                 <div v-if="clientConfig.showSingboxAndroid" class="platform-option"
-                    @click="importToClient('singbox-android')">
+                     @click="importToClient('singbox-android')">
                   <img :src="singboxAndroidIcon" class="client-icon" alt="Singbox"/>
                   <span>Singbox</span>
                 </div>
                 <div v-if="clientConfig.showHiddifyAndroid" class="platform-option"
-                    @click="importToClient('hiddify-android')">
+                     @click="importToClient('hiddify-android')">
                   <img :src="hiddifyAndroidIcon" class="client-icon" alt="Hiddify"/>
                   <span>Hiddify</span>
                 </div>
@@ -366,12 +366,12 @@
                   <span>Nekoray</span>
                 </div>
                 <div v-if="clientConfig.showSingboxWindows" class="platform-option"
-                    @click="importToClient('singbox-windows')">
+                     @click="importToClient('singbox-windows')">
                   <img :src="singboxWindowsIcon" class="client-icon" alt="Singbox"/>
                   <span>Singbox</span>
                 </div>
                 <div v-if="clientConfig.showHiddifyWindows" class="platform-option"
-                    @click="importToClient('hiddify-windows')">
+                     @click="importToClient('hiddify-windows')">
                   <img :src="hiddifyWindowsIcon" class="client-icon" alt="Hiddify"/>
                   <span>Hiddify</span>
                 </div>
@@ -410,17 +410,17 @@
                   <span>Stash</span>
                 </div>
                 <div v-if="clientConfig.showQuantumultXMac" class="platform-option"
-                    @click="importToClient('quantumultx-mac')">
+                     @click="importToClient('quantumultx-mac')">
                   <img :src="quantumultXMacIcon" class="client-icon" alt="Quantumult X"/>
                   <span>Quantumult X</span>
                 </div>
                 <div v-if="clientConfig.showSingboxMac" class="platform-option"
-                    @click="importToClient('singbox-macos')">
+                     @click="importToClient('singbox-macos')">
                   <img :src="singboxMacIcon" class="client-icon" alt="Singbox"/>
                   <span>Singbox</span>
                 </div>
                 <div v-if="clientConfig.showHiddifyMac" class="platform-option"
-                    @click="importToClient('hiddify-macos')">
+                     @click="importToClient('hiddify-macos')">
                   <img :src="hiddifyMacIcon" class="client-icon" alt="Hiddify"/>
                   <span>Hiddify</span>
                 </div>
@@ -3225,224 +3225,6 @@ export default {
 }
 
 
-.stats-card.no-plan-card {
-  border-color: #ff9800;
-  box-shadow: 0 4px 10px rgba(255, 152, 0, 0.15);
-  background: linear-gradient(145deg, rgba(255, 152, 0, 0.05) 0%, rgba(255, 152, 0, 0.1) 100%);
-  padding: 20px;
-  overflow: hidden;
-  position: relative;
-}
-
-.no-plan-content {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  position: relative;
-  z-index: 1;
-}
-
-.no-plan-icon {
-  background-color: rgba(255, 152, 0, 0.15);
-  color: #ff9800;
-  width: 80px;
-  height: 80px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 12px rgba(255, 152, 0, 0.1);
-  flex-shrink: 0;
-  transform: rotate(-5deg);
-  transition: all 0.3s ease;
-}
-
-.no-plan-card:hover .no-plan-icon {
-  transform: rotate(0deg) scale(1.05);
-}
-
-.no-plan-message {
-  flex: 1;
-}
-
-.no-plan-title {
-  color: #ff9800;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-  line-height: 1.4;
-}
-
-.no-plan-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.no-plan-actions .action-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.no-plan-actions .action-button.primary {
-  background-color: var(--theme-color);
-  color: white;
-  border: none;
-  box-shadow: 0 4px 10px rgba(var(--theme-color-rgb), 0.3);
-}
-
-.no-plan-actions .action-button.primary:hover {
-  background-color: var(--theme-hover-color);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(var(--theme-color-rgb), 0.4);
-}
-
-.no-plan-actions .action-button.secondary {
-  background-color: transparent;
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.no-plan-actions .action-button.secondary:hover {
-  background-color: rgba(var(--theme-color-rgb), 0.08);
-  color: var(--theme-color);
-  border-color: var(--theme-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(var(--theme-color-rgb), 0.2);
-}
-
-
-@media (max-width: 768px) {
-  .no-plan-content {
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-  }
-
-  .no-plan-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    text-align: center;
-  }
-
-  .no-plan-actions {
-    justify-content: center;
-    width: 100%;
-    gap: 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .no-plan-actions .action-button {
-    padding: 8px 15px;
-    min-width: 120px;
-    justify-content: center;
-  }
-
-  .stats-card.no-plan-card {
-    padding: 15px 12px;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .no-plan-content {
-    padding: 5px;
-    width: 100%;
-  }
-
-  .no-plan-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    margin: 0 auto;
-  }
-
-  .no-plan-icon .icon-cart {
-    width: 32px;
-    height: 32px;
-  }
-
-  .no-plan-title {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    width: 100%;
-    text-align: center;
-  }
-
-  .no-plan-message {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .no-plan-actions {
-    gap: 10px;
-    width: 100%;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .no-plan-actions .action-button {
-    padding: 10px 15px;
-    font-size: 14px;
-    justify-content: center;
-    width: 80%;
-    max-width: 200px;
-  }
-
-  .no-plan-actions .action-button .btn-icon {
-    width: 14px;
-    height: 14px;
-    margin-right: 4px;
-  }
-
-  .stats-card.no-plan-card {
-    padding: 15px 10px;
-  }
-}
-
-
-.no-plan-card::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: rgba(255, 152, 0, 0.08);
-  z-index: 0;
-}
-
-.no-plan-card::after {
-  content: '';
-  position: absolute;
-  bottom: -30px;
-  left: -30px;
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: rgba(255, 152, 0, 0.05);
-  z-index: 0;
-}
 
 
 .skeleton-card {
@@ -4181,6 +3963,7 @@ export default {
 
 <!-- 全局样式，不受scoped限制 -->
 <style lang="scss">
+@use '@/assets/styles/no-plan-card' as *;
 
 .stats-card.warning-card {
   border-color: #ff9800 !important;
