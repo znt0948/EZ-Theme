@@ -377,7 +377,11 @@ export default {
         popup: {
             close_btn: 'Close',
             wait_close_btn: 'Close in {seconds}s'
-        }
+        },
+        upPictures: 'Upload images',
+        uploadingImages: 'Uploading images...',
+        uploadTipText: 'Drag and drop images here or click to upload',
+        uploadDescText: 'Supports JPG, PNG, GIF formats, up to 5 MB',
     },
     profile: {
         title: 'User Center',
