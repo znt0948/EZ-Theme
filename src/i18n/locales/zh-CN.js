@@ -376,7 +376,11 @@ export default {
         popup: {
             close_btn: '关闭',
             wait_close_btn: '{seconds}秒后关闭'
-        }
+        },
+        upPictures: '上传图片',
+        uploadingImages: '上传中...',
+        uploadTipText: '拖拽图片到此处或点击上传',
+        uploadDescText: '支持 JPG、PNG、GIF 格式，最大 5 MB',
     },
     profile: {
         title: '用户中心',

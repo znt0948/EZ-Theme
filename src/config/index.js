@@ -499,6 +499,10 @@ export const config  = {
             // 等待时间（秒），用户需要等待多少秒才能关闭弹窗，设为0表示无需等待
             closeWaitSeconds: 0
         },
+        // 工单图片设置
+        isImageHosting: false, // 是否启用工单图片上传功能
+        // imgBB 图床 api 设置 前往imgBB注册账号 https://imgbb.com/ 获取 apiKey
+        imgbbApiKey: '',
     },
 
     // 流量明细配置
