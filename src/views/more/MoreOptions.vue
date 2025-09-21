@@ -384,23 +384,27 @@ const morePageConfig = MORE_PAGE_CONFIG;
 
 const thirdNavItem = NAVIGATION_CONFIG?.thirdNavItem || 'invite';
 
+const fourthNavItem = NAVIGATION_CONFIG?.fourthNavItem || '';
 
-const shouldShowInviteCard = computed(() => thirdNavItem !== 'invite');
+const isHiddenByTopNav = (key) => key === thirdNavItem || key === fourthNavItem;
 
-const shouldShowDocsCard = computed(() => thirdNavItem !== 'docs');
 
-const shouldShowNodesCard = computed(() => thirdNavItem !== 'nodes');
 
-const shouldShowOrdersCard = computed(() => thirdNavItem !== 'orders');
+const shouldShowInviteCard = computed(() => !isHiddenByTopNav('invite'));
 
-const shouldShowTicketsCard = computed(() => thirdNavItem !== 'tickets');
+const shouldShowDocsCard = computed(() => !isHiddenByTopNav('docs'));
 
-const shouldShowTrafficCard = computed(() => thirdNavItem !== 'traffic');
+const shouldShowNodesCard = computed(() => !isHiddenByTopNav('nodes'));
 
-const shouldShowWalletCard = computed(() => thirdNavItem !== 'wallet');
+const shouldShowOrdersCard = computed(() => !isHiddenByTopNav('orders'));
 
-const shouldShowProfileCard = computed(() => thirdNavItem !== 'profile');
+const shouldShowTicketsCard = computed(() => !isHiddenByTopNav('tickets'));
 
+const shouldShowTrafficCard = computed(() => !isHiddenByTopNav('traffic'));
+
+const shouldShowWalletCard = computed(() => !isHiddenByTopNav('wallet'));
+
+const shouldShowProfileCard = computed(() => !isHiddenByTopNav('profile'));
 
 
 const checkScreenSize = () => {
@@ -799,4 +803,4 @@ onUnmounted(() => {
 
 }
 
-</style> 
+</style>

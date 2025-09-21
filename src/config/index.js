@@ -577,6 +577,8 @@ export const config  = {
 
         // 可选：第四个导航项（插入在“更多”之前）。为空字符串或未设置则不插入
         // 可选值同上: 'invite', 'docs', 'tickets', 'nodes', 'orders', 'traffic', 'wallet', 'profile'
+        // 默认值为 'docs'
+        // 注意：如果第三个导航项设置为 'invite'，则第四个导航项不能设置为 'invite'
         fourthNavItem: 'docs',
     },
 
