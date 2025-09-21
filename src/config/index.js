@@ -568,6 +568,14 @@ export const config  = {
         }
     },
 
+    // 设置导航栏第三个位置显示的内容
+    NAVIGATION_CONFIG: {
+        // 可选值: 'invite', 'docs', 'tickets', 'nodes', 'orders', 'traffic', 'wallet', 'profile'
+        // 'wallet' 只有 xiao-v2board 支持 非 xiao-v2board 面板请勿设置为 wallet
+        // 默认值为 'invite'
+        thirdNavItem: 'invite',
+    },
+
     // More页面自定义卡片配置
     MORE_PAGE_CONFIG: {
         // 是否启用自定义卡片功能

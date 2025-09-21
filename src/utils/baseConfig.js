@@ -883,3 +883,14 @@ const DEFAULT_AUTH_CONFIG = {
 };
 
 export const AUTH_CONFIG = mergeDeep(DEFAULT_AUTH_CONFIG, getConfig('AUTH_CONFIG'));
+
+/**
+ * 添加默认导航栏配置
+ */
+const DEFAULT_NAVIGATION_CONFIG = {
+    // 设置导航栏第三个位置显示的内容
+    thirdNavItem: 'invite'  // 默认显示邀请
+};
+
+// 导出合并后的导航栏配置
+export const NAVIGATION_CONFIG = mergeDeep(DEFAULT_NAVIGATION_CONFIG, getConfig('NAVIGATION_CONFIG'));
