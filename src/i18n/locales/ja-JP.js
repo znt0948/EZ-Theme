@@ -374,6 +374,11 @@ export default {
       close_btn: '閉じる',
       wait_close_btn: '{seconds}秒後に閉じる'
     }
+    ,
+    upPictures: '画像をアップロード',
+    uploadingImages: 'アップロード中...',
+    uploadTipText: 'ここに画像をドラッグ＆ドロップするか、クリックしてアップロード',
+    uploadDescText: 'JPG、PNG、GIF 形式に対応、最大 5 MB'
   },
   profile: {
     title: 'ユーザーセンター',
