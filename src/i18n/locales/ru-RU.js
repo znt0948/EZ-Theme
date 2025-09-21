@@ -374,6 +374,11 @@ export default {
       close_btn: 'Закрыть',
       wait_close_btn: 'Закрыть через {seconds} с'
     }
+    ,
+    upPictures: 'Загрузить изображения',
+    uploadingImages: 'Загрузка...',
+    uploadTipText: 'Перетащите изображения сюда или нажмите для загрузки',
+    uploadDescText: 'Поддерживаются форматы JPG, PNG, GIF, до 5 МБ'
   },
   profile: {
     title: 'Центр пользователя',

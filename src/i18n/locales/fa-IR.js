@@ -373,7 +373,13 @@ export default {
     popup: {
       close_btn: 'بستن',
       wait_close_btn: 'بستن در {seconds} ثانیه'
-    },
+    }
+    ,
+    upPictures: 'آپلود تصاویر',
+    uploadingImages: 'در حال آپلود...',
+    uploadTipText: 'تصاویر را اینجا بکشید و رها کنید یا برای آپلود کلیک کنید',
+    uploadDescText: 'پشتیبانی از فرمت‌های JPG، PNG، GIF تا 5 مگابایت'
+    ,
   },
   profile: {
     title: 'مرکز کاربر',
