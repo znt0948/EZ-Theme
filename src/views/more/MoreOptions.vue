@@ -33,8 +33,34 @@
       <!-- 功能导航卡片组 -->
 
       <div class="stats-grid">
+        
+        <div v-if="shouldShowInviteCard" class="stats-card" @click="$router.push('/invite')">
 
-        <div class="stats-card" @click="$router.push('/docs')">
+          <div class="stats-icon">
+
+            <IconUserPlus :size="32" />
+
+          </div>
+
+          <div class="stats-info">
+
+            <div class="stats-value">{{ $t('invite.title') }}</div>
+
+            <div class="stats-label">{{ $t('more.inviteDescription') }}</div>
+
+          </div>
+
+          <div class="chevron-icon">
+
+            <IconChevronRight :size="20" />
+
+          </div>
+
+        </div>
+
+
+
+        <div v-if="shouldShowDocsCard" class="stats-card" @click="$router.push('/docs')">
 
           <div class="stats-icon">
 
@@ -60,7 +86,7 @@
 
         
 
-        <div class="stats-card" @click="$router.push('/nodes')">
+        <div v-if="shouldShowNodesCard" class="stats-card" @click="$router.push('/nodes')">
 
           <div class="stats-icon">
 
@@ -86,7 +112,7 @@
 
         
 
-        <div class="stats-card" @click="$router.push('/orders')">
+        <div v-if="shouldShowOrdersCard" class="stats-card" @click="$router.push('/orders')">
 
           <div class="stats-icon">
 
@@ -112,7 +138,7 @@
 
         
 
-        <div class="stats-card" @click="navigateToTickets">
+        <div v-if="shouldShowTicketsCard" class="stats-card" @click="navigateToTickets">
 
           <div class="stats-icon">
 
@@ -138,7 +164,7 @@
 
         
 
-        <div class="stats-card" v-if="showTrafficLog" @click="$router.push('/trafficlog')">
+        <div class="stats-card" v-if="shouldShowTrafficCard && showTrafficLog" @click="$router.push('/trafficlog')">
 
           <div class="stats-icon">
 
@@ -166,7 +192,7 @@
 
         <!-- 充值选项，仅Xiao-V2board面板显示 -->
 
-        <div v-if="isXiaoPanel" class="stats-card" @click="$router.push('/wallet/deposit')">
+        <div v-if="shouldShowWalletCard && isXiaoPanel" class="stats-card" @click="$router.push('/wallet/deposit')">
 
           <div class="stats-icon">
 
@@ -192,7 +218,7 @@
 
         
 
-        <div class="stats-card" @click="$router.push('/profile')">
+        <div v-if="shouldShowProfileCard" class="stats-card" @click="$router.push('/profile')">
 
           <div class="stats-icon">
 
@@ -314,7 +340,9 @@ import {
 
   IconChartBar,
 
-  IconWallet
+  IconWallet,
+
+  IconUserPlus
 
 } from '@tabler/icons-vue';
 
@@ -322,13 +350,13 @@ import { useI18n } from 'vue-i18n';
 
 import { useRouter } from 'vue-router';
 
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 
 import DomainAuthAlert from '@/components/common/DomainAuthAlert.vue';
 
 
 
-import { TRAFFICLOG_CONFIG, isXiaoV2board, MORE_PAGE_CONFIG } from '@/utils/baseConfig';
+import { TRAFFICLOG_CONFIG, isXiaoV2board, MORE_PAGE_CONFIG, NAVIGATION_CONFIG } from '@/utils/baseConfig';
 
 
 
@@ -353,6 +381,25 @@ const isXiaoPanel = isXiaoV2board();
 
 
 const morePageConfig = MORE_PAGE_CONFIG;
+
+const thirdNavItem = NAVIGATION_CONFIG?.thirdNavItem || 'invite';
+
+
+const shouldShowInviteCard = computed(() => thirdNavItem !== 'invite');
+
+const shouldShowDocsCard = computed(() => thirdNavItem !== 'docs');
+
+const shouldShowNodesCard = computed(() => thirdNavItem !== 'nodes');
+
+const shouldShowOrdersCard = computed(() => thirdNavItem !== 'orders');
+
+const shouldShowTicketsCard = computed(() => thirdNavItem !== 'tickets');
+
+const shouldShowTrafficCard = computed(() => thirdNavItem !== 'traffic');
+
+const shouldShowWalletCard = computed(() => thirdNavItem !== 'wallet');
+
+const shouldShowProfileCard = computed(() => thirdNavItem !== 'profile');
 
 
 

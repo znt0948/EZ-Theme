@@ -245,6 +245,13 @@ export default {
         dashboard: '仪表盘',
         shop: '商店',
         invite: '邀请',
+        docs: '文档',
+        tickets: '工单',
+        orders: '订单',
+        nodes: '节点',
+        traffic: '流量',
+        wallet: '钱包',
+        profile: '账号',
         more: '更多',
         commission: '返利',
         hotSale: '热销'
@@ -252,6 +259,7 @@ export default {
     more: {
         title: '更多功能',
         description: '探索更多功能和服务',
+        inviteDescription: '邀请好友获得返佣奖励',
         viewHelp: '查看使用帮助和常见问题',
         viewNodes: '查看可用的服务器节点',
         manageOrders: '管理您的订单',

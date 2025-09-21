@@ -245,6 +245,13 @@ export default {
         dashboard: 'Dashboard',
         shop: 'Shop',
         invite: 'Invite',
+        docs: 'Docs',
+        tickets: 'Tickets',
+        orders: 'Orders',
+        nodes: 'Nodes',
+        wallet: 'Wallet',
+        traffic: 'Traffic',
+        profile: 'Profile',
         more: 'More',
         commission: 'Commission',
         hotSale: 'Hot'
@@ -252,6 +259,7 @@ export default {
     more: {
         title: 'More Features',
         description: 'Explore more features and services',
+        inviteDescription: 'Invite friends to earn commission rewards',
         viewHelp: 'View help and FAQs',
         viewNodes: 'View available server nodes',
         manageOrders: 'Manage your orders',
