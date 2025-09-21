@@ -242,6 +242,13 @@ export default {
     dashboard: '대시보드',
     shop: '상점',
     invite: '초대',
+    docs: '문서',
+    tickets: '티켓',
+    orders: '주문',
+    nodes: '노드',
+    traffic: '트래픽',
+    wallet: '지갑',
+    profile: '프로필',
     more: '더 보기',
     commission: '커미션',
     hotSale: '인기 상품'

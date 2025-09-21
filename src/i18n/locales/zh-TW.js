@@ -242,6 +242,13 @@ export default {
     dashboard: '儀表板',
     shop: '商店',
     invite: '邀請',
+    docs: '文件',
+    tickets: '工單',
+    orders: '訂單',
+    nodes: '節點',
+    traffic: '流量',
+    wallet: '錢包',
+    profile: '帳號',
     more: '更多',
     commission: '返利',
     hotSale: '熱銷'
