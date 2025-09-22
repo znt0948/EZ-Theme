@@ -574,6 +574,12 @@ export const config  = {
         // 'wallet' 只有 xiao-v2board 支持 非 xiao-v2board 面板请勿设置为 wallet
         // 默认值为 'invite'
         thirdNavItem: 'invite',
+
+        // 可选：第四个导航项（插入在“更多”之前）。为空字符串或未设置则不插入
+        // 可选值同上: 'invite', 'docs', 'tickets', 'nodes', 'orders', 'traffic', 'wallet', 'profile'
+        // 默认值为 'docs'
+        // 注意：如果第三个导航项设置为 'invite'，则第四个导航项不能设置为 'invite'
+        fourthNavItem: 'docs',
     },
 
     // More页面自定义卡片配置

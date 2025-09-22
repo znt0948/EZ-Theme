@@ -242,6 +242,13 @@ export default {
     dashboard: 'Панель управления',
     shop: 'Магазин',
     invite: 'Приглашение',
+    docs: 'Документы',
+    tickets: 'Тикеты',
+    orders: 'Заказы',
+    nodes: 'Узлы',
+    traffic: 'Трафик',
+    wallet: 'Кошелек',
+    profile: 'Профиль',
     more: 'Еще',
     commission: 'Комиссия',
     hotSale: 'Горячие продажи'

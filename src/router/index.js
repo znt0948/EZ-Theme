@@ -33,20 +33,25 @@ const getThirdNavItem = () => {
   const { NAVIGATION_CONFIG } = require('@/utils/baseConfig');
 
   return NAVIGATION_CONFIG?.thirdNavItem || 'docs';
+};
 
+const getFourthNavItem = () => {
+  const { NAVIGATION_CONFIG } = require('@/utils/baseConfig');
+  return NAVIGATION_CONFIG?.fourthNavItem || '';
 };
 
 
 
 const getActiveNavForRoute = (routeName) => {
   const thirdNavItem = getThirdNavItem();
-  
-  // 第三个导航项对应的路由名称映射
-  const thirdNavRouteMap = {
+  const fourthNavItem = getFourthNavItem();
+
+  // 导航项对应的路由名称映射
+  const routeMap = {
 
     docs: 'Docs',
 
-    invite: 'Invite', 
+    invite: 'Invite',
 
     tickets: 'TicketList',
 
@@ -59,42 +64,35 @@ const getActiveNavForRoute = (routeName) => {
     wallet: 'Deposit',
 
     profile: 'Profile'
-
+    
   };
-  
-  // 如果当前路由是第三个导航项，则activeNav为自己对应的导航名称
-  const thirdNavRouteName = thirdNavRouteMap[thirdNavItem];
 
-  if (routeName === thirdNavRouteName) {
+  // 路由名称 -> 导航名称 映射（与 SlideTabsNav 中的 item.name 对齐）
+  const navNameMap = {
+    Docs: 'Docs',
+    Invite: 'Invite',
+    TicketList: 'Tickets',
+    NodeList: 'Nodes',
+    OrderList: 'Orders',
+    TrafficLog: 'Traffic',
+    Deposit: 'Wallet',
+    Profile: 'Profile'
+  };
 
-    // 返回对应的导航名称
-    const navNameMap = {
-
-      'Docs': 'Docs',
-
-      'Invite': 'Invite',
-
-      'TicketList': 'Tickets', 
-
-      'NodeList': 'Nodes',
-
-      'OrderList': 'Orders',
-
-      'TrafficLog': 'Traffic',
-
-      'Deposit': 'Wallet',
-
-      'Profile': 'Profile'
-
-    };
-
-    return navNameMap[thirdNavRouteName] || thirdNavItem;
-
+  // 如果当前路由匹配第三个导航项，则返回第三项对应的导航名
+  const thirdNavRouteName = routeMap[thirdNavItem];
+  if (thirdNavRouteName && routeName === thirdNavRouteName) {
+    return navNameMap[thirdNavRouteName] || 'More';
   }
-  
-  // 其他情况返回 'More'
+
+  // 如果当前路由匹配第四个导航项（且第四项存在且有效），返回第四项对应的导航名
+  const fourthNavRouteName = fourthNavItem ? routeMap[fourthNavItem] : '';
+  if (fourthNavRouteName && routeName === fourthNavRouteName) {
+    return navNameMap[fourthNavRouteName] || 'More';
+  }
+
+  // 其他情况归类为“更多”
   return 'More';
-  
 };
 
 

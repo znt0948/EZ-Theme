@@ -242,6 +242,13 @@ export default {
     dashboard: 'داشبورد',
     shop: 'فروشگاه',
     invite: 'دعوت',
+    docs: 'مستندات',
+    tickets: 'تیکت‌ها',
+    orders: 'سفارش‌ها',
+    nodes: 'نودها',
+    traffic: 'ترافیک',
+    wallet: 'کیف پول',
+    profile: 'پروفایل',
     more: 'بیشتر',
     commission: 'کمیسیون',
     hotSale: 'فروش داغ'

@@ -242,6 +242,13 @@ export default {
     dashboard: 'ダッシュボード',
     shop: 'ストア',
     invite: '招待',
+    docs: 'ドキュメント',
+    tickets: 'チケット',
+    orders: '注文',
+    nodes: 'ノード',
+    traffic: 'トラフィック',
+    wallet: 'ウォレット',
+    profile: 'プロフィール',
     more: 'もっと見る',
     commission: 'リベート',
     hotSale: '人気'

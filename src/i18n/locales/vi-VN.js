@@ -251,6 +251,13 @@ export default {
         dashboard: 'Trang chủ',
         shop: 'Cửa hàng',
         invite: 'Mời bạn',
+        docs: 'Tài liệu',
+        tickets: 'Vé hỗ trợ',
+        orders: 'Đơn hàng',
+        nodes: 'Nút',
+        traffic: 'Lưu lượng',
+        wallet: 'Ví',
+        profile: 'Hồ sơ',
         more: 'Thêm',
         commission: 'Hoa hồng',
         hotSale: 'Bán chạy'

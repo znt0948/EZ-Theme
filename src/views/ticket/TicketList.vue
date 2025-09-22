@@ -1801,15 +1801,17 @@ onUnmounted(() => {
 
     flex-direction: column;
 
-    @media (prefers-color-scheme: dark) {
-        background-color: rgba(20, 25, 30, 0.7);
+    // 移除系统暗色覆盖
+    // @media (prefers-color-scheme: dark) {
+    //   background-color: rgba(20, 25, 30, 0.7);
+    //   background-image: linear-gradient(to bottom, rgba(30,35,40,.4), rgba(15,20,25,.4));
+    // }
+}
 
-        background-image: linear-gradient(
-            to bottom,
-            rgba(30, 35, 40, 0.4),
-            rgba(15, 20, 25, 0.4)
-        );
-    }
+// 仅在 EZ 主题为暗色时生效
+:global(body.dark-theme) .ticket-detail-content {
+  background-color: rgba(20, 25, 30, 0.7);
+  background-image: linear-gradient(to bottom, rgba(30,35,40,.4), rgba(15,20,25,.4));
 }
 
 .ticket-messages {
@@ -1880,11 +1882,10 @@ onUnmounted(() => {
 
             border-radius: 18px 18px 4px 18px;
 
-            @media (prefers-color-scheme: dark) {
-                background-color: rgba(var(--theme-color-rgb), 0.15);
-
-                border: 1px solid rgba(var(--theme-color-rgb), 0.2);
-            }
+            // @media (prefers-color-scheme: dark) {
+            //   background-color: rgba(var(--theme-color-rgb), 0.15);
+            //   border: 1px solid rgba(var(--theme-color-rgb), 0.2);
+            // }
 
             .message-sender {
                 color: rgba(var(--theme-color-rgb), 0.9);
@@ -1910,11 +1911,10 @@ onUnmounted(() => {
 
             border-radius: 18px 18px 18px 4px;
 
-            @media (prefers-color-scheme: dark) {
-                background-color: rgba(var(--theme-color-rgb), 0.15);
-
-                border: 1px solid rgba(var(--theme-color-rgb), 0.2);
-            }
+            // @media (prefers-color-scheme: dark) {
+            //   background-color: rgba(var(--theme-color-rgb), 0.15);
+            //   border: 1px solid rgba(var(--theme-color-rgb), 0.2);
+            // }
 
             .message-sender {
                 color: rgba(var(--theme-color-rgb), 0.9);
@@ -1978,11 +1978,10 @@ onUnmounted(() => {
 
             margin-left: 8px;
 
-            @media (prefers-color-scheme: dark) {
-                background-color: rgba(74, 122, 226, 0.85);
-
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-            }
+            // @media (prefers-color-scheme: dark) {
+            //   background-color: rgba(74, 122, 226, 0.85);
+            //   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+            // }
         }
 
         &.admin-avatar {
@@ -1990,11 +1989,10 @@ onUnmounted(() => {
 
             margin-right: 8px;
 
-            @media (prefers-color-scheme: dark) {
-                background-color: rgba(216, 73, 73, 0.85);
-
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-            }
+            // @media (prefers-color-scheme: dark) {
+            //   background-color: rgba(216, 73, 73, 0.85);
+            //   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+            // }
         }
     }
 
@@ -2009,9 +2007,9 @@ onUnmounted(() => {
 
         position: relative;
 
-        @media (prefers-color-scheme: dark) {
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
+        // @media (prefers-color-scheme: dark) {
+        //   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        // }
 
         .message-header {
             display: flex;
@@ -2063,6 +2061,24 @@ onUnmounted(() => {
     }
 }
 
+// 按应用主题启用深色
+:global(body.dark-theme) .message-item.user-message .message-content,
+:global(body.dark-theme) .message-item.admin-message .message-content {
+  background-color: rgba(var(--theme-color-rgb), 0.15);
+  border: 1px solid rgba(var(--theme-color-rgb), 0.2);
+}
+:global(body.dark-theme) .message-item .message-content {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+:global(body.dark-theme) .message-item .message-avatar.user-avatar {
+  background-color: rgba(74, 122, 226, 0.85);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+:global(body.dark-theme) .message-item .message-avatar.admin-avatar {
+  background-color: rgba(216, 73, 73, 0.85);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
 .reply-container {
     padding: 1.25rem;
 
@@ -2076,9 +2092,9 @@ onUnmounted(() => {
 
     background-color: var(--card-bg);
 
-    @media (prefers-color-scheme: dark) {
-        background-color: rgba(25, 30, 35, 0.8);
-    }
+    // @media (prefers-color-scheme: dark) {
+    //   background-color: rgba(25, 30, 35, 0.8);
+    // }
 
     textarea {
         flex: 1;
@@ -2121,11 +2137,10 @@ onUnmounted(() => {
             opacity: 0.7;
         }
 
-        @media (prefers-color-scheme: dark) {
-            background-color: rgba(30, 35, 40, 0.7);
-
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+        // @media (prefers-color-scheme: dark) {
+        //   background-color: rgba(30, 35, 40, 0.7);
+        //   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        // }
     }
 
     .send-reply-btn {
@@ -2199,28 +2214,19 @@ onUnmounted(() => {
             animation: spin 1s linear infinite;
         }
 
-        @media (prefers-color-scheme: dark) {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
+        // @media (prefers-color-scheme: dark) {
+        //   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        // }
     }
 }
 
-.ticket-closed-notice {
-    padding: 1rem;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 0.5rem;
-
-    color: var(--text-muted);
-
-    border-top: 1px solid var(--border-color);
-
-    background-color: rgba(0, 0, 0, 0.03);
+// 按应用主题启用深色
+:global(body.dark-theme) .reply-container {
+  background-color: rgba(25, 30, 35, 0.8);
+}
+:global(body.dark-theme) .reply-container textarea {
+  background-color: rgba(30, 35, 40, 0.7);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .no-selection,
@@ -2250,9 +2256,9 @@ onUnmounted(() => {
 
         color: var(--text-muted);
 
-        @media (prefers-color-scheme: dark) {
-            opacity: 0.4;
-        }
+        // @media (prefers-color-scheme: dark) {
+        //   opacity: 0.4;
+        // }
     }
 
     p {
@@ -2367,9 +2373,16 @@ onUnmounted(() => {
 
     transform-origin: center center;
 
-    @media (prefers-color-scheme: dark) {
-        background-color: rgba(var(--card-background-rgb, 30, 30, 30), 1);
-    }
+    // @media (prefers-color-scheme: dark) {
+    //   background-color: rgba(var(--card-background-rgb, 30, 30, 30), 1);
+    // }
+}
+:global(body.dark-theme) .modal-content {
+  background-color: rgba(var(--card-background-rgb, 30, 30, 30), 1);
+}
+
+.modal-close-animation {
+    animation: modal-disappear 0.25s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
 
 @keyframes modal-appear {
@@ -2384,10 +2397,6 @@ onUnmounted(() => {
 
         transform: translateY(0) scale(1);
     }
-}
-
-.modal-close-animation {
-    animation: modal-disappear 0.25s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
 
 @keyframes modal-disappear {

@@ -139,7 +139,7 @@ export default {
       opacity: 0,
 
       transition: 'none'
-
+      
     });
 
     
@@ -182,43 +182,53 @@ export default {
 
         ];
 
-        // 获取第三个导航项配置
+        // 获取第三、第四个导航项配置
         const thirdNavItem = NAVIGATION_CONFIG?.thirdNavItem || 'invite';
-        
-        // 第三个导航项配置映射
-        const thirdNavMap = {
+        const fourthNavItem = NAVIGATION_CONFIG?.fourthNavItem || '';
 
-            docs: { title: 'Docs', path: '/docs', name: 'Docs', icon: 'IconFileText', i18nKey: 'docs' },
+        // 导航项配置映射（可复用）
+        const navMap = {
 
-            invite: { title: 'Invite', path: '/invite', name: 'Invite', icon: 'IconInvite', i18nKey: 'invite' },
+          docs: { title: 'Docs', path: '/docs', name: 'Docs', icon: 'IconFileText', i18nKey: 'docs' },
 
-            tickets: { 
+          invite: { title: 'Invite', path: '/invite', name: 'Invite', icon: 'IconInvite', i18nKey: 'invite' },
 
-              title: 'Tickets', 
+          tickets: {
 
-              path: isSmallScreen.value ? '/mobile/tickets' : '/tickets', 
+            title: 'Tickets',
 
-              name: 'Tickets', 
+            path: isSmallScreen.value ? '/mobile/tickets' : '/tickets',
 
-              icon: 'IconHeadset', 
+            name: 'Tickets',
 
-              i18nKey: 'tickets' 
-            },
+            icon: 'IconHeadset',
 
-            nodes: { title: 'Nodes', path: '/nodes', name: 'Nodes', icon: 'IconServer', i18nKey: 'nodes' },
+            i18nKey: 'tickets'
+          },
 
-            orders: { title: 'Orders', path: '/orders', name: 'Orders', icon: 'IconShop', i18nKey: 'orders' },
+          nodes: { title: 'Nodes', path: '/nodes', name: 'Nodes', icon: 'IconServer', i18nKey: 'nodes' },
 
-            traffic: { title: 'Traffic', path: '/trafficlog', name: 'TrafficLog', icon: 'IconChartBar', i18nKey: 'traffic' },
+          orders: { title: 'Orders', path: '/orders', name: 'Orders', icon: 'IconShop', i18nKey: 'orders' },
 
-            wallet: { title: 'Wallet', path: '/wallet/deposit', name: 'Deposit', icon: 'IconWallet', i18nKey: 'wallet' },
+          traffic: { title: 'Traffic', path: '/trafficlog', name: 'TrafficLog', icon: 'IconChartBar', i18nKey: 'traffic' },
 
-            profile: { title: 'Profile', path: '/profile', name: 'Profile', icon: 'IconUser', i18nKey: 'profile' }
+          wallet: { title: 'Wallet', path: '/wallet/deposit', name: 'Deposit', icon: 'IconWallet', i18nKey: 'wallet' },
+
+          profile: { title: 'Profile', path: '/profile', name: 'Profile', icon: 'IconUser', i18nKey: 'profile' }
 
         };
 
-        // 添加配置的第三个导航项
-        baseNavItems.push(thirdNavMap[thirdNavItem]);
+        // 添加配置的第三个导航项（有效值才插入）
+        const third = navMap[thirdNavItem];
+        if (third) {
+          baseNavItems.push(third);
+        }
+
+        // 可选：添加第四个导航项（非空、有效且不与第三重复时插入）
+        const fourth = fourthNavItem && navMap[fourthNavItem] ? navMap[fourthNavItem] : null;
+        if (fourth && fourth.i18nKey !== (third?.i18nKey)) {
+          baseNavItems.push(fourth);
+        }
 
         // 添加更多选项
         baseNavItems.push({ title: 'More', path: '/more', name: 'More', icon: 'IconMore', i18nKey: 'more' });
@@ -1072,7 +1082,7 @@ function debounce(fn, delay) {
       }
 
       
-
+      
       &:last-child {
 
         border: 1px solid var(--theme-color);
