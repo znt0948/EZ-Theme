@@ -224,7 +224,7 @@ export const config  = {
         // 下单前二次确认
         confirmOrder: true,
         // 下单前二次确认内容
-        confirmOrderContent: "<p><strong style='color: red'>暂不支持福建泉州(电信除外)、新疆、西藏地区</strong></p><p><strong style='color: red'>相关地区用户请勿下单</strong></p>",
+        confirmOrderContent: "<p><strong style='color: red'>暂不保证福建泉州、新疆、西藏地区的可用性</strong></p><p><strong style='color: red'>相关地区用户请谨慎下单</strong></p>",
 
     },
     // 仪表盘页面配置
@@ -276,8 +276,8 @@ export const config  = {
         showAndroid: true,
         showMacOS: true,
         showWindows: true,
-        showLinux: false,
-        showOpenWrt: false,
+        showLinux: true,
+        showOpenWrt: true,
 
         // 客户端下载链接
         clientLinks: {
@@ -285,8 +285,8 @@ export const config  = {
             android: 'https://hzextension.cc/index.html#/docs/3', // Android客户端下载链接
             macos: 'https://hzextension.cc/index.html#/docs/6',     // MacOS客户端下载链接
             windows: 'https://hzextension.cc/index.html#/docs/2', // Windows客户端下载链接
-            linux: 'https://github.com/xxx/releases/latest',     // Linux客户端下载链接
-            openwrt: 'https://github.com/xxx/releases/latest'  // OpenWrt客户端下载链接
+            linux: 'https://www.clashverge.dev/install.html#_4',     // Linux客户端下载链接
+            openwrt: 'https://github.com/juewuy/ShellCrash/blob/dev/README_CN.md'  // OpenWrt客户端下载链接
         },
 
         // 订阅导入客户端显示控制 部分面板不支持SingBox导入请您注意检查

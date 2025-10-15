@@ -208,7 +208,7 @@
 
             <h2 class="card-title">{{ plan.name }}</h2>
 
-            <div class="card-badge glassmorphism stock-plenty" v-if="plan.capacity_limit >= SHOP_CONFIG.lowStockThreshold || plan.capacity_limit === null">
+            <div class="card-badge glassmorphism stock-plenty" v-if="plan.remaining_capacity >= SHOP_CONFIG.lowStockThreshold || plan.remaining_capacity === null">
 
               <IconBox :size="16" class="badge-icon" />
 
@@ -216,7 +216,7 @@
 
             </div>
 
-            <div class="card-badge glassmorphism stock-warning" v-else-if="plan.capacity_limit > 0 && plan.capacity_limit < SHOP_CONFIG.lowStockThreshold">
+            <div class="card-badge glassmorphism stock-warning" v-else-if="plan.remaining_capacity > 0 && plan.remaining_capacity < SHOP_CONFIG.lowStockThreshold">
 
               <IconBox :size="16" class="badge-icon" />
 
@@ -224,7 +224,7 @@
 
             </div>
 
-            <div class="card-badge glassmorphism stock-danger" v-if="plan.capacity_limit === 0">
+            <div class="card-badge glassmorphism stock-danger" v-if="plan.remaining_capacity === 0">
 
               <IconBox :size="16" class="badge-icon" />
 
@@ -360,17 +360,17 @@
 
               class="btn-purchase glassmorphism" 
 
-              :class="{ 'btn-disabled': plan.capacity_limit === 0 }"
+              :class="{ 'btn-disabled': plan.remaining_capacity === 0 }"
 
               @click="purchasePlan(plan)"
 
-              :disabled="plan.capacity_limit === 0"
+              :disabled="plan.remaining_capacity === 0"
 
             >
 
               <IconShoppingCart class="btn-icon" />
 
-              <span class="btn-text">{{ plan.capacity_limit === 0 ? $t('shop.plan.sold_out_btn') : $t('shop.plan.purchase') }}</span>
+              <span class="btn-text">{{ plan.remaining_capacity === 0 ? $t('shop.plan.sold_out_btn') : $t('shop.plan.purchase') }}</span>
 
             </button>
 
@@ -972,7 +972,7 @@ export default {
 
     const purchasePlan = (plan) => {
 
-      if (plan.capacity_limit === 0) {
+      if (plan.remaining_capacity === 0) {
 
         showToast(t('shop.plan.stock.sold_out'), 'error');
 

@@ -719,43 +719,25 @@ export default {
     });
 
     
-
+    
     const getPlanStockText = (plan) => {
-
-      if (plan.capacity_limit === 0) {
-
+      if (plan.remaining_capacity === 0) {
         return t('shop.plan.stock.sold_out');
-
-      } else if (plan.capacity_limit > 0 && plan.capacity_limit < 5) {
-
+      } else if (plan.remaining_capacity > 0 && plan.remaining_capacity < 5) {
         return t('shop.plan.stock.warning');
-
       } else {
-
         return t('shop.plan.stock.plenty');
-
       }
-
     };
 
-    
-
     const getStockBadgeClass = (plan) => {
-
-      if (plan.capacity_limit === 0) {
-
+      if (plan.remaining_capacity === 0) {
         return 'stock-danger';
-
-      } else if (plan.capacity_limit > 0 && plan.capacity_limit < 5) {
-
+      } else if (plan.remaining_capacity > 0 && plan.remaining_capacity < 5) {
         return 'stock-warning';
-
       } else {
-
         return 'stock-plenty';
-
       }
-
     };
 
     
