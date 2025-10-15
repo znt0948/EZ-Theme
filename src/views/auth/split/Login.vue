@@ -448,15 +448,15 @@ export default {
     display: none;
   }
 
-  .left-content-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
+.left-content-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2); // 可以根据需要调整透明度
+  z-index: 1;  // 改为 0，让它在背景下方
+}
 
   .site-name {
     position: absolute;
@@ -576,6 +576,7 @@ export default {
     font-size: 1rem;
     color: var(--secondary-text-color);
     margin-bottom: 1.5rem;
+    white-space: pre-line;
 
     @media (min-width: 993px) {
       text-align: left;
@@ -909,12 +910,11 @@ export default {
   }
 
   img {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    min-height: 60px;
-    border-radius: 12px;
-    object-fit: cover;
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    border-radius: 0;
+    object-fit: contain;
     cursor: pointer;
     user-select: none;
   }

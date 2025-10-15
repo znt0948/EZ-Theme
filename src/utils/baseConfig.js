@@ -38,7 +38,7 @@ const isObject = item => {
 
 // 获取面板类型的常量
 // 可选值: 'V2board', 'Xiao-V2board' 或 'Xboard'
-export const PANEL_TYPE = getConfig('PANEL_TYPE', 'V2board');
+export const PANEL_TYPE = getConfig('PANEL_TYPE', 'Xboard');
 
 // 判断是否为Xiao-V2board面板
 export const isXiaoV2board = () => {
@@ -198,27 +198,27 @@ export const CUSTOM_HEADERS_CONFIG = mergeDeep(DEFAULT_CUSTOM_HEADERS_CONFIG, ge
 
 // 网站名称配置
 const DEFAULT_SITE_CONFIG = {
-    siteName: 'EZ THEME',
-    siteDescription: 'EZ UI',
-    copyright: `© ${new Date().getFullYear()} EZ THEME. All Rights Reserved.`,
+    siteName: 'HzExtension',
+    siteDescription: 'HZ',
+    copyright: `© ${new Date().getFullYear()} HzExtension. All Rights Reserved.`,
 
     // 是否显示标题中的网站Logo (true=显示, false=隐藏)
     showLogo: true,
 
     // Landing页面多语言标语
     landingText: {
-        'zh-CN': '探索全球网络无限可能',
-        'vi-VN': 'Khám phá khả năng vô hạn của mạng toàn cầu',
-        'en-US': 'Explore Unlimited Possibilities of Global Network',
-        'zh-TW': '探索全球網絡無限可能',
-        'ja-JP': 'グローバルネットワークの無限の可能性',
-        'ko-KR': '글로벌 네트워크의 무한한 가능성을 탐색하세요',
-        'ru-RU': 'Исследуйте безграничные возможности глобальной сети',
-        'fa-IR': 'امکانات نامحدود شبکه جهانی را کاوش کنید'
+        'zh-CN': '加速访问、并在数以千计的互联网跟踪器中保护您的隐私',
+        'en-US': 'Accelerate your access and protect your privacy from thousands of internet trackers',
+        'zh-TW': '加速存取，並在數以千計的網際網路追蹤器中保護您的隱私',
+        'ja-JP': 'アクセスを高速化し、数千のインターネットトラッカーからプライバシーを守ります',
+        'ko-KR': '접속 속도를 높이고 수천 개의 인터넷 추적기로부터 개인 정보를 보호하세요',
+        'ru-RU': 'Ускорьте доступ и защитите свою конфиденциальность от тысяч интернет-трекеров',
+        'vi-VN': 'Tăng tốc truy cập và bảo vệ quyền riêng tư của bạn khỏi hàng nghìn trình theo dõi Internet',
+        'fa-IR': 'دسترسی خود را سریع‌تر کرده و حریم خصوصی خود را از هزاران ردیاب اینترنتی محافظت کنید'
     },
 
     // 自定义landing页面路径（相对于public目录）
-    customLandingPage: ''
+    customLandingPage: 'landingpage.html'
 };
 
 export const SITE_CONFIG = mergeDeep(DEFAULT_SITE_CONFIG, getConfig('SITE_CONFIG'));
@@ -229,7 +229,7 @@ const DEFAULT_BASE_CONFIG = {
     defaultLanguage: 'zh-CN',
 
     // 默认主题 ('light' 或 'dark') TODO
-    defaultTheme: 'dark',
+    defaultTheme: 'light',
 
     // 主题色 (16进制颜色值) TODO
     primaryColor: '#00947c',
@@ -283,7 +283,7 @@ const DEFAULT_PROFILE_CONFIG = {
     showGiftCardRedeem: false,
 
     // 是否显示最近登录设备栏目 (true=显示, false=隐藏)
-    showRecentDevices: true
+    showRecentDevices: false
 };
 
 export const PROFILE_CONFIG = mergeDeep(DEFAULT_PROFILE_CONFIG, getConfig('PROFILE_CONFIG'));
@@ -322,7 +322,7 @@ const DEFAULT_TRAFFICLOG_CONFIG = {
     daysToShow: 30,
 
     // 流量趋势图是否聚合每日流量 (如果你的节点倍率全为1倍则无需开启)
-    sumDailyTraffic: false
+    sumDailyTraffic: true
 };
 
 export const TRAFFICLOG_CONFIG = mergeDeep(DEFAULT_TRAFFICLOG_CONFIG, getConfig('TRAFFICLOG_CONFIG'));
@@ -333,22 +333,22 @@ export const TRAFFICLOG_CONFIG = mergeDeep(DEFAULT_TRAFFICLOG_CONFIG, getConfig(
  */
 const DEFAULT_CLIENT_CONFIG = {
     // 整个下载卡片显示控制 TODO
-    showDownloadCard: false,  // 设置为false将隐藏整个客户端下载卡片
+    showDownloadCard: true,  // 设置为false将隐藏整个客户端下载卡片
 
     // 平台显示控制 (true=显示, false=隐藏)
-    showIOS: false,         // iOS客户端显示控制
-    showAndroid: false,     // Android客户端显示控制
-    showMacOS: false,       // MacOS客户端显示控制
-    showWindows: false,     // Windows客户端显示控制
+    showIOS: true,         // iOS客户端显示控制
+    showAndroid: true,     // Android客户端显示控制
+    showMacOS: true,       // MacOS客户端显示控制
+    showWindows: true,     // Windows客户端显示控制
     showLinux: false,       // Linux客户端显示控制
     showOpenWrt: false,     // OpenWrt客户端显示控制
 
     // 客户端下载链接
     clientLinks: {
-        ios: 'https://apps.apple.com/app/xxx',         // iOS客户端下载链接
-        android: 'https://play.google.com/store/apps/xxx', // Android客户端下载链接
-        macos: 'https://github.com/xxx/releases/latest',     // MacOS客户端下载链接
-        windows: 'https://github.com/xxx/releases/latest', // Windows客户端下载链接
+        ios: 'https://apps.apple.com/us/app/sing-box-vt/id6673731168',         // iOS客户端下载链接
+        android: 'https://hzextension.cc/assets/clients/SFA.apk', // Android客户端下载链接
+        macos: 'https://apps.apple.com/us/app/sing-box-vt/id6673731168',     // MacOS客户端下载链接
+        windows: 'https://hzextension.cc/assets/clients/clash-verge-rev-setup.exe', // Windows客户端下载链接
         linux: 'https://github.com/xxx/releases/latest',     // Linux客户端下载链接
         openwrt: 'https://github.com/xxx/releases/latest'  // OpenWrt客户端下载链接
     },
@@ -359,17 +359,17 @@ const DEFAULT_CLIENT_CONFIG = {
     // iOS平台客户端
     showShadowrocket: true,   // Shadowrocket
     showSurge: true,          // Surge
-    showStash: true,          // Stash
-    showQuantumultX: true,    // QuantumultX
-    showHiddifyIOS: true,     // Hiddify for IOS
+    showStash: false,          // Stash
+    showQuantumultX: false,    // QuantumultX
+    showHiddifyIOS: false,     // Hiddify for IOS
     showSingboxIOS: true,     // SingBox for iOS
-    showLoon: true,           // Loon
+    showLoon: false,           // Loon
 
     // Android平台客户端
     showFlClashAndroid: true,   // FlClash for Android
     showV2rayNG: true,          // V2rayNG
-    showClashAndroid: true,     // Clash for Android
-    showSurfboard: true,        // Surfboard
+    showClashAndroid: false,     // Clash for Android
+    showSurfboard: false,        // Surfboard
     showClashMetaAndroid: true, // Clash Meta for Android
     showNekobox: true,          // Nekobox
     showSingboxAndroid: true,   // SingBox for Android
@@ -412,7 +412,7 @@ const DEFAULT_SHOP_CONFIG = {
     autoSelectMaxPeriod: false,
 
     // 是否隐藏周期选择标签 (true=隐藏, false=显示)
-    hidePeriodTabs: false,
+    hidePeriodTabs: true,
 
     // 库存紧张的阈值（当库存数量小于等于此值且大于0时显示库存紧张）
     lowStockThreshold: 5,
@@ -461,7 +461,7 @@ export const SHOP_CONFIG = mergeDeep(DEFAULT_SHOP_CONFIG, getConfig('SHOP_CONFIG
  */
 const DEFAULT_ORDER_CONFIG = {
     // 是否启用二次确认
-    confirmOrder: true,
+    confirmOrder: false,
     // 二次确认内容
     confirmOrderContent: "<p>您确定要购买该套餐吗？</p>",
 };
@@ -501,7 +501,7 @@ const DEFAULT_DASHBOARD_CONFIG = {
     expiringThreshold: 7,
 
     // 是否显示在线设备数量限制 (true=显示, false=隐藏，仅Xiao-V2board支持)
-    showOnlineDevicesLimit: true,
+    showOnlineDevicesLimit: false,
     
     // 是否显示导入订阅
     showImportSubscription: true,
@@ -618,15 +618,15 @@ export const BACKGROUND_BALLS_CONFIG = getConfig('BACKGROUND_BALLS_CONFIG', DEFA
  */
 const DEFAULT_BROWSER_RESTRICT_CONFIG = {
     // 是否启用浏览器限制功能
-    enabled: false,
+    enabled: true,
 
     // 各浏览器是否被限制访问（true=限制访问，false=允许访问）
     restrictBrowsers: {
-        '360': true,     // 360浏览器
+        '360': false,     // 360浏览器
         'QQ': true,      // QQ浏览器
         'WeChat': true,  // 微信内置浏览器
-        'Baidu': true,   // 百度浏览器
-        'Sogou': true,   // 搜狗浏览器
+        'Baidu': false,   // 百度浏览器
+        'Sogou': false,   // 搜狗浏览器
         'UC': false,     // UC浏览器
         'Maxthon': false // 傲游浏览器
     },
@@ -786,13 +786,13 @@ export const NODES_CONFIG = mergeDeep(DEFAULT_NODES_CONFIG, getConfig('NODES_CON
  */
 const DEFAULT_CUSTOMER_SERVICE_CONFIG = {
     // 是否启用客服系统
-    enabled: false,
+    enabled: true,
 
     // 客服系统类型: 'crisp' 或 'other'
     type: 'crisp',
 
     // 客服系统HTML代码
-    customHtml: '',
+    customHtml: '<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="a6756926-ee2e-4233-8a7b-562e42c7c880";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>',
 
     // 是否在未登录状态下也显示客服图标
     showWhenNotLoggedIn: true,

@@ -5,7 +5,7 @@ import { SITE_CONFIG } from '../../../utils/baseConfig';
 export default {
   auth: {
     loginTitle: '登录账户',
-    loginSubtitle: '请输入您的凭据继续',
+    loginSubtitle: 'Welcome to HzExtension! 👋\n请输入您的登录凭据',
     registerTitle: '创建账户',
     registerSubtitle: '填写以下信息注册新账户',
     forgotPasswordTitle: '忘记密码',

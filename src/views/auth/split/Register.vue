@@ -4147,18 +4147,15 @@ export default {
 
 
   img {
+    width: 100%;
+    
+    max-width: 120px;
 
-    width: 60px;
+    height: auto;
 
-    height: 60px;
+    border-radius: 0;
 
-    min-width: 60px;
-
-    min-height: 60px;
-
-    border-radius: 12px;
-
-    object-fit: cover;
+    object-fit: contain;
 
     cursor: pointer;
 
@@ -4167,6 +4164,7 @@ export default {
   }
 
 }
+
 
 
 

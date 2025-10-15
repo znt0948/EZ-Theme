@@ -6,7 +6,7 @@
 
 export const config  = {
     // 面板类型配置 - 请选择您使用的面板类型
-    PANEL_TYPE: 'Xiao-V2board', // 可选值: 'V2board', 'Xiao-V2board' 或 'Xboard'
+    PANEL_TYPE: 'Xboard', // 可选值: 'V2board', 'Xiao-V2board' 或 'Xboard'
     // 说明:
     // 1. V2board: 标准V2board面板，使用默认请求格式
     // 2. Xiao-V2board: Xiao修改版面板，使用特殊格式的请求参数
@@ -20,7 +20,7 @@ export const config  = {
     // 2. 自动获取: 从当前域名自动生成API基础URL
     API_CONFIG: {
         // API URL获取方式: 'static'=使用静态URL, 'auto'=自动从当前域名获取
-        urlMode: 'static',
+        urlMode: 'auto',
       
         // 是否展示后端联通性检测
         showCheckBackend: false,
@@ -49,7 +49,7 @@ export const config  = {
 
     // 是否启用中间件代理API请求
     // 设置为true时，所有API请求将通过中间件转发
-    API_MIDDLEWARE_ENABLED: true,
+    API_MIDDLEWARE_ENABLED: false,
   
     //=======================================================
     // 中间件服务器URL (不含路径) 开源地址 https://github.com/codeman857/EZ-Encrypt-Middleware
@@ -66,10 +66,10 @@ export const config  = {
 
     // ====================  网站基础配置  ====================
     SITE_CONFIG: {
-        siteName: 'EZ THEME',
-        siteDescription: 'EZ UI',
+        siteName: 'HzExtension',
+        siteDescription: '加速访问、并在数以千计的互联网跟踪器中保护您的隐私',
         // copyright会自动使用当前年份
-        copyright: `© ${new Date().getFullYear()} EZ THEME. All Rights Reserved.`,
+        copyright: `© ${new Date().getFullYear()} HzExtension. All Rights Reserved.`,
 
         // 是否显示标题中的网站Logo (true=显示, false=隐藏)
         showLogo: true,
@@ -89,7 +89,7 @@ export const config  = {
         // 自定义landing页面路径（相对于public目录
         // 例如：'testlandingpage.html'
         // 如果为空则不启用自定义landing页面
-        customLandingPage: ''
+        customLandingPage: 'landingpage.html'
     },
 
     // 默认语言和主题配置
@@ -143,19 +143,19 @@ export const config  = {
     // 认证页面布局配置
     AUTH_LAYOUT_CONFIG: {
         // 布局类型: 'center' 为居中卡片布局, 'split' 为左右分栏布局
-        layoutType: 'center',
+        layoutType: 'split',
 
         // 左右分栏布局配置 (仅当 layoutType 为 'split' 时生效)
         splitLayout: {
             // 左侧区域内容配置
             leftContent: {
                 // 左侧背景图片URL或路径 (如不设置则不设置图片背景)
-                backgroundImage: 'https://www.loliapi.com/acg',
+                backgroundImage: '/images/background.png',
 
                 // 左上角网站名称配置
                 siteName: {
                     // 是否显示网站名称
-                    show: true,
+                    show: false,
                     // 文字颜色 (white或black)
                     color: 'white'
                 },
@@ -163,7 +163,7 @@ export const config  = {
                 // 左下角问候语配置
                 greeting: {
                     // 是否显示问候语
-                    show: true,
+                    show: false,
                     // 文字颜色 (white或black)
                     color: 'white'
                 }
@@ -183,7 +183,7 @@ export const config  = {
         autoSelectMaxPeriod: false, // 默认关闭
 
         // 是否隐藏周期选择标签 (true=隐藏, false=显示)
-        hidePeriodTabs: false, // 默认显示周期选择标签
+        hidePeriodTabs: true, // 默认显示周期选择标签
 
         // 库存紧张的阈值（当库存数量小于等于此值且大于0时显示库存紧张）
         lowStockThreshold: 5,
@@ -205,7 +205,7 @@ export const config  = {
         // 商店弹窗配置
         popup: {
             // 是否启用弹窗
-            enabled: true,
+            enabled: false,
 
             // 弹窗标题
             title: "用户须知",
@@ -224,7 +224,7 @@ export const config  = {
         // 下单前二次确认
         confirmOrder: true,
         // 下单前二次确认内容
-        confirmOrderContent: "<p><strong style='color: red'>无法提供相关教程和使用说明。</strong></p><p><strong style='color: red'>不会使用请勿购买，没有退款政策</strong></p>",
+        confirmOrderContent: "<p><strong style='color: red'>暂不支持福建泉州(电信除外)、新疆、西藏地区</strong></p><p><strong style='color: red'>相关地区用户请勿下单</strong></p>",
 
     },
     // 仪表盘页面配置
@@ -244,7 +244,7 @@ export const config  = {
         resetTrafficDisplayMode: 'low',
 
         // 低流量阈值百分比 (1-100)，当剩余流量百分比低于此值时触发低流量警告
-        lowTrafficThreshold: 10,
+        lowTrafficThreshold: 15,
 
         // ===============================
 
@@ -260,7 +260,7 @@ export const config  = {
         // ===============================
 
         // 是否显示在线设备数量限制 (true=显示, false=隐藏，仅Xiao-V2board支持)
-        showOnlineDevicesLimit: true,
+        showOnlineDevicesLimit: false,
         
         // 是否显示导入订阅
         showImportSubscription: true,
@@ -276,58 +276,58 @@ export const config  = {
         showAndroid: true,
         showMacOS: true,
         showWindows: true,
-        showLinux: true,
-        showOpenWrt: true,
+        showLinux: false,
+        showOpenWrt: false,
 
-        // 客户端下载链接  //可以改成文档链接直接在新标签页打开
+        // 客户端下载链接
         clientLinks: {
-            ios: 'https://apps.apple.com/app/xxx',
-            android: 'https://play.google.com/store/apps/xxx',
-            macos: 'https://github.com/xxx/releases/latest',
-            windows: 'https://github.com/xxx/releases/latest',
-            linux: 'https://github.com/xxx/releases/latest',
-            openwrt: 'https://github.com/xxx/releases/latest'
+            ios: 'https://hzextension.cc/index.html#/docs/5',         // iOS客户端下载链接
+            android: 'https://hzextension.cc/index.html#/docs/3', // Android客户端下载链接
+            macos: 'https://hzextension.cc/index.html#/docs/6',     // MacOS客户端下载链接
+            windows: 'https://hzextension.cc/index.html#/docs/2', // Windows客户端下载链接
+            linux: 'https://github.com/xxx/releases/latest',     // Linux客户端下载链接
+            openwrt: 'https://github.com/xxx/releases/latest'  // OpenWrt客户端下载链接
         },
 
         // 订阅导入客户端显示控制 部分面板不支持SingBox导入请您注意检查
 
         // iOS平台
         showShadowrocket: true,
-        showSurge: true,
-        showStash: true,
-        showQuantumultX: true,
-        showHiddifyIOS: true,
+        showSurge: false,
+        showStash: false,
+        showQuantumultX: false,
+        showHiddifyIOS: false,
         showSingboxIOS: true,
-        showLoon: true,
+        showLoon: false,
 
         // Android平台客户端
-        showFlClashAndroid: true,
-        showV2rayNG: true,
-        showClashAndroid: true,
-        showSurfboard: true,
+        showFlClashAndroid: false,
+        showV2rayNG: false,
+        showClashAndroid: false,
+        showSurfboard: false,
         showClashMetaAndroid: true,
-        showNekobox: true,
+        showNekobox: false,
         showSingboxAndroid: true,
-        showHiddifyAndroid: true,
+        showHiddifyAndroid: false,
 
         // Windows平台客户端
-        showFlClashWindows: true,
+        showFlClashWindows: false,
         showClashVergeWindows: true,
-        showClashWindows: true,
-        showNekoray: true,
+        showClashWindows: false,
+        showNekoray: false,
         showSingboxWindows: true,
-        showHiddifyWindows: true,
+        showHiddifyWindows: false,
 
         // MacOS平台客户端
-        showFlClashMac: true,
+        showFlClashMac: false,
         showClashVergeMac: true,
-        showClashX: true,
+        showClashX: false,
         showClashMetaX: true,
-        showSurgeMac: true,
-        showStashMac: true,
-        showQuantumultXMac: true,
+        showSurgeMac: false,
+        showStashMac: false,
+        showQuantumultXMac: false,
         showSingboxMac: true,
-        showHiddifyMac: true
+        showHiddifyMac: false
     },
 
     // ================ Xiao 版本的配置 =======================
@@ -338,7 +338,7 @@ export const config  = {
         showGiftCardRedeem: false, // 只有Xiao-V2board支持礼品卡兑换
 
         // 是否显示最近登录设备栏目 (true=显示, false=隐藏)
-        showRecentDevices: true
+        showRecentDevices: false
     },
 
     // =======================================================
@@ -517,7 +517,7 @@ export const config  = {
         daysToShow: 30, // 默认显示30天
 
         // 流量趋势图是否聚合每日流量 (如果你的节点倍率全为1倍则无需开启)
-        sumDailyTraffic: false // 默认禁用
+        sumDailyTraffic: true // 默认禁用
     },
 
     // 节点列表配置
@@ -535,7 +535,7 @@ export const config  = {
     // 客服系统配置
     CUSTOMER_SERVICE_CONFIG: {
         // 是否启用客服系统
-        enabled: false,
+        enabled: true,
 
         // 客服系统类型: 'crisp' 或 'other'
         // 注意：当客服类型为crisp时，系统会自动向Crisp传递用户数据
@@ -543,7 +543,7 @@ export const config  = {
         type: 'crisp',
 
         // 客服系统JS代码，请将您的客服系统提供的嵌入代码粘贴在这里
-        customHtml: '',
+        customHtml: '<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="a6756926-ee2e-4233-8a7b-562e42c7c880";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>',
 
         // 客服系统嵌入模式: 'popup'=弹出式页面, 'embed'=嵌入到每个页面
         // 'popup'模式: 点击客服图标会跳转到单独的客服页面

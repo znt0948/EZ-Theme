@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="icon" href="./images/logo.png">
-  <title>EZ</title>
+  <link rel="icon" href="/favicon.ico">
+  <title>HzExtension</title>
   <!-- 动态设置网站标题 -->
   <script>
     document.write('<script src="config.js?t=' + Math.random() + '"><\/script>');
@@ -375,7 +375,6 @@
     .hero-image {
       max-width: 85%;
       border-radius: 12px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
       margin: 0 auto;
     }
 
@@ -849,8 +848,8 @@
 
   <header>
     <div class="logo">
-      <img src="./images/logo.png" alt="Logo">
-      <h1 id="siteName">EZ</h1>
+      <img src="favicon.ico" alt="Logo">
+      <h1 id="siteName">HzExtension</h1>
     </div>
     <nav class="nav-links">
       <a href="#features">特性</a>
@@ -903,20 +902,43 @@
     </div>
   </div>
 
-  <section class="hero">
-    <h2 id="heroTitle">探索全球网络的无限可能</h2>
-    <p id="heroSubtitle">高速稳定、安全私密，随时随地畅享网络世界</p>
+<section class="hero hero-1 text-center">
+  <div class="container">
+
+    <!-- 主标题（保留原来的蓝色风格） -->
+    <h1 class="hero-title mb-4" style="
+        font-size: 3rem;
+        font-weight: 900;
+        background: linear-gradient(90deg, #2a2685, #302c89);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 2px;
+    ">
+      HZ-EXTENSION
+    </h1>
+
+    <!-- 副标题 -->
+    <p class="hero-subtitle mb-4" ; font-size: 1rem; line-height: 1.8;">
+      通过覆盖全球的智能路由对您的网络进行优化<br>
+      峰值1200Mbps的单线接入能力<br>
+      加速访问、并在数以千计的互联网跟踪器中保护您的隐私
+    </p>
+
+    <!-- 按钮 -->
     <div class="hero-buttons">
       <a href="javascript:void(0)" onclick="navigateTo('register')" class="button primary-button">立即开始</a>
       <a href="#download" class="button secondary-button">下载客户端</a>
     </div>
-    <img src="https://placehold.co/1200x675" alt="Dashboard Preview" class="hero-image">
-  </section>
+  </div>
+
+  <!-- 背景图 -->
+  <img src="/static/picture/hero.png" alt="Dashboard Preview" class="hero-image">
+</section>
 
   <section class="features" id="features">
     <div class="section-title">
-      <h3>专为极致体验设计</h3>
-      <p>我们为您提供最优质的服务和极致的用户体验</p>
+      <h3>了解我们的优势</h3>
+      <p>我们先进的网络基础设施建设可以满足您苛刻的业务需求</p>
     </div>
     <div class="feature-grid">
       <div class="feature-card">
@@ -927,8 +949,11 @@
             <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
           </svg>
         </div>
-        <h4>高速稳定</h4>
-        <p>高速节点全球覆盖，智能路由技术，保障您的网络连接稳定流畅</p>
+      <h4 style="margin-bottom: 6px;">高速稳定</h4>
+      <p style="margin-top: 0; line-height: 1.4;">
+        运营商直签专线<br>
+        全球跨区域低延迟大带宽数据传输
+      </p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
@@ -938,8 +963,11 @@
             <path d="M8 11v-4a4 4 0 1 1 8 0v4"></path>
           </svg>
         </div>
-        <h4>安全私密</h4>
-        <p>采用军事级加密技术，保护您的网络隐私和数据安全</p>
+      <h4 style="margin-bottom: 6px;">隐私保护</h4>
+      <p style="margin-top: 0; line-height: 1.4;">
+        内置DNS保护<br>
+        屏蔽大量应用与网页对您的跟踪行为
+      </p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
@@ -951,8 +979,11 @@
             <path d="M12.5 3a17 17 0 0 1 0 18"></path>
           </svg>
         </div>
-        <h4>全球连接</h4>
-        <p>多区域节点覆盖，助您畅享全球网络资源</p>
+      <h4 style="margin-bottom: 6px;">全球覆盖</h4>
+      <p style="margin-top: 0; line-height: 1.4;">
+        BGP骨干网络<br>
+        与100+运营商、内容提供商直接互联
+      </p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
@@ -962,8 +993,11 @@
             <path d="M16 9h2"></path>
           </svg>
         </div>
-        <h4>多平台支持</h4>
-        <p>支持 iOS、Android、Windows、macOS 等各大主流平台</p>
+      <h4 style="margin-bottom: 6px;">跨平台兼容</h4>
+      <p style="margin-top: 0; line-height: 1.4;">
+        支持 iOS、Android、Windows、macOS<br>
+        等各大主流平台
+      </p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
@@ -971,8 +1005,11 @@
             <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"></path>
           </svg>
         </div>
-        <h4>简单易用</h4>
-        <p>一键连接，简洁直观的界面设计，无需复杂设置</p>
+      <h4 style="margin-bottom: 6px;">简单易用</h4>
+      <p style="margin-top: 0; line-height: 1.4;">
+        内置轻量智能分流规则<br>
+        一键连接，直观的界面设计，无需额外调整
+      </p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
@@ -980,11 +1017,147 @@
             <path d="M3 20l1.3 -3.9c-2.324 -3.437 -1.426 -7.872 2.1 -10.374c3.526 -2.501 8.59 -2.296 11.845 .48c3.255 2.777 3.695 7.266 1.029 10.501c-2.666 3.235 -7.615 4.215 -11.574 2.293l-4.7 1"></path>
           </svg>
         </div>
-        <h4>专业客服</h4>
-        <p>24/7专业客服团队，随时为您解决问题</p>
+        <h4 style="margin-bottom: 6px;">售后保证</h4>
+        <p style="margin-top: 0; line-height: 1.4;">
+          专业客服支持<br>
+          24/7专业客服团队，随时为您解决问题
+        </p>
       </div>
     </div>
   </section>
+
+
+<!-- 新的 Feature Section -->
+<section class="advanced-features">
+
+  <div class="row align-items-center feature-row mb-6">
+    <div class="col-md-5 order-1 order-md-2 mt-md-0 mt-5">
+      <span class="badge badge-pill badge-primary mb-4">跨平台兼容</span>
+      <h2 class="mb-4">在您的所有设备上享受更顺畅的连接</h2>
+      <p class="text-muted mb-5">
+        无论是 macOS、iOS、Android、Windows 还是 Linux，HzExtension 都能为您提供稳定可靠的网络体验，覆盖手机、电脑和路由器等多种使用场景
+      </p>
+    </div>
+    <div class="col-md-6 order-2 order-md-1">
+      <img src="static/picture/all-devices.jpg" class="img-fluid d-block mx-auto feature-img floating-banner">
+    </div>
+  </div>
+
+  <div class="row align-items-center feature-row mb-6">
+    <div class="col-md-6 order-2 order-md-1">
+      <img src="static/picture/work-2.png" class="img-fluid d-block mx-auto feature-img floating-banner">
+    </div>
+    <div class="col-md-5 order-1 order-md-2 mt-md-0 mt-5">
+      <span class="badge badge-pill badge-primary mb-4">网络加速</span>
+      <h2 class="mb-4">加速您的网络访问</h2>
+      <p class="text-muted mb-5">
+        自有AS与全球尖端数据资源，覆盖亚洲、欧洲、美洲、非洲与大洋洲主要核心网络, 与100+运营商、内容提供商、数据交换中心直接互联
+      </p>
+    </div>
+  </div>
+
+  <div class="row align-items-center feature-row mb-6">
+    <div class="col-md-5 order-1 order-md-2 mt-md-0 mt-5">
+      <span class="badge badge-pill badge-primary mb-4">隐私保护</span>
+      <h2 class="mb-4">内置 DNS 保护</h2>
+      <p class="text-muted mb-5">
+        通过基于 DNS 的过滤机制，HzExtension 能够有效拦截广告与跟踪器，屏蔽大量应用与网页对您的跟踪行为，为您提供更干净、更安全、更私密的上网体验
+      </p>
+    </div>
+    <div class="col-md-6 order-2 order-md-1">
+      <img src="static/picture/laptop-stable-connection-fast-protected-md.avif" class="img-fluid d-block mx-auto feature-img floating-banner" alt="DNS Protection">
+    </div>
+  </div>
+
+</section>
+
+<style>
+.advanced-features {
+  width: 100%;
+  max-width: 1200px;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 0 20px;
+}
+
+/* 基本行布局 */
+.feature-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* 徽章样式 - 使用主题蓝 */
+.badge-primary {
+  background-color: var(--primary-color, #2a2685);
+  color: #fff;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  display: inline-block;
+  margin-bottom: 1.2rem; /* 🔹原本 1rem，现在更宽松 */
+}
+
+/* 调整标题与段落的间距 */
+.feature-row h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.feature-row p {
+  margin-top: 0.5rem;
+}
+
+/* 图片样式 */
+.feature-img {
+  max-width: 85%;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+  animation: floatUpDown 5s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* 轻微浮动动画 */
+@keyframes floatUpDown {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+/* 文本区域 */
+.feature-text h3,
+.feature-row h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: var(--primary-text-color);
+}
+
+.feature-text p,
+.feature-row p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--secondary-text-color);
+}
+
+/* 响应式布局 */
+@media (max-width: 992px) {
+  .feature-row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .feature-img {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
+</style>
 
   <section class="download" id="download">
     <div class="section-title">
@@ -996,7 +1169,7 @@
         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-apple"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8.286 7.008c-3.216 0 -4.286 3.23 -4.286 5.92c0 3.229 2.143 8.072 4.286 8.072c1.165 -.05 1.799 -.538 3.214 -.538c1.406 0 1.607 .538 3.214 .538s4.286 -3.229 4.286 -5.381c-.03 -.011 -2.649 -.434 -2.679 -3.23c-.02 -2.335 2.589 -3.179 2.679 -3.228c-1.096 -1.606 -3.162 -2.113 -3.75 -2.153c-1.535 -.12 -3.032 1.077 -3.75 1.077c-.729 0 -2.036 -1.077 -3.214 -1.077z" /><path d="M12 4a2 2 0 0 0 2 -2a2 2 0 0 0 -2 2" /></svg>
         <h4>iOS</h4>
         <p>适用于 iPhone 和 iPad 的客户端</p>
-        <a href="https://apps.apple.com/app/id1" class="button primary-button" target="_blank" rel="noopener noreferrer">下载</a>
+        <a href="https://apps.apple.com/us/app/sing-box-vt/id6673731168" class="button primary-button" target="_blank" rel="noopener noreferrer">下载</a>
       </div>
       <div class="client-card" id="androidClient">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-brand-android">
@@ -1010,7 +1183,7 @@
         </svg>
         <h4>Android</h4>
         <p>适用于安卓手机和平板的客户端</p>
-        <a href="https://play.google.com/store/apps" class="button primary-button" target="_blank" rel="noopener noreferrer">下载</a>
+        <a href="https://hzextension.cc/assets/clients/SFA.apk" class="button primary-button" target="_blank" rel="noopener noreferrer">下载</a>
       </div>
       <div class="client-card" id="windowsClient">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-brand-windows">
@@ -1020,7 +1193,7 @@
         </svg>
         <h4>Windows</h4>
         <p>适用于 Windows 系统的客户端</p>
-        <a href="https://github.com/releases/latest" class="button primary-button" target="_blank" rel="noopener noreferrer">下载</a>
+        <a href="https://hzextension.cc/assets/clients/clash-verge-rev-setup.exe" class="button primary-button" target="_blank" rel="noopener noreferrer">下载</a>
       </div>
       <div class="client-card" id="macosClient">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-device-laptop">
@@ -1029,7 +1202,7 @@
         </svg>
         <h4>MacOS</h4>
         <p>适用于 Mac 电脑的客户端</p>
-        <a href="https://github.com/releases/latest" class="button primary-button" target="_blank" rel="noopener noreferrer">下载</a>
+        <a href="https://apps.apple.com/us/app/sing-box-vt/id6673731168" class="button primary-button" target="_blank" rel="noopener noreferrer">下载</a>
       </div>
     </div>
   </section>
@@ -1053,7 +1226,7 @@
       <a href="#">常见问题</a>
       <a href="#">联系我们</a>
     </div>
-    <p class="copyright" id="copyrightText">© 2025 EZ THEME. All Rights Reserved.</p>
+    <p class="copyright" id="copyrightText">© 2025 HzExtension. All Rights Reserved.</p>
   </footer>
 
   <script>

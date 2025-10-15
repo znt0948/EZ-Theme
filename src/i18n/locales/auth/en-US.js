@@ -5,7 +5,7 @@ import { SITE_CONFIG } from '../../../utils/baseConfig';
 export default {
   auth: {
     loginTitle: 'Sign In',
-    loginSubtitle: 'Enter your credentials to continue',
+    loginSubtitle: 'Welcome to HzExtension! 👋\nEnter your credentials to continue',
     registerTitle: 'Create Account',
     registerSubtitle: 'Fill in the information below to register a new account',
     forgotPasswordTitle: 'Forgot Password',

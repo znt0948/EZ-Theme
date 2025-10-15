@@ -2917,23 +2917,20 @@ export default {
 
 
   img {
+    width: 100%;
 
-    width: 60px;
+    max-width: 120px;
 
-    height: 60px;
+    height: auto;
 
-    min-width: 60px;
+    border-radius: 0;
 
-    min-height: 60px;
-
-    border-radius: 12px;
-
-    object-fit: cover;
+    object-fit: contain;
 
     cursor: pointer;
 
     user-select: none;
-
+    
   }
 
 }
