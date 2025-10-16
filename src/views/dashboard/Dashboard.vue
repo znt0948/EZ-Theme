@@ -1098,55 +1098,62 @@ export default {
       }
     };
 
-    const fetchUserInfo = async () => {
-      if (loading.userInfo === false && Object.keys(userPlan.value).length > 0) return;
+      const fetchUserInfo = async () => {
+    if (loading.userInfo === false && Object.keys(userPlan.value).length > 0) return;
 
-      loading.userInfo = true;
-      try {
-        const response = await getUserInfo();
-        if (response.data) {
-          const info = response.data;
+    loading.userInfo = true;
+    try {
+      const response = await getUserInfo();
+      if (response.data) {
+        const info = response.data;
 
-          userPlanId.value = info.plan_id;
+        userPlanId.value = info.plan_id;
 
-          hasPlan.value = info.plan_id !== null && info.plan_id !== undefined;
+        hasPlan.value = info.plan_id !== null && info.plan_id !== undefined;
 
-          if (info.email) {
-            userStats.userEmail = info.email;
-          }
-          if (info.balance !== undefined) {
-            userBalance.value = info.balance;
-            updateAccountBalanceDisplay();
-          }
-          if (info.expired_at) {
-            userPlan.value.expireDate = formatDate(info.expired_at);
-            userPlan.value.isExpireDatePermanent = false;
-
-            const now = new Date();
-            const expiredDate = new Date(info.expired_at * 1000);
-            const diffTime = expiredDate - now;
-
-            if (diffTime <= 0) {
-              userStats.remainingDays = '0';
-              userStats.isRemainingDaysPermanent = false;
-            } else {
-              const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-              userStats.remainingDays = `${diffDays}`;
-              userStats.isRemainingDaysPermanent = false;
-            }
-          } else {
-            userPlan.value.expireDate = null;
-            userPlan.value.isExpireDatePermanent = true;
-            userStats.remainingDays = null;
-            userStats.isRemainingDaysPermanent = true;
-          }
+        // 注入在线设备数
+        if (info.aliveIp !== undefined) {
+          userPlan.value.aliveIp = info.aliveIp;
+        } else if (info.alive_ip !== undefined) {
+          userPlan.value.aliveIp = info.alive_ip;
         }
-      } catch (error) {
-        console.error('获取用户信息失败:', error);
-      } finally {
-        loading.userInfo = false;
+
+        if (info.email) {
+          userStats.userEmail = info.email;
+        }
+        if (info.balance !== undefined) {
+          userBalance.value = info.balance;
+          updateAccountBalanceDisplay();
+        }
+        if (info.expired_at) {
+          userPlan.value.expireDate = formatDate(info.expired_at);
+          userPlan.value.isExpireDatePermanent = false;
+
+          const now = new Date();
+          const expiredDate = new Date(info.expired_at * 1000);
+          const diffTime = expiredDate - now;
+
+          if (diffTime <= 0) {
+            userStats.remainingDays = '0';
+            userStats.isRemainingDaysPermanent = false;
+          } else {
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            userStats.remainingDays = `${diffDays}`;
+            userStats.isRemainingDaysPermanent = false;
+          }
+        } else {
+          userPlan.value.expireDate = null;
+          userPlan.value.isExpireDatePermanent = true;
+          userStats.remainingDays = null;
+          userStats.isRemainingDaysPermanent = true;
+        }
       }
-    };
+    } catch (error) {
+      console.error('获取用户信息失败:', error);
+    } finally {
+      loading.userInfo = false;
+    }
+  };
 
     const isExpiringSoon = computed(() => {
       if (userStats.isRemainingDaysPermanent) return false;
@@ -1791,7 +1798,7 @@ export default {
     };
 
     const showDeviceLimit = computed(() => {
-      return isXiaoV2board() && DASHBOARD_CONFIG.showOnlineDevicesLimit;
+      return DASHBOARD_CONFIG.showOnlineDevicesLimit;
     });
 
     const timers = {};

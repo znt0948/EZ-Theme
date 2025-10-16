@@ -260,7 +260,7 @@ export const config  = {
         // ===============================
 
         // 是否显示在线设备数量限制 (true=显示, false=隐藏，仅Xiao-V2board支持)
-        showOnlineDevicesLimit: false,
+        showOnlineDevicesLimit: true,
         
         // 是否显示导入订阅
         showImportSubscription: true,
