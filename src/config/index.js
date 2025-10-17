@@ -76,14 +76,14 @@ export const config  = {
 
         // Landing页面多语言标语
         landingText: {
-            'zh-CN': '共同维护的网络托管服务',
-            'vi-VN': 'Dịch vụ lưu trữ mạng được duy trì chung',
-            'en-US': 'Co-maintained Network Hosting Service',
-            'zh-TW': '共同維護的網絡托管服務',
-            'ja-JP': '共同管理されたネットワークホスティングサービス',
-            'ko-KR': '공동 관리 네트워크 호스팅 서비스',
-            'ru-RU': 'Совместно поддерживаемый сетевой хостинг',
-            'fa-IR': 'خدمات میزبانی شبکه با نگهداری مشترک'
+            'zh-CN': '全球网络托管',
+            'vi-VN': 'Dịch vụ lưu trữ mạng toàn cầu',
+            'en-US': 'Global Network Hosting',
+            'zh-TW': '全球網絡託管',
+            'ja-JP': 'グローバルネットワークホスティング',
+            'ko-KR': '글로벌 네트워크 호스팅',
+            'ru-RU': 'Глобальный сетевой хостинг',
+            'fa-IR': 'میزبانی شبکه جهانی'
         },
 
         // 自定义landing页面路径（相对于public目录

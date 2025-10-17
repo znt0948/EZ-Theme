@@ -212,7 +212,7 @@ export default {
         pendingTickets: '待回复工单',
         pendingInvites: '待管理员处理佣金',
         officialClients: '使用教程',
-        deviceLimit: '在线设备',
+        deviceLimit: '接入额度',
         unlimited: '不限制',
         nextResetTime: '下次重置时间',
 
