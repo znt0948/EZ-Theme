@@ -69,21 +69,21 @@ export const config  = {
         siteName: 'HzExtension',
         siteDescription: '加速访问、并在数以千计的互联网跟踪器中保护您的隐私',
         // copyright会自动使用当前年份
-        copyright: `© ${new Date().getFullYear()} HzExtension. All Rights Reserved.`,
+        copyright: `© ${new Date().getFullYear()} HzExtension LLC. All Rights Reserved.`,
 
         // 是否显示标题中的网站Logo (true=显示, false=隐藏)
         showLogo: true,
 
         // Landing页面多语言标语
         landingText: {
-            'zh-CN': '探索全球网络无限可能',
-            'vi-VN': 'Khám phá khả năng vô hạn của mạng toàn cầu',
-            'en-US': 'Explore Unlimited Possibilities of Global Network',
-            'zh-TW': '探索全球網絡無限可能',
-            'ja-JP': 'グローバルネットワークの無限の可能性',
-            'ko-KR': '글로벌 네트워크의 무한한 가능성을 탐색하세요',
-            'ru-RU': 'Исследуйте безграничные возможности глобальной сети',
-            'fa-IR': 'امکانات نامحدود شبکه جهانی را کاوش کنید'
+            'zh-CN': '共同维护的网络托管服务',
+            'vi-VN': 'Dịch vụ lưu trữ mạng được duy trì chung',
+            'en-US': 'Co-maintained Network Hosting Service',
+            'zh-TW': '共同維護的網絡托管服務',
+            'ja-JP': '共同管理されたネットワークホスティングサービス',
+            'ko-KR': '공동 관리 네트워크 호스팅 서비스',
+            'ru-RU': 'Совместно поддерживаемый сетевой хостинг',
+            'fa-IR': 'خدمات میزبانی شبکه با نگهداری مشترک'
         },
 
         // 自定义landing页面路径（相对于public目录
