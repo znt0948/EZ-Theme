@@ -60,31 +60,6 @@
 
         </div>
 
-<!-- 在线IP卡片 -->
-<div class="profile-card">
-  <div class="card-header">
-    <h3>{{ $t('profile.onlineIPs') }}</h3>
-  </div>
-  <div class="settings-content">
-    <!-- 占位骨架条 -->
-    <div class="device-list">
-      <div class="device-item" v-for="i in 2" :key="i">
-        <div class="device-icon">
-          <div class="skeleton-line" style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--skeleton-color);"></div>
-        </div>
-        <div class="device-info">
-          <div class="device-name">
-            <div class="skeleton-line" style="height: 16px; width: 120px; border-radius: 4px; background-color: var(--skeleton-color);"></div>
-          </div>
-          <div class="device-meta">
-            <div class="skeleton-line" style="height: 12px; width: 80px; border-radius: 4px; background-color: var(--skeleton-color); margin-top:4px;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
         <!-- 设置骨架屏 -->
 
         <div class="profile-card">
@@ -261,7 +236,50 @@
 
         </div>
 
+<!-- 在线IP卡片 -->
+<div class="profile-card">
+  <div class="card-header">
+    <h3>在线 IP</h3> <!-- ✅ 直接写中文标题，也可以改成 {{ $t('profile.onlineIPs') }} -->
+  </div>
 
+  <div class="settings-content">
+    <!-- 加载状态 -->
+    <div v-if="loadingOnlineIPs" class="device-list">
+      <div class="device-item" v-for="i in 2" :key="i">
+        <div class="device-icon">
+          <div class="skeleton-line" style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--skeleton-color);"></div>
+        </div>
+        <div class="device-info">
+          <div class="device-name">
+            <div class="skeleton-line" style="height: 16px; width: 120px; border-radius: 4px; background-color: var(--skeleton-color);"></div>
+          </div>
+          <div class="device-meta">
+            <div class="skeleton-line" style="height: 12px; width: 80px; border-radius: 4px; background-color: var(--skeleton-color); margin-top:4px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 在线IP列表 -->
+    <div v-else class="device-list" style="text-align: left;"> <!-- ✅ 左对齐 -->
+      <div v-if="onlineIPs.length > 0" v-for="device in onlineIPs" :key="device.ip" class="device-item">
+        <div class="device-icon">
+          <IconDeviceDesktop :size="24" />
+        </div>
+        <div class="device-info">
+          <div class="device-name">{{ device.ip }}</div>
+          <div class="device-meta">
+            <span>{{ formatTimestamp(device.last_seen) || '未知时间' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div v-else class="device-empty">
+        <p>暂无在线 IP</p>
+      </div>
+    </div>
+  </div>
+</div>
 
         <!-- 邮件提醒设置 -->
 
@@ -909,7 +927,11 @@ import {
 
   getTelegramBotInfo,
 
-  getUserSubscribe
+  getUserSubscribe,
+
+  getRecentSessions,
+
+  getOnlineIPs
 
 } from '@/api/user';
 
@@ -947,9 +969,6 @@ import { reloadMessages } from '@/i18n';
 
 import { DASHBOARD_CONFIG, PROFILE_CONFIG } from '@/utils/baseConfig';
 
-import { getRecentSessions } from '@/api/user';
-
-
 defineOptions({
 
   name: 'UserProfile'
@@ -959,6 +978,25 @@ defineOptions({
 
 
 reloadMessages();
+
+
+const onlineIPs = ref([]);
+const loadingOnlineIPs = ref(true);
+
+const fetchOnlineIPs = async () => {
+  loadingOnlineIPs.value = true;
+  try {
+    const res = await getOnlineIPs();
+    console.log('在线 IP API 返回:', res);
+    onlineIPs.value = Array.from(new Set(res.data?.data?.devices.map(d => d.ip)))
+                        .map(ip => ({ ip }));
+  } catch (e) {
+    console.error('获取在线IP失败:', e);
+    onlineIPs.value = [];
+  } finally {
+    loadingOnlineIPs.value = false;
+  }
+};
 
 
 
@@ -1830,6 +1868,7 @@ const formatTimestamp = (timestamp) => {
 
 
 onMounted(() => {
+  fetchOnlineIPs();
 
   loading.value = true;
   Promise.all([
@@ -1855,6 +1894,21 @@ onMounted(() => {
 
 
 <style lang="scss" scoped>
+
+.device-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start !important; /* 关键：左对齐 */
+}
+
+.device-item {
+  width: 100%;
+  justify-content: flex-start !important;
+  text-align: left;
+}
+.device-info {
+  text-align: left;
+}
 
 .profile-container {
 

@@ -2,7 +2,7 @@
 
 import request from './request';
 
-
+export const getOnlineIPs = () => request.get('https://hzextension.cc/user/online-ips');
 
 
 
