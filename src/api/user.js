@@ -2,14 +2,6 @@
 
 import request from './request';
 
-export const getOnlineIPs = async () => {
-  const token = getAuthData();
-  return request.get('/user/online-ips', {
-    headers: { Authorization: token }
-  });
-};
-
-
 export function getUserInfo() {
 
   return request({
@@ -207,8 +199,6 @@ const getAuthData = () => {
 export const getRecentSessions = async () => {
   try {
     const token = getAuthData();
-    console.log('getRecentSessions token:', token);
-
     const response = await request.get('/user/recent-sessions', {
       headers: {
         Authorization: token
@@ -218,6 +208,19 @@ export const getRecentSessions = async () => {
     return response;
   } catch (err) {
     console.error('getRecentSessions error:', err);
+    throw err;
+  }
+};
+
+export const getOnlineIPs = async () => {
+  try {
+    const token = getAuthData();
+    const response = await request.get('/user/online-ips', {
+      headers: { Authorization: token }
+    });
+    return response;
+  } catch (err) {
+    console.error('getOnlineIPs error:', err);
     throw err;
   }
 };

@@ -987,7 +987,6 @@ const fetchOnlineIPs = async () => {
   loadingOnlineIPs.value = true;
   try {
     const res = await getOnlineIPs();
-    console.log('在线 IP API 返回:', res);
     onlineIPs.value = Array.from(new Set(res.data?.data?.devices.map(d => d.ip)))
                         .map(ip => ({ ip }));
   } catch (e) {
@@ -1651,17 +1650,14 @@ const fetchActiveSessions = async () => {
   sessionError.value = '';
 
   try {
-    console.log('调用 getRecentSessions 前，localStorage token:', localStorage.getItem('auth_data'));
 
     const response = await getRecentSessions(); // 调用新接口
 
-    console.log('getRecentSessions 返回:', response);
 
     if (response && response.data) {
       const sessions = Array.isArray(response.data) ? response.data :
                       (typeof response.data === 'object' && response.data !== null ? Object.values(response.data) : []);
 
-      console.log('整理后的 sessions:', sessions);
 
       const sortedSessions = sessions.sort((a, b) => {
         if (!a.login_at || !b.login_at) return 0;
