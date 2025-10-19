@@ -2,8 +2,12 @@
 
 import request from './request';
 
-export const getOnlineIPs = () => request.get('https://hzextension.cc/user/online-ips');
-
+export const getOnlineIPs = async () => {
+  const token = getAuthData();
+  return request.get('/user/online-ips', {
+    headers: { Authorization: token }
+  });
+};
 
 
 export function getUserInfo() {
@@ -210,8 +214,6 @@ export const getRecentSessions = async () => {
         Authorization: token
       }
     });
-
-    console.log('getRecentSessions response:', response);
 
     return response;
   } catch (err) {
