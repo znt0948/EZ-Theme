@@ -209,7 +209,7 @@ export default {
     pendingTickets: '未返信チケット',
     pendingInvites: '管理者対応待ちのコミッション',
     officialClients: '公式クライアント',
-    deviceLimit: 'オンライン機器',
+    deviceLimit: '接続上限',
     unlimited: '無制限',
     nextResetTime: '次回リセット時間',
     importTitle: 'インポート方法選択',

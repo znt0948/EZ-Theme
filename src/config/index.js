@@ -259,7 +259,7 @@ export const config  = {
 
         // ===============================
 
-        // 是否显示在线设备数量限制 (true=显示, false=隐藏，仅Xiao-V2board支持)
+        // 是否显示在线设备数量限制 (true=显示, false=隐藏，仅 Xboard 支持)
         showOnlineDevicesLimit: true,
         
         // 是否显示导入订阅
@@ -338,7 +338,7 @@ export const config  = {
         showGiftCardRedeem: false, // 只有Xiao-V2board支持礼品卡兑换
 
         // 是否显示最近登录设备栏目 (true=显示, false=隐藏)
-        showRecentDevices: false
+        showRecentDevices: true
     },
 
     // =======================================================
@@ -500,9 +500,9 @@ export const config  = {
             closeWaitSeconds: 0
         },
         // 工单图片设置
-        isImageHosting: false, // 是否启用工单图片上传功能
+        isImageHosting: true, // 是否启用工单图片上传功能
         // imgBB 图床 api 设置 前往imgBB注册账号 https://imgbb.com/ 获取 apiKey
-        imgbbApiKey: '',
+        imgbbApiKey: 'b0f318d21cffa1d76a52061824dcc57a',
     },
 
     // 流量明细配置
@@ -585,7 +585,7 @@ export const config  = {
     // More页面自定义卡片配置
     MORE_PAGE_CONFIG: {
         // 是否启用自定义卡片功能
-        enableCustomCards: false,
+        enableCustomCards: true,
 
         // 自定义卡片列表
         // 说明:
@@ -597,21 +597,12 @@ export const config  = {
         // 3. SVG图标应该使用 currentColor 作为颜色，以支持主题色 stroke="currentColor"
         // 4. 您可以从https://tabler.io/icons 获取图标的SVG代码
         customCards: [
-            // 自定义卡片示例
-            {
-                id: 'github',                  // 卡片唯一ID
-                title: 'GitHub',               // 卡片标题
-                description: '访问我们的GitHub', // 卡片描述
-                svgIcon: '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg>',
-                url: 'https://github.com',     // 点击卡片跳转的URL
-                openInNewTab: true             // 是否在新标签页打开
-            },
             {
                 id: 'telegram',
                 title: 'Telegram',
                 description: '加入我们的Telegram频道',
                 svgIcon: '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg>',
-                url: 'https://t.me/your_group',
+                url: 'https://t.me/+pFQmRgG2Ip1lZmI9',
                 openInNewTab: true
             }
             // 可以继续添加更多卡片...

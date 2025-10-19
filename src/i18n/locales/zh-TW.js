@@ -209,7 +209,7 @@ export default {
     pendingTickets: '待回覆工單',
     pendingInvites: '待管理員處理佣金',
     officialClients: '官方客戶端',
-    deviceLimit: '線上設備',
+    deviceLimit: '接入額度',
     unlimited: '不限制',
     nextResetTime: '下次重設時間',  
     importTitle: '選擇匯入方式',

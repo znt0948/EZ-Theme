@@ -60,7 +60,30 @@
 
         </div>
 
-
+<!-- 在线IP卡片 -->
+<div class="profile-card">
+  <div class="card-header">
+    <h3>{{ $t('profile.onlineIPs') }}</h3>
+  </div>
+  <div class="settings-content">
+    <!-- 占位骨架条 -->
+    <div class="device-list">
+      <div class="device-item" v-for="i in 2" :key="i">
+        <div class="device-icon">
+          <div class="skeleton-line" style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--skeleton-color);"></div>
+        </div>
+        <div class="device-info">
+          <div class="device-name">
+            <div class="skeleton-line" style="height: 16px; width: 120px; border-radius: 4px; background-color: var(--skeleton-color);"></div>
+          </div>
+          <div class="device-meta">
+            <div class="skeleton-line" style="height: 12px; width: 80px; border-radius: 4px; background-color: var(--skeleton-color); margin-top:4px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
         <!-- 设置骨架屏 -->
 
@@ -924,6 +947,7 @@ import { reloadMessages } from '@/i18n';
 
 import { DASHBOARD_CONFIG, PROFILE_CONFIG } from '@/utils/baseConfig';
 
+import { getRecentSessions } from '@/api/user';
 
 
 defineOptions({
@@ -1584,65 +1608,42 @@ const redeemGiftCard = async () => {
 };
 
 
-
 const fetchActiveSessions = async () => {
-
   loadingSessions.value = true;
-
   sessionError.value = '';
 
-
-
   try {
+    console.log('调用 getRecentSessions 前，localStorage token:', localStorage.getItem('auth_data'));
 
-    const response = await getActiveSession();
+    const response = await getRecentSessions(); // 调用新接口
 
-
+    console.log('getRecentSessions 返回:', response);
 
     if (response && response.data) {
-
       const sessions = Array.isArray(response.data) ? response.data :
-
                       (typeof response.data === 'object' && response.data !== null ? Object.values(response.data) : []);
 
-
+      console.log('整理后的 sessions:', sessions);
 
       const sortedSessions = sessions.sort((a, b) => {
-
         if (!a.login_at || !b.login_at) return 0;
-
         return b.login_at - a.login_at;
-
       });
 
-
-
       activeSessions.value = sortedSessions.slice(0, 10);
-
     } else {
-
       sessionError.value = t('profile.sessionError');
-
+      console.warn('getRecentSessions 返回空数据或格式不正确');
     }
-
   } catch (err) {
-
-    console.error('Failed to fetch active sessions:', err);
-
+    console.error('Failed to fetch recent sessions:', err);
     sessionError.value = err?.message || t('common.networkError');
-
   } finally {
-
     loadingSessions.value = false;
-
     if (!loading.value && !loadingTelegram.value) {
-
       loading.value = false;
-
     }
-
   }
-
 };
 
 

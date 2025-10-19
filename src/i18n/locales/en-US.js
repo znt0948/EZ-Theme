@@ -212,7 +212,7 @@ export default {
         pendingTickets: 'Pending Tickets',
         pendingInvites: 'Pending Commissions',
         officialClients: 'Official Clients',
-        deviceLimit: 'Online Devices',
+        deviceLimit: 'Connection Limit',
         unlimited: 'Unlimited',
         nextResetTime: 'Next Reset Time',
         importTitle: 'Select Import Method',

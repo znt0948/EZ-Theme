@@ -209,7 +209,7 @@ export default {
     pendingTickets: 'تیکت های در حال پاسخ',
     pendingInvites: 'دعوت های در حال پردازش توسط مدیر',
     officialClients: 'کلاینت های رسمی',
-    deviceLimit: 'دستگاه های آنلاین',
+    deviceLimit: 'سهمیه دسترسی',
     unlimited: 'نامحدود',
     nextResetTime: 'زمان بازنشانی بعدی',
     importTitle: 'انتخاب روش وارد کردن',

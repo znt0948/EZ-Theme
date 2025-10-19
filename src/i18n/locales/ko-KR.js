@@ -209,7 +209,7 @@ export default {
     pendingTickets: '답변 대기 티켓',
     pendingInvites: '관리자 처리 대기 커미션',
     officialClients: '공식 클라이언트',
-    deviceLimit: '온라인 기기',
+    deviceLimit: '접속 한도',
     unlimited: '무제한',
     nextResetTime: '다음 초기화 시간',
     importTitle: '가져오기 방식 선택',

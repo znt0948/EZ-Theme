@@ -209,7 +209,7 @@ export default {
     pendingTickets: 'Ожидающие ответа тикеты',
     pendingInvites: 'Ожидающие обработки комиссии',
     officialClients: 'Официальные клиенты',
-    deviceLimit: 'Лимит устройств',
+    deviceLimit: 'Лимит подключений',
     unlimited: 'Без ограничений',
     nextResetTime: 'Время следующего сброса',
     importTitle: 'Выберите способ импорта',

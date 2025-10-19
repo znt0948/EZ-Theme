@@ -219,7 +219,7 @@ export default {
         pendingTickets: 'Ticket chờ phản hồi',
         pendingInvites: 'Hoa hồng chờ quản trị viên xử lý',
         officialClients: 'Client chính thức',
-        deviceLimit: 'Thiết bị trực tuyến',
+        deviceLimit: 'Giới hạn kết nối',
         unlimited: 'Không giới hạn',
         nextResetTime: 'Thời gian đặt lại tiếp theo',
         importTitle: 'Chọn cách nhập',
