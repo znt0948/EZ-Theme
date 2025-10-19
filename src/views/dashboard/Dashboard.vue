@@ -159,15 +159,19 @@
                 <span class="info-label">{{ $t('dashboard.nextResetTime') }}</span>
                 <span class="info-value">{{ userPlan.resetDay }} {{ $t('dashboard.days') }}</span>
               </div>
-              <!-- 添加在线设备信息，仅当面板类型为 Xiao-board 时显示 -->
-              <div class="info-item" v-if="showDeviceLimit">
-                <span class="info-label">{{ $t('dashboard.deviceLimit') }}</span>
+            <div class="info-item" v-if="showDeviceLimit">
+              <span class="info-label">{{ $t('dashboard.deviceLimit') }}</span>
+
+              <div class="info-value-wrapper">
                 <span class="info-value">
                   {{
-                    userPlan.deviceLimit === null ? `${userPlan.aliveIp} / ${$t('dashboard.unlimited')}` : `${userPlan.aliveIp} / ${userPlan.deviceLimit}`
+                    userPlan.deviceLimit === null
+                      ? `${userPlan.aliveIp} / ${$t('dashboard.unlimited')}`
+                      : `${userPlan.aliveIp} / ${userPlan.deviceLimit}`
                   }}
                 </span>
               </div>
+            </div>
             </div>
             <div class="subscription-actions">
               <button v-if="showImportSubscription" class="btn-outline" :class="{

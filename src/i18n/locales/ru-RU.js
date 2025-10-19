@@ -212,7 +212,6 @@ export default {
     deviceLimit: 'Лимит устройств',
     unlimited: 'Без ограничений',
     nextResetTime: 'Время следующего сброса',
-    
     importTitle: 'Выберите способ импорта',
     copySubscription: 'Копировать адрес подписки',
     copySubscriptionDesc: 'Копировать ссылку подписки в буфер обмена',

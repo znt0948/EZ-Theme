@@ -211,8 +211,7 @@ export default {
     officialClients: '官方客戶端',
     deviceLimit: '線上設備',
     unlimited: '不限制',
-    nextResetTime: '下次重設時間',
-    
+    nextResetTime: '下次重設時間',  
     importTitle: '選擇匯入方式',
     copySubscription: '複製訂閱地址',
     copySubscriptionDesc: '複製訂閱連結到剪貼簿',

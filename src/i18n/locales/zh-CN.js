@@ -215,7 +215,6 @@ export default {
         deviceLimit: '接入额度',
         unlimited: '不限制',
         nextResetTime: '下次重置时间',
-
         importTitle: '选择导入方式',
         copySubscription: '复制订阅地址',
         copySubscriptionDesc: '复制订阅链接到剪贴板',

@@ -212,7 +212,6 @@ export default {
     deviceLimit: 'オンライン機器',
     unlimited: '無制限',
     nextResetTime: '次回リセット時間',
-    
     importTitle: 'インポート方法選択',
     copySubscription: 'サブスクリプションアドレスをコピー',
     copySubscriptionDesc: 'サブスクリプションリンクをクリップボードにコピー',

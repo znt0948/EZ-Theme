@@ -212,7 +212,6 @@ export default {
     deviceLimit: 'دستگاه های آنلاین',
     unlimited: 'نامحدود',
     nextResetTime: 'زمان بازنشانی بعدی',
-    
     importTitle: 'انتخاب روش وارد کردن',
     copySubscription: 'کپی لینک اشتراک',
     copySubscriptionDesc: 'لینک اشتراک را به کلیپ بورد کپی کنید',

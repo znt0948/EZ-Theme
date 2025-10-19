@@ -212,7 +212,6 @@ export default {
     deviceLimit: '온라인 기기',
     unlimited: '무제한',
     nextResetTime: '다음 초기화 시간',
-    
     importTitle: '가져오기 방식 선택',
     copySubscription: '구독 주소 복사',
     copySubscriptionDesc: '구독 링크를 클립보드에 복사',

@@ -215,7 +215,6 @@ export default {
         deviceLimit: 'Online Devices',
         unlimited: 'Unlimited',
         nextResetTime: 'Next Reset Time',
-
         importTitle: 'Select Import Method',
         copySubscription: 'Copy Subscription Link',
         copySubscriptionDesc: 'Copy subscription link to clipboard',
