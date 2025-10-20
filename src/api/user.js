@@ -31,7 +31,13 @@ export function getIpLocationInfo() {
 
 }
 
-
+export function getIpLocationInfo_2(ip) {
+  return request({
+    url: `https://ipwho.is/${ip}?lang=zh-CN`, // ✅ 添加中文参数
+    method: 'get',
+    baseURL: '' // 不走默认 baseURL
+  });
+}
 
 
 

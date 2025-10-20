@@ -239,11 +239,11 @@
 <!-- 在线IP卡片 -->
 <div class="profile-card">
   <div class="card-header">
-    <h3>在线 IP</h3> <!-- ✅ 直接写中文标题，也可以改成 {{ $t('profile.onlineIPs') }} -->
+    <h3>在线 IP</h3>
   </div>
 
   <div class="settings-content">
-    <!-- 加载状态 -->
+    <!-- 加载状态骨架 -->
     <div v-if="loadingOnlineIPs" class="device-list">
       <div class="device-item" v-for="i in 2" :key="i">
         <div class="device-icon">
@@ -260,16 +260,20 @@
       </div>
     </div>
 
-    <!-- 在线IP列表 -->
-    <div v-else class="device-list" style="text-align: left;"> <!-- ✅ 左对齐 -->
-      <div v-if="onlineIPs.length > 0" v-for="device in onlineIPs" :key="device.ip" class="device-item">
-        <div class="device-icon">
-          <IconDeviceDesktop :size="24" />
-        </div>
-        <div class="device-info">
-          <div class="device-name">{{ device.ip }}</div>
-          <div class="device-meta">
-            <span>{{ formatTimestamp(device.last_seen) || '未知时间' }}</span>
+    <!-- 数据列表 / 无数据状态 -->
+    <div v-else class="device-list" style="text-align: left;">
+      <div v-if="onlineIPs.length > 0">
+        <div v-for="device in onlineIPs" :key="device.ip" class="device-item">
+          <div class="device-icon">
+            <IconDeviceDesktop :size="24" />
+          </div>
+          <div class="device-info">
+            <div class="device-name">{{ device.ip }}</div>
+            <div class="device-meta">
+              <span>{{ device.location }}</span>
+              <span>{{ device.isp }}</span>
+              <span>{{ formatTimestamp(device.last_seen) || '未知时间' }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -280,7 +284,6 @@
     </div>
   </div>
 </div>
-
         <!-- 邮件提醒设置 -->
 
         <div class="profile-card">
@@ -931,7 +934,9 @@ import {
 
   getRecentSessions,
 
-  getOnlineIPs
+  getOnlineIPs,
+
+  getIpLocationInfo_2
 
 } from '@/api/user';
 
@@ -985,19 +990,71 @@ const loadingOnlineIPs = ref(true);
 
 const fetchOnlineIPs = async () => {
   loadingOnlineIPs.value = true;
+  console.log('fetchOnlineIPs called');
+
   try {
     const res = await getOnlineIPs();
-    onlineIPs.value = Array.from(new Set(res.data?.data?.devices.map(d => d.ip)))
-                        .map(ip => ({ ip }));
+    console.log('getOnlineIPs raw response:', res);
+
+      const devices =
+      Array.isArray(res.data?.data?.devices) ? res.data.data.devices :
+      Array.isArray(res.data?.devices) ? res.data.devices :
+      [];
+    console.log('devices array extracted:', devices);
+
+    // 并发获取每个 IP 的地理信息
+    const devicesWithLoc = await Promise.all(
+      devices.map(async device => {
+        try {
+          const locRes = await getIpLocationInfo_2(device.ip);
+          console.log(`locRes for IP ${device.ip}:`, locRes);
+
+          if (locRes.success) {
+            let isp = locRes.connection?.isp || '未知运营商';
+
+            // 如果 isp 含有数字或 Street/Road/路/街等，认为是地址，替换为 org 或未知
+            if (/\d|Street|Road|Ave|路|街/i.test(isp)) {
+              isp = locRes.connection?.org || '未知运营商';
+            }
+
+            // 简化为中国三大运营商简称
+            if (/移动/i.test(isp) || /China Mobile/i.test(isp)) {
+              isp = '中国移动';
+            } else if (/联通/i.test(isp) || /China Unicom/i.test(isp)) {
+              isp = '中国联通';
+            } else if (/电信/i.test(isp) || /China Telecom/i.test(isp) || /Chinanet/i.test(isp)) {
+              isp = '中国电信';
+            } else {
+              isp = isp; // 其他保留原始
+            }
+
+            return {
+              ...device,
+              location: `${locRes.country} ${locRes.region} ${locRes.city}`.trim(),
+              isp
+            };
+          }
+
+          return { ...device, location: '未知', isp: '未知' };
+        } catch (e) {
+          console.error(`获取 IP ${device.ip} 地理信息失败:`, e);
+          return { ...device, location: '未知', isp: '未知' };
+        }
+      })
+    );
+
+    console.log('devicesWithLoc:', devicesWithLoc);
+    onlineIPs.value = devicesWithLoc;
+    console.log('onlineIPs.value assigned:', onlineIPs.value);
+
   } catch (e) {
     console.error('获取在线IP失败:', e);
     onlineIPs.value = [];
   } finally {
     loadingOnlineIPs.value = false;
+    console.log('loadingOnlineIPs set to false');
   }
 };
-
-
 
 const { t } = useI18n();
 
@@ -1903,7 +1960,10 @@ onMounted(() => {
   text-align: left;
 }
 .device-info {
-  text-align: left;
+  flex: 1;
+  min-width: 0; /* 允许子元素收缩 */
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .profile-container {
