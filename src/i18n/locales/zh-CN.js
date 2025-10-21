@@ -463,6 +463,11 @@ export default {
         telegramSendCommand: '向机器人发送如下指令',
         commandCopied: '指令已复制到剪贴板',
         iKnow: '我知道了',
+        onlineIPs: '在线 IP',
+        noOnlineIP: '暂无在线 IP',
+        unknownTime: '未知时间',
+        isp: '运营商',
+        location: '位置',
         telegram: 'Telegram 通信',
         telegramError: '获取Telegram信息失败'
     },

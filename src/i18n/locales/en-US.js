@@ -465,7 +465,12 @@ export default {
         commandCopied: 'Command copied to clipboard',
         iKnow: 'I Understand',
         telegram: 'Telegram Communication',
-        telegramError: 'Failed to retrieve Telegram information'
+        telegramError: 'Failed to retrieve Telegram information',
+        onlineIPs: 'Online IPs',
+        noOnlineIP: 'No online IPs',
+        unknownTime: 'Unknown time',
+        isp: 'ISP',
+        location: 'Location'
     },
     contextMenu: {
         refresh: 'Refresh Page',

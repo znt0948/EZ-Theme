@@ -239,7 +239,7 @@
 <!-- 在线IP卡片 -->
 <div class="profile-card">
   <div class="card-header">
-    <h3>在线 IP</h3>
+    <h3>{{ $t('profile.onlineIPs') }}</h3>
   </div>
 
   <div class="settings-content">
@@ -270,16 +270,16 @@
           <div class="device-info">
             <div class="device-name">{{ device.ip }}</div>
             <div class="device-meta">
-              <span>{{ device.location }}</span>
-              <span>{{ device.isp }}</span>
-              <span>{{ formatTimestamp(device.last_seen) || '未知时间' }}</span>
+              <span>{{ device.location || $t('profile.location') }}</span>
+              <span>{{ device.isp || $t('profile.isp') }}</span>
+              <span>{{ formatTimestamp(device.last_seen) || $t('profile.unknownTime') }}</span>
             </div>
           </div>
         </div>
       </div>
 
       <div v-else class="device-empty">
-        <p>暂无在线 IP</p>
+        <p>{{ $t('profile.noOnlineIP') }}</p>
       </div>
     </div>
   </div>

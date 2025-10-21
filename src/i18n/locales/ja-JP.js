@@ -460,6 +460,11 @@ export default {
     telegramSendCommand: 'ボットに以下のコマンドを送信',
     commandCopied: 'コマンドをクリップボードにコピー済み',
     iKnow: '了解',
+    onlineIPs: 'オンラインIP',
+    noOnlineIP: 'オンラインIPはありません',
+    unknownTime: '不明な時間',
+    isp: '通信事業者',
+    location: '位置情報',
     telegram: 'Telegram通信',
     telegramError: 'Telegram情報取得失敗'
   },
