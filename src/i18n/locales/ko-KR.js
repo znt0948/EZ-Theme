@@ -461,6 +461,9 @@ export default {
     telegramSendCommand: '봇에 다음 명령을 전송하세요',
     commandCopied: '명령이 클립보드에 복사되었습니다',
     iKnow: '알겠습니다',
+    onlineIPs: '온라인 IP',
+    noOnlineIP: '온라인 IP가 없습니다',
+    unknownTime: '알 수 없는 시간',
     telegram: 'Telegram 통신',
     telegramError: 'Telegram 정보 가져오기 실패'
   },

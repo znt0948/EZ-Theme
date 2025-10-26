@@ -460,6 +460,9 @@ export default {
     telegramSendCommand: 'به ربات دستور زیر را ارسال کنید',
     commandCopied: 'دستور به کلیپ بورد کپی شد',
     iKnow: 'درک کردم',
+    onlineIPs: 'آی‌پی‌های آنلاین',
+    noOnlineIP: 'هیچ آی‌پی آنلاینی وجود ندارد',
+    unknownTime: 'زمان نامشخص',
     telegram: 'ارتباط Telegram',
     telegramError: 'دریافت اطلاعات Telegram شکست خورد'
   },

@@ -459,6 +459,9 @@ export default {
         telegramSendCommand: 'Gửi lệnh sau đây cho bot',
         commandCopied: 'Lệnh đã được sao chép vào clipboard',
         iKnow: 'Tôi hiểu',
+        onlineIPs: 'Địa chỉ IP trực tuyến',
+        noOnlineIP: 'Không có địa chỉ IP trực tuyến',
+        unknownTime: 'Thời gian không xác định',
         telegram: 'Liên lạc Telegram',
         telegramError: 'Lấy thông tin Telegram thất bại'
     },

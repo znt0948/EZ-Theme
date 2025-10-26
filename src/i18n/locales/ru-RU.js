@@ -460,6 +460,9 @@ export default {
     telegramSendCommand: 'Отправьте следующую команду боту',
     commandCopied: 'Команда скопирована в буфер обмена',
     iKnow: 'Понял',
+    onlineIPs: 'Онлайн IP-адреса',
+    noOnlineIP: 'Нет активных IP-адресов',
+    unknownTime: 'Неизвестное время',
     telegram: 'Связь через Telegram',
     telegramError: 'Ошибка получения информации Telegram'
   },

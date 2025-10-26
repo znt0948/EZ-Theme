@@ -459,6 +459,9 @@ export default {
     telegramSendCommand: '向機器人傳送以下指令',
     commandCopied: '指令已複製到剪貼簿',
     iKnow: '我知道了',
+    onlineIPs: '線上 IP',
+    noOnlineIP: '暫無線上 IP',
+    unknownTime: '未知時間',
     telegram: 'Telegram 通訊',
     telegramError: '取得Telegram資訊失敗'
   },

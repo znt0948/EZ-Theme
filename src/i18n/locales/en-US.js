@@ -464,6 +464,9 @@ export default {
         telegramSendCommand: 'Send the following command to the bot',
         commandCopied: 'Command copied to clipboard',
         iKnow: 'I Understand',
+        onlineIPs: 'Online IPs',
+        noOnlineIP: 'No online IPs',
+        unknownTime: 'Unknown time',
         telegram: 'Telegram Communication',
         telegramError: 'Failed to retrieve Telegram information'
     },
