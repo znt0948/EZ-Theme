@@ -1960,51 +1960,32 @@ export default {
 
 
 
+
 .auth-split-right {
-
-  flex: 0.8;
-
+  flex: 1.2;           // ✅ 增大右侧占比
   min-width: 320px;
-
-  max-width: 520px;
-
+  max-width: 600px;     // ✅ 允许更宽内容
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
-
   position: relative;
-
   background-color: var(--background-color);
-
   overflow-y: auto;
-
   height: 100%;
-
-
+  padding: 60px 40px;   // ✅ 内边距稍微加大
 
   @media (max-width: 992px) {
-
     width: 100%;
-
     max-width: none;
-
     flex: 1;
-
     justify-content: center;
-
     overflow-y: visible;
-
     display: flex;
-
-    padding: 60px 0;
-
+    padding: 60px 20px;  // ✅ 保证手机/小屏适配
     min-height: 100vh;
-
   }
-
 }
+
 
 
 
@@ -2051,33 +2032,19 @@ export default {
 
 
 .auth-form-container {
-
-  padding: 40px 40px;
-
+  padding: 40px;       // ✅ 统一内边距
   width: 100%;
-
-  max-width: 420px;
-
+  max-width: 480px;    // ✅ 放宽表单宽度
   margin: 0 auto;
-
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
 
-
-
   @media (max-width: 992px) {
-
     padding: 20px;
-
     margin: auto;
-
     width: 100%;
-
   }
-
 }
 
 
