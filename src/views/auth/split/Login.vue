@@ -31,15 +31,15 @@
 
         <div class="auth-form-container" v-else>
           <div class="auth-header">
-            <div class="auth-logo">
-              <img
-                :src="logoPath"
-                alt="Logo"
-                @error="handleLogoError"
-                @click="goTo('/')"
-              />
-            </div>
-            <h1 class="auth-title">{{ $t('auth.loginTitle') }}</h1>
+          <!-- 用 logo 替代标题 -->
+          <div class="auth-logo auth-title-logo" @click="goTo('/')">
+            <img
+              :src="logoPath"
+              alt="Logo"
+              @error="handleLogoError"
+            />
+          </div>
+
             <p class="auth-subtitle">{{ $t('auth.loginSubtitle') }}</p>
           </div>
 
@@ -500,9 +500,9 @@ export default {
 }
 
 .auth-split-right {
-  flex: 0.8;
+  flex: 1.2;           // ✅ 增大右侧占比
   min-width: 320px;
-  max-width: 520px;
+  max-width: 600px;     // ✅ 允许更宽内容
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -510,6 +510,7 @@ export default {
   background-color: var(--background-color);
   overflow-y: auto;
   height: 100%;
+  padding: 60px 40px;   // ✅ 内边距稍微加大
 
   @media (max-width: 992px) {
     width: 100%;
@@ -518,7 +519,7 @@ export default {
     justify-content: center;
     overflow-y: visible;
     display: flex;
-    padding: 60px 0;
+    padding: 60px 20px;  // ✅ 保证手机/小屏适配
     min-height: 100vh;
   }
 }
@@ -538,9 +539,9 @@ export default {
 }
 
 .auth-form-container {
-  padding: 40px 40px;
+  padding: 40px;       // ✅ 统一内边距
   width: 100%;
-  max-width: 420px;
+  max-width: 480px;    // ✅ 放宽表单宽度
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -562,7 +563,7 @@ export default {
   }
 
   .auth-title {
-    font-size: 1.75rem;
+    font-size: 2rem;    // ✅ 放大标题
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: var(--primary-text-color);
@@ -573,7 +574,7 @@ export default {
   }
 
   .auth-subtitle {
-    font-size: 1rem;
+    font-size: 1.1rem;  // ✅ 副标题稍大
     color: var(--secondary-text-color);
     margin-bottom: 1.5rem;
     white-space: pre-line;
@@ -911,12 +912,29 @@ export default {
 
   img {
     width: 100%;
-    max-width: 120px;
+    max-width: 200px;
     height: auto;
     border-radius: 0;
     object-fit: contain;
     cursor: pointer;
     user-select: none;
+  }
+}
+
+.auth-title-logo {
+  text-align: center;       // 居中显示
+  margin-bottom: 2rem;      // 与原标题相似的下间距
+
+  img {
+    width: 100%;            // 自适应父容器宽度
+    max-width: 250px;       // 最大宽度，保证不会过大
+    height: auto;           // 高度自适应
+    cursor: pointer;
+    object-fit: contain;
+  }
+
+  @media (min-width: 993px) {
+    text-align: left;       // 大屏幕左对齐
   }
 }
 
