@@ -316,6 +316,14 @@ export default {
       } catch (error) {
         console.error("登录状态检查失败", error);
       }
+      const updateLogo = () => {
+        const isDark = document.body.classList.contains('dark-theme');
+        logoPath.value = isDark ? '/images/logo-dark.png' : '/images/logo.png';
+      };
+      updateLogo();
+      window.addEventListener('theme-changed', updateLogo);
+      onUnmounted(() => window.removeEventListener('theme-changed', updateLogo));
+
     });
 
     const validateForm = () => {
@@ -500,7 +508,7 @@ export default {
 }
 
 .auth-split-right {
-  flex: 1.2;           // ✅ 增大右侧占比
+  flex: 0.8;           // ✅ 增大右侧占比
   min-width: 320px;
   max-width: 600px;     // ✅ 允许更宽内容
   display: flex;
@@ -576,7 +584,7 @@ export default {
   .auth-subtitle {
     font-size: 1.1rem;  // ✅ 副标题稍大
     color: var(--secondary-text-color);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.0rem;
     white-space: pre-line;
 
     @media (min-width: 993px) {
@@ -923,7 +931,7 @@ export default {
 
 .auth-title-logo {
   text-align: center;       // 居中显示
-  margin-bottom: 2rem;      // 与原标题相似的下间距
+  margin-bottom: 1.0rem;      // 与原标题相似的下间距
 
   img {
     width: 100%;            // 自适应父容器宽度

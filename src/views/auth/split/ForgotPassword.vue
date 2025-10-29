@@ -1616,6 +1616,13 @@ export default {
 
       }
 
+      const updateLogo = () => {
+        const isDark = document.body.classList.contains('dark-theme');
+        logoPath.value = isDark ? '/images/logo-dark.png' : '/images/logo.png';
+      };
+      updateLogo();
+      window.addEventListener('theme-changed', updateLogo);
+      onUnmounted(() => window.removeEventListener('theme-changed', updateLogo));
     });
 
 
@@ -1962,7 +1969,7 @@ export default {
 
 
 .auth-split-right {
-  flex: 1.2;           // ✅ 增大右侧占比
+  flex: 0.8;           // ✅ 增大右侧占比
   min-width: 320px;
   max-width: 600px;     // ✅ 允许更宽内容
   display: flex;

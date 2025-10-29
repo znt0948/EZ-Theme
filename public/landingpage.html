@@ -189,6 +189,11 @@
       background-color: #1a1a1a;
     }
 
+    /* 夜间模式下使用浅色 logo */
+    :root.dark-theme .footer-logo img {
+       content: url('./images/logo-dark.png') !important;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -585,6 +590,7 @@
       stroke: var(--primary-color);
       stroke-width: 1.5;
     }
+
 
     .copyright {
       color: var(--text-light);
@@ -1617,6 +1623,7 @@ function setupScrollAnimations() {
           document.getElementById('copyrightText').textContent = config.SITE_CONFIG.copyright;
         }
         
+
         // 设置 Hero 标题（多语言支持）
         if (config.SITE_CONFIG.landingText) {
           // 获取浏览器语言
@@ -1627,7 +1634,8 @@ function setupScrollAnimations() {
           
           document.getElementById('heroTitle').textContent = heroText;
         }
-        
+
+
         // 设置客户端下载链接
         if (config.CLIENT_CONFIG && config.CLIENT_CONFIG.clientLinks) {
           try {

@@ -1740,6 +1740,13 @@ export default {
 
       });
 
+      const updateLogo = () => {
+        const isDark = document.body.classList.contains('dark-theme');
+        logoPath.value = isDark ? '/images/logo-dark.png' : '/images/logo.png';
+      };
+      updateLogo();
+      window.addEventListener('theme-changed', updateLogo);
+      onUnmounted(() => window.removeEventListener('theme-changed', updateLogo));
     });
 
 
@@ -2533,7 +2540,7 @@ export default {
 
 
 .auth-split-right {
-  flex: 1.2;           // ✅ 增大右侧占比
+  flex: 0.8;           // ✅ 增大右侧占比
   min-width: 320px;
   max-width: 600px;     // ✅ 允许更宽内容
   display: flex;
@@ -2663,7 +2670,7 @@ export default {
 
     color: var(--secondary-text-color);
 
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.0rem;
 
 
 
@@ -3654,11 +3661,11 @@ export default {
 
   .auth-title-logo {
     text-align: center;       // 居中显示
-    margin-bottom: 2rem;      // 与原标题相似的下间距
+    margin-bottom: 1.0 rem;      // 与原标题相似的下间距
 
     img {
       width: 100%;            // 自适应父容器宽度
-      max-width: 250px;       // 最大宽度，保证不会过大
+      max-width: 300px;       // 最大宽度，保证不会过大
       height: auto;           // 高度自适应
       cursor: pointer;
       object-fit: contain;
