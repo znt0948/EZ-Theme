@@ -134,9 +134,97 @@
       animation: slideUp 0.8s ease 0.7s both;
     }
 
-    .hero-image {
-      animation: scaleIn 1.2s ease 0.8s both;
-    }
+.hero-image-wrapper {
+  position: relative;
+  display: block;
+  max-width: 100%
+}
+
+
+.hero-image {
+  max-width: 85%;
+  display: block;
+  border-radius: 12px;
+  animation: scaleIn 1.2s ease 0.8s both;
+}
+/* 浮动卡片容器 */
+.floating-cards-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  animation: scaleIn 1.2s ease 1.5s both;
+}
+
+/* 单个卡片样式 */
+.floating-card {
+  position: absolute;
+  width: 100px;
+  opacity: 0.9;
+  animation: floatMotion 6s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+}
+
+/* 浮动卡片环绕 hero-image 的下半弧形布局 
+.card1 { left: 50%; bottom: -18%; transform: translateX(-50%); } 
+.card2 { left: 38%; bottom: -10%; }  
+.card3 { left: 33%; bottom: 0%; }   
+.card4 { right: 33%; bottom: 5%; }   
+.card5 { right: 38%; bottom: -10%; } 
+.card6 { right: 50%; bottom: -18%; transform: translateX(50%); } 
+*/
+
+/* 桌面端位置，靠近 hero-image 中心 */
+.card1 { left: 55%; bottom: -20%; }
+.card2 { left: 25%; bottom: 12%; }
+.card3 { right: 60%; bottom: -15%; }
+.card4 { right: 28%; bottom: 5%; }
+.card5 { right: 27%; bottom: 47%; }
+.card6 { right: 36%; top: 12%; }
+
+
+/* 浮动无人机 */
+.floating-drones-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  animation: scaleIn 1.2s ease 1.5s both;
+}
+
+.drone {
+  position: absolute;
+  width: 60px;
+  animation: floatMotion 5s ease-in-out infinite;
+}
+
+.drone1 { top: 30%; left: 40%; }
+.drone2 { top: 45%; left: 55%; }
+
+/* 漂浮动画 */
+@keyframes floatMotion {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+/* 移动端缩小浮动元素并微调位置 */
+@media (max-width: 768px) {
+  .floating-card { width: 60px; }
+  .card1 { left: 30%; bottom: 10%; }
+  .card2 { left: 20%; bottom: 18%; }
+  .card3 { right: 30%; bottom: 10%; }
+  .card4 { right: 20%; bottom: 18%; }
+
+  .drone { width: 35px; }
+  .drone1 { top: 25%; left: 35%; }
+  .drone2 { top: 35%; left: 55%; }
+}
 
     .feature-card {
       animation: slideUp 0.8s ease both;
@@ -765,6 +853,11 @@
         color: var(--text-color);
         cursor: pointer;
       }
+
+      .floating-cards-wrapper,
+      .floating-drones-wrapper {
+      display: none !important;
+    }
     }
 
     /* 添加加载动画样式 */
@@ -911,22 +1004,15 @@
 <section class="hero hero-1 text-center">
   <div class="container">
 
-    <!-- 主标题（保留原来的蓝色风格） -->
-    <h1 class="hero-title mb-4" style="
-        font-size: 3rem;
-        font-weight: 900;
-        background: linear-gradient(90deg, #2a2685, #302c89);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        letter-spacing: 2px;
-    ">
-      HZ-EXTENSION
-    </h1>
+  <!-- 动态渐变标题 -->
+  <h1 class="hero-title mb-4">
+    HZ-EXTENSION
+  </h1>
 
     <!-- 副标题 -->
     <p class="hero-subtitle mb-4" ; font-size: 1rem; line-height: 1.8;">
-      通过覆盖全球的路由骨干实现网络流量分发<br>
-      峰值1200Mbps的单线接入能力
+      构建全球互联的高性能传输网络<br>
+      专为企业与开发者打造的 1200Mbps 单线接入通道<br> 
     </p>
 
     <!-- 按钮 -->
@@ -936,8 +1022,26 @@
     </div>
   </div>
 
-  <!-- 背景图 -->
-  <img src="/images/hero.png" alt="Dashboard Preview" class="hero-image">
+  <div class="hero-image-wrapper" style="position: relative; margin: 0 auto;">
+    <img src="/images/hero.png" class="hero-image">
+
+    <!-- 浮动卡片 -->
+    <div class="floating-cards-wrapper">
+      <img src="/images/float-card.png" class="floating-card card1">
+      <img src="/images/float-card.png" class="floating-card card2">
+      <img src="/images/float-card.png" class="floating-card card3">
+      <img src="/images/float-card.png" class="floating-card card4">
+      <img src="/images/float-card.png" class="floating-card card5">
+      <img src="/images/float-card.png" class="floating-card card6">
+    </div>
+
+    <!-- 浮动无人机 -->
+    <div class="floating-drones-wrapper">
+      <img src="/images/drone.png" class="drone drone1">
+      <img src="/images/drone.png" class="drone drone2">
+    </div>
+  </div>
+
 </section>
 
 <section class="features" id="features">
@@ -1125,10 +1229,54 @@
   }
 
   .feature-img {
-    max-width: 100%;
+    max-width: 80%;
     margin-top: 20px;
   }
 }
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 900;
+  background: linear-gradient(270deg, #2a2685, #3d5afe, #302c89, #00bcd4);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 8s ease infinite;
+  letter-spacing: 2px;
+  word-wrap: break-word;
+}
+
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem; /* 小屏幕缩小标题 */
+    
+  }
+}
+
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+
 </style>
 
   <section class="download" id="download">
@@ -1393,7 +1541,7 @@
 <section class="cta">
     <div class="cta-container">
       <h3>准备好开始您的探索了吗？</h3>
-      <p>加入我们，让世界触手可及</p>
+      <p>加入我们，创造无限可能</p>
       <a href="javascript:void(0)" onclick="navigateTo('register')" class="button cta-button">现在开始</a>
     </div>
   </section>

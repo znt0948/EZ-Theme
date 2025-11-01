@@ -76,14 +76,14 @@ export const config  = {
 
         // Landing页面多语言标语
         landingText: {
-            'zh-CN': '',
-            'vi-VN': '',
-            'en-US': '',
-            'zh-TW': '',
-            'ja-JP': '',
-            'ko-KR': '',
-            'ru-RU': '',
-            'fa-IR': ''
+            'zh-CN': '全球网络托管',
+            'vi-VN': 'Lưu trữ mạng toàn cầu',
+            'en-US': 'Global Network Hosting',
+            'zh-TW': '全球網路託管',
+            'ja-JP': 'グローバルネットワークホスティング',
+            'ko-KR': '글로벌 네트워크 호스팅',
+            'ru-RU': 'Глобальный хостинг сети',
+            'fa-IR': 'میزبانی شبکه جهانی'
         },
 
         // 自定义landing页面路径（相对于public目录
