@@ -142,14 +142,24 @@
                 <span class="info-label">{{ $t('dashboard.planName') }}</span>
                 <span class="info-value">{{ userPlan.name || $t('dashboard.noSubscription') }}</span>
               </div>
-              <div class="info-item">
-                <span class="info-label">{{ $t('dashboard.expiryDate') }}</span>
-                <span class="info-value">
-                  {{
-                    userPlan.isExpireDatePermanent ? $t('dashboard.permanent') : (userPlan.expireDate || $t('dashboard.none'))
-                  }}
-                </span>
-              </div>
+<div class="info-item">
+  <span class="info-label">{{ $t('dashboard.expiryDate') }}</span>
+  <span class="info-value">
+    {{
+      userPlan.isExpireDatePermanent
+        ? $t('dashboard.permanent')
+        : (
+            userPlan.expireDate
+              ? (
+                  new Date(userPlan.expireDate).getFullYear() + '-' +
+                  (new Date(userPlan.expireDate).getMonth() + 1) + '-' +
+                  new Date(userPlan.expireDate).getDate()
+                )
+              : $t('dashboard.none')
+          )
+    }}
+  </span>
+</div>
               <div class="info-item">
                 <span class="info-label">{{ $t('dashboard.planTraffic') }}</span>
                 <span class="info-value">{{ userPlan.totalTraffic || '0 GB' }}</span>
@@ -2033,29 +2043,35 @@ export default {
   .subscription-card {
     margin-bottom: 24px;
 
-    .subscription-info {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-bottom: 15px;
+.subscription-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 15px;
 
-      .info-item {
-        display: flex;
-        flex-direction: column;
+  .info-item {
+    display: flex;
+    flex-direction: row;  /* 水平布局 */
+    align-items: center;
+    min-width: 200px;     /* 每条最小宽度 */
+    gap: 12px;            /* label 与 value 间距 */
 
-        .info-label {
-          font-size: 13px;
-          color: var(--secondary-text-color);
-          margin-bottom: 5px;
-        }
-
-        .info-value {
-          font-size: 16px;
-          font-weight: 600;
-          color: var(--text-color);
-        }
-      }
+    .info-label {
+      font-size: 13px;
+      color: var(--secondary-text-color);
+      width: auto;         /* 取消固定宽度 */
+      text-align: left;    /* 左对齐 */
+      white-space: nowrap; /* 防止换行 */
     }
+
+    .info-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-color);
+      flex: none;           /* 不占剩余空间 */
+    }
+  }
+}
 
     .subscription-actions {
       display: flex;

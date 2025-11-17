@@ -134,12 +134,15 @@
       animation: slideUp 0.8s ease 0.7s both;
     }
 
+/* ================= Hero 区域 ================= */
 .hero-image-wrapper {
   position: relative;
-  display: block;
-  max-width: 100%
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
 }
-
 
 .hero-image {
   max-width: 85%;
@@ -147,7 +150,8 @@
   border-radius: 12px;
   animation: scaleIn 1.2s ease 0.8s both;
 }
-/* 浮动卡片容器 */
+
+/* ================= 浮动卡片 ================= */
 .floating-cards-wrapper {
   position: absolute;
   top: 0;
@@ -156,37 +160,24 @@
   height: 100%;
   pointer-events: none;
   z-index: 2;
-  animation: scaleIn 1.2s ease 1.5s both;
 }
 
-/* 单个卡片样式 */
 .floating-card {
   position: absolute;
   width: 100px;
   opacity: 0.9;
-  animation: floatMotion 6s ease-in-out infinite;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
 }
 
-/* 浮动卡片环绕 hero-image 的下半弧形布局 
-.card1 { left: 50%; bottom: -18%; transform: translateX(-50%); } 
-.card2 { left: 38%; bottom: -10%; }  
-.card3 { left: 33%; bottom: 0%; }   
-.card4 { right: 33%; bottom: 5%; }   
-.card5 { right: 38%; bottom: -10%; } 
-.card6 { right: 50%; bottom: -18%; transform: translateX(50%); } 
-*/
+/* 卡片位置 */
+.card1 { left: 5%; bottom: 15%; }
+.card6 { right: 5%; bottom: 55%;}
 
-/* 桌面端位置，靠近 hero-image 中心 */
-.card1 { left: 55%; bottom: -20%; }
-.card2 { left: 25%; bottom: 12%; }
-.card3 { right: 60%; bottom: -15%; }
-.card4 { right: 28%; bottom: 5%; }
-.card5 { right: 27%; bottom: 47%; }
-.card6 { right: 36%; top: 12%; }
+/* 卡片动画 */
+.card1 { animation: floatA 6s ease-in-out infinite, fadeIn 1.5s ease 1.2s both; }
+.card6 { animation: floatB 8s ease-in-out infinite, fadeIn 1.5s ease 2s both; }
 
-
-/* 浮动无人机 */
+/* ================= 浮动无人机 ================= */
 .floating-drones-wrapper {
   position: absolute;
   top: 0;
@@ -195,36 +186,62 @@
   height: 100%;
   pointer-events: none;
   z-index: 3;
-  animation: scaleIn 1.2s ease 1.5s both;
 }
 
 .drone {
   position: absolute;
   width: 60px;
-  animation: floatMotion 5s ease-in-out infinite;
+  opacity: 0.95;
 }
 
-.drone1 { top: 30%; left: 40%; }
-.drone2 { top: 45%; left: 55%; }
+/* 无人机位置及动画 */
+.drone1 { top: 30%; left: 20%; animation: floatC 7s ease-in-out infinite, fadeIn 1.2s ease 1.6s both; }
+.drone2 { top: 45%; right: 20%; animation: floatD 9s ease-in-out infinite, fadeIn 1.2s ease 2.2s both; }
 
-/* 漂浮动画 */
-@keyframes floatMotion {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(2deg); }
+/* ================= 动画定义 ================= */
+/* 浮动卡片动画 */
+@keyframes floatA {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-10px) rotate(-4deg); }
 }
 
-/* 移动端缩小浮动元素并微调位置 */
+@keyframes floatB {
+  0%, 100% { transform: translateY(0) rotate(6deg); }
+  50% { transform: translateY(15px) rotate(9deg); }
+}
+
+/* 无人机浮动动画 */
+@keyframes floatC {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -12px); }
+}
+
+@keyframes floatD {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-8px, -10px); }
+}
+
+/* 图片淡入动画（仅透明度） */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* 图片缩放动画 */
+@keyframes scaleIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ================= 移动端响应 ================= */
 @media (max-width: 768px) {
   .floating-card { width: 60px; }
-  .card1 { left: 30%; bottom: 10%; }
-  .card2 { left: 20%; bottom: 18%; }
-  .card3 { right: 30%; bottom: 10%; }
-  .card4 { right: 20%; bottom: 18%; }
+
 
   .drone { width: 35px; }
-  .drone1 { top: 25%; left: 35%; }
-  .drone2 { top: 35%; left: 55%; }
+
 }
+
 
     .feature-card {
       animation: slideUp 0.8s ease both;
@@ -244,7 +261,7 @@
     :root {
       --primary-color: #355cc2;
       --primary-color-light: #5c93ff;
-      --primary-rgb: 53, 92, 194; /* RGB值用于透明度计算 */
+      --primary-rgb: 53, 92, 194; /* RGB值用于透明度计算  5c93ff */
       --text-color: #333;
       --text-light: #666;
       --background-color: #fff;
@@ -401,15 +418,16 @@
       stroke: var(--text-color);
     }
 
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 24px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-align: center;
-    }
+.button {
+  display: inline-block;
+  padding: 6px 14px;       /* 略微缩小内边距 */
+  border-radius: 18px;      /* 略微缩小圆角 */
+  font-size: 0. nine rem;   /* 可根据原来大小略微缩小 */
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-align: center;
+}
 
     .primary-button {
       background-color: var(--primary-color);
@@ -853,11 +871,6 @@
         color: var(--text-color);
         cursor: pointer;
       }
-
-      .floating-cards-wrapper,
-      .floating-drones-wrapper {
-      display: none !important;
-    }
     }
 
     /* 添加加载动画样式 */
@@ -1017,21 +1030,18 @@
 
     <!-- 按钮 -->
     <div class="hero-buttons">
-      <a href="javascript:void(0)" onclick="navigateTo('register')" class="button primary-button">即刻体验</a>
+      <a href="javascript:void(0)" onclick="navigateTo('register')" class="button primary-button">立即开始</a>
       <a href="#download" class="button secondary-button">下载客户端</a>
     </div>
   </div>
 
-  <div class="hero-image-wrapper" style="position: relative; margin: 0 auto;">
+  <div class="hero-image-wrapper">
     <img src="/images/hero.png" class="hero-image">
 
     <!-- 浮动卡片 -->
     <div class="floating-cards-wrapper">
       <img src="/images/float-card.png" class="floating-card card1">
-      <img src="/images/float-card.png" class="floating-card card2">
-      <img src="/images/float-card.png" class="floating-card card3">
-      <img src="/images/float-card.png" class="floating-card card4">
-      <img src="/images/float-card.png" class="floating-card card5">
+
       <img src="/images/float-card.png" class="floating-card card6">
     </div>
 
@@ -1234,6 +1244,30 @@
   }
 }
 
+/* 动态流动渐变标题 */
+.hero-title {
+  position: relative;
+  display: inline-block;
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  word-wrap: break-word;
+  color: transparent;
+  background: linear-gradient(
+    270deg,
+    #3d5afe,
+    #302c89,
+    #2a2685,
+    #00bcd4,
+    #3d5afe
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 10s linear infinite;
+}
+
+/* 流动动画 */
 @keyframes gradientFlow {
   0% {
     background-position: 0% 50%;
@@ -1244,18 +1278,6 @@
   100% {
     background-position: 0% 50%;
   }
-}
-
-.hero-title {
-  font-size: 4rem;
-  font-weight: 900;
-  background: linear-gradient(270deg, #2a2685, #3d5afe, #302c89, #00bcd4);
-  background-size: 600% 600%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientFlow 8s ease infinite;
-  letter-spacing: 2px;
-  word-wrap: break-word;
 }
 
 @media (max-width: 1024px) {
@@ -1338,14 +1360,14 @@
     <div class="plan-grid">
 
       <div class="plan-card">
-        <h4>基础方案</h4>
+        <h4>个人方案</h4>
         <p class="plan-desc">轻量使用者首选，快速体验全球网络托管</p>
-        <div class="plan-price">¥3.88<span>/月</span></div>
+        <div class="plan-price">¥9.88<span>/月</span></div>
         <ul>
-          <li>45GB 全球流量</li>
-          <li>3 台设备同时在线</li>
+          <li>95GB 全球流量</li>
+          <li>3 个IP接入额度</li>
           <li>标准接入节点</li>
-          <li>国内中转优化</li>
+          <li>全球访问优化</li>
         </ul>
         <a href="javascript:void(0)" onclick="navigateTo('shop')" class="button plan-button">订阅</a>
       </div>
@@ -1356,7 +1378,7 @@
         <div class="plan-price">¥12.88<span>/月</span></div>
         <ul>
           <li>150GB 全球流量</li>
-          <li>5 台设备同时在线</li>
+          <li>5 个IP接入额度</li>
           <li>全球优先节点</li>
           <li>增强隐私与 DNS 保护</li>
         </ul>
@@ -1368,9 +1390,9 @@
         <p class="plan-desc">为团队与企业打造高可靠、定制化的网络环境</p>
         <div class="plan-price">¥59.88<span>/月</span></div>
         <ul>
-          <li>1000GB 全球流量</li>
-          <li>9 台设备同时在线</li>
-          <li>专属优先路由</li>
+          <li>800GB 全球流量</li>
+          <li>24 个IP接入额度</li>
+          <li>企业独立专线</li>
           <li>7×24 专属支持</li>
         </ul>
         <a href="javascript:void(0)" onclick="navigateTo('shop')" class="button plan-button">订阅</a>
