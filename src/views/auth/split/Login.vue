@@ -159,6 +159,7 @@ import { AUTH_LAYOUT_CONFIG, SITE_CONFIG, AUTH_CONFIG } from '@/utils/baseConfig
 import AuthPopup from '@/components/auth/AuthPopup.vue';
 import { shouldShowAuthPopup } from '@/utils/authPopupState';
 import { useNavigator } from "@/composables/useNavigator";
+import { useTheme } from '@/composables/useTheme';
 
 export default {
   name: 'LoginView',
@@ -178,7 +179,8 @@ export default {
     const router = useRouter();
     const { t } = useI18n();
     const { showToast } = useToast();
-    const { goTo } = useNavigator()
+    const { goTo } = useNavigator();
+    const { theme } = useTheme();
 
     const logoPath = ref('./images/logo.png');
     const handleLogoError = () => {
@@ -232,7 +234,11 @@ export default {
     });
 
     const leftSideStyles = computed(() => {
-      const backgroundImage = AUTH_LAYOUT_CONFIG?.splitLayout?.leftContent?.backgroundImage || '';
+      const isDark = theme.value === 'dark';
+      const config = AUTH_LAYOUT_CONFIG?.splitLayout?.leftContent;
+      const backgroundImage = isDark 
+        ? (config?.backgroundImageDark || config?.backgroundImage || '') 
+        : (config?.backgroundImage || '');
 
       if (backgroundImage) {
         return {

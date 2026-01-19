@@ -422,6 +422,7 @@ import AuthPopup from '@/components/auth/AuthPopup.vue';
 
 import { shouldShowAuthPopup } from '@/utils/authPopupState';
 import { useNavigator } from "@/composables/useNavigator";
+import { useTheme } from '@/composables/useTheme';
 
 
 
@@ -514,12 +515,10 @@ export default {
   setup() {
 
     const { t } = useI18n();
-
     const router = useRouter();
-
     const { showToast } = useToast();
-
-    const { goTo } = useNavigator()
+    const { goTo } = useNavigator();
+    const { theme } = useTheme();
 
 
 
@@ -582,31 +581,22 @@ export default {
 
 
     const leftSideStyles = computed(() => {
-
-      const backgroundImage = AUTH_LAYOUT_CONFIG?.splitLayout?.leftContent?.backgroundImage || '';
-
-
+      const isDark = theme.value === 'dark';
+      const config = AUTH_LAYOUT_CONFIG?.splitLayout?.leftContent;
+      const backgroundImage = isDark 
+        ? (config?.backgroundImageDark || config?.backgroundImage || '') 
+        : (config?.backgroundImage || '');
 
       if (backgroundImage) {
-
         return {
-
           'background-image': `url(${backgroundImage})`,
-
           'background-position': 'center',
-
           'background-size': 'cover',
-
           'background-repeat': 'no-repeat'
-
         };
-
       } else {
-
         return { background: 'var(--theme-color)' };
-
       }
-
     });
 
 

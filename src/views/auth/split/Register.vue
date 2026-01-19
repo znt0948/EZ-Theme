@@ -608,10 +608,9 @@ import DomainAuthAlert from '@/components/common/DomainAuthAlert.vue';
 import { CAPTCHA_CONFIG, AUTH_LAYOUT_CONFIG, SITE_CONFIG, AUTH_CONFIG } from '@/utils/baseConfig';
 
 import AuthPopup from '@/components/auth/AuthPopup.vue';
-
 import { shouldShowAuthPopup } from '@/utils/authPopupState';
-
 import { useNavigator } from "@/composables/useNavigator";
+import { useTheme } from '@/composables/useTheme';
 
 
 
@@ -708,12 +707,10 @@ export default {
   setup() {
 
     const { t } = useI18n();
-
     const router = useRouter();
-
     const { showToast } = useToast();
-
-    const { goTo } = useNavigator()
+    const { goTo } = useNavigator();
+    const { theme } = useTheme();
 
 
     const loading = ref(false);
@@ -775,31 +772,22 @@ export default {
 
 
     const leftSideStyles = computed(() => {
-
-      const backgroundImage = AUTH_LAYOUT_CONFIG?.splitLayout?.leftContent?.backgroundImage || '';
-
-
+      const isDark = (typeof theme !== 'undefined' && theme.value === 'dark');
+      const config = AUTH_LAYOUT_CONFIG?.splitLayout?.leftContent;
+      const backgroundImage = isDark 
+        ? (config?.backgroundImageDark || config?.backgroundImage || '') 
+        : (config?.backgroundImage || '');
 
       if (backgroundImage) {
-
         return {
-
           'background-image': `url(${backgroundImage})`,
-
           'background-position': 'center',
-
           'background-size': 'cover',
-
           'background-repeat': 'no-repeat'
-
         };
-
       } else {
-
         return { background: 'var(--theme-color)' };
-
       }
-
     });
 
 

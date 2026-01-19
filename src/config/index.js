@@ -154,6 +154,8 @@ export const config = {
             leftContent: {
                 // 左侧背景图片URL或路径 (如不设置则不设置图片背景)
                 backgroundImage: '/images/auth-bg-lightweight.png',
+                // 左侧暗色背景图片URL或路径
+                backgroundImageDark: '/images/auth-bg-darkweight.png',
 
                 // 左上角网站名称配置
                 siteName: {

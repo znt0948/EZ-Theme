@@ -1376,6 +1376,166 @@
     .tilt-content {
       transform: translateZ(20px);
     }
+
+    /* 6. Language Selector Styles */
+    .lang-selector-container {
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .custom-lang-selector {
+      position: relative;
+      user-select: none;
+    }
+
+    .lang-trigger {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    :root.dark-theme .lang-trigger {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .lang-trigger:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.15);
+    }
+
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      min-width: 160px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 10px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px) scale(0.92);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      transform-origin: top right;
+    }
+
+    :root.dark-theme .lang-dropdown {
+      background: rgba(30, 30, 32, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .lang-selector-container.active .lang-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .lang-selector-container.active .chevron-icon {
+      transform: rotate(180deg);
+      color: var(--primary-color);
+      opacity: 1;
+    }
+
+    .lang-option {
+      padding: 12px 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .lang-option:last-child {
+      margin-bottom: 0;
+    }
+
+    .lang-option:hover {
+      background: rgba(var(--primary-rgb), 0.1);
+      color: var(--primary-color);
+    }
+
+    .lang-option.active {
+      background: var(--primary-color);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+    }
+
+    .lang-option .check-icon {
+      opacity: 0;
+      filter: brightness(0) invert(1);
+      transition: all 0.3s ease;
+    }
+
+    .lang-option.active .check-icon {
+      opacity: 1;
+    }
+
+    .chevron-icon {
+      transition: all 0.3s ease;
+      opacity: 0.4;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-lang-selector {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+
+      .mobile-lang-btn {
+        flex: 1;
+        padding: 14px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .mobile-lang-btn.active {
+        background: var(--primary-color);
+        color: #fff;
+        border-color: var(--primary-color);
+        box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.25);
+        transform: scale(1.02);
+      }
+    }
   </style>
 </head>
 
@@ -1409,12 +1569,47 @@
       <h1 id="siteName">HzExtension</h1>
     </div>
     <nav class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#download">Clients</a>
-      <a href="javascript:void(0)" onclick="navigateTo('shop')">Pricing</a>
-      <a href="javascript:void(0)" onclick="navigateTo('tickets')">Support</a>
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#download" data-i18n="nav_clients">Clients</a>
+      <a href="javascript:void(0)" onclick="navigateTo('shop')" data-i18n="nav_pricing">Pricing</a>
+      <a href="javascript:void(0)" onclick="navigateTo('tickets')" data-i18n="nav_support">Support</a>
     </nav>
     <div class="nav-buttons">
+      <div class="lang-selector-container" id="langSelectorContainer">
+        <div class="custom-lang-selector">
+          <div class="lang-trigger" id="langTrigger">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+              </path>
+            </svg>
+            <span id="currentLangText">English</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="chevron-icon">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </div>
+          <div class="lang-dropdown" id="langDropdown">
+            <div class="lang-option" data-value="en">
+              <span>English</span>
+              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="lang-option" data-value="zh">
+              <span>中文</span>
+              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="theme-toggle" id="themeToggle">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -1430,8 +1625,10 @@
           <path d="M5.5 18.5l1.5 -1.5"></path>
         </svg>
       </div>
-      <a href="javascript:void(0)" onclick="navigateTo('login')" class="button secondary-button">Login</a>
-      <a href="javascript:void(0)" onclick="navigateTo('register')" class="button primary-button">Register</a>
+      <a href="javascript:void(0)" onclick="navigateTo('login')" class="button secondary-button"
+        data-i18n="login">Login</a>
+      <a href="javascript:void(0)" onclick="navigateTo('register')" class="button primary-button"
+        data-i18n="register">Register</a>
     </div>
     <button class="mobile-menu-button" id="mobileMenuButton">☰</button>
   </header>
@@ -1455,10 +1652,15 @@
       <span>Toggle Theme</span>
     </div>
     <div class="mobile-nav-links">
-      <a href="#features">Features</a>
-      <a href="#download">Clients</a>
-      <a href="javascript:void(0)" onclick="navigateTo('shop'); closeMobileMenu();">Pricing</a>
-      <a href="javascript:void(0)" onclick="navigateTo('tickets'); closeMobileMenu();">Support</a>
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#download" data-i18n="nav_clients">Clients</a>
+      <a href="javascript:void(0)" onclick="navigateTo('shop'); closeMobileMenu();" data-i18n="nav_pricing">Pricing</a>
+      <a href="javascript:void(0)" onclick="navigateTo('tickets'); closeMobileMenu();"
+        data-i18n="nav_support">Support</a>
+    </div>
+    <div class="mobile-lang-selector">
+      <div class="mobile-lang-btn" data-value="en" onclick="updateLanguage('en')">English</div>
+      <div class="mobile-lang-btn" data-value="zh" onclick="updateLanguage('zh')">中文</div>
     </div>
   </div>
 
@@ -1475,20 +1677,21 @@
     <div class="container" style="position: relative; z-index: 2;">
 
       <!-- 动态渐变标题 -->
-      <h1 class="hero-title mb-4">
+      <h1 class="hero-title mb-4" data-i18n="hero_title">
         HZ-EXTENSION
       </h1>
 
       <!-- 副标题 -->
-      <p class="hero-subtitle mb-4" style="font-size: 1rem; line-height: 1.8;">
+      <p class="hero-subtitle mb-4" style="font-size: 1rem; line-height: 1.8;" data-i18n="hero_subtitle">
         Building a High-Performance Global Interconnected Network<br>
         1200Mbps Dedicated Access Channel Built for Enterprises and Developers<br>
       </p>
 
       <!-- 按钮 -->
       <div class="hero-buttons">
-        <a href="javascript:void(0)" onclick="navigateTo('register')" class="button primary-button">Get Started</a>
-        <a href="#download" class="button secondary-button">Download Clients</a>
+        <a href="javascript:void(0)" onclick="navigateTo('register')" class="button primary-button"
+          data-i18n="get_started">Get Started</a>
+        <a href="#download" class="button secondary-button" data-i18n="download_clients">Download Clients</a>
       </div>
     </div>
 
@@ -1516,8 +1719,9 @@
   <!-- Statistics Section -->
   <section class="stats" id="stats">
     <div class="section-title">
-      <h3>Global Scale & Reliability</h3>
-      <p>Powering thousands of developers and businesses worldwide with unmatched speed and uptime.</p>
+      <h3 data-i18n="stats_title">Global Scale & Reliability</h3>
+      <p data-i18n="stats_subtitle">Powering thousands of developers and businesses worldwide with unmatched speed and
+        uptime.</p>
     </div>
 
     <!-- Map Background -->
@@ -1574,19 +1778,19 @@
     <div class="stats-container">
       <div class="stat-item">
         <h3 class="stat-number" data-target="10000">0</h3>
-        <p class="stat-label">Active Users</p>
+        <p class="stat-label" data-i18n="active_users">Active Users</p>
       </div>
       <div class="stat-item">
         <h3 class="stat-number" data-target="50">0</h3>
-        <p class="stat-label">Global Nodes</p>
+        <p class="stat-label" data-i18n="global_nodes">Global Nodes</p>
       </div>
       <div class="stat-item">
         <h3 class="stat-number" data-target="20">0</h3>
-        <p class="stat-label">Avg Latency (ms)</p>
+        <p class="stat-label" data-i18n="avg_latency">Avg Latency (ms)</p>
       </div>
       <div class="stat-item">
         <h3 class="stat-number" data-target="99">0</h3>
-        <p class="stat-label">Uptime (%)</p>
+        <p class="stat-label" data-i18n="uptime">Uptime (%)</p>
       </div>
     </div>
   </section>
@@ -1679,8 +1883,9 @@
 
   <section class="features" id="features">
     <div class="section-title">
-      <h3>Our Core Advantages</h3>
-      <p>Supporting your unlimited business potential with superior global network infrastructure</p>
+      <h3 data-i18n="features_title">Our Core Advantages</h3>
+      <p data-i18n="features_subtitle">Supporting your unlimited business potential with superior global network
+        infrastructure</p>
     </div>
     <div class="feature-grid">
       <div class="feature-card">
@@ -1693,8 +1898,8 @@
             <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
           </svg>
         </div>
-        <h4>Fast & Stable</h4>
-        <p>Direct connection to core backbone<br><strong>99.9%</strong> Uptime Guarantee</p>
+        <h4 data-i18n="feat_fast_title">Fast & Stable</h4>
+        <p data-i18n="feat_fast_desc">Direct connection to core backbone<br><strong>99.9%</strong> Uptime Guarantee</p>
       </div>
 
       <div class="feature-card">
@@ -1706,8 +1911,8 @@
             <path d="M8 11v-4a4 4 0 1 1 8 0v4"></path>
           </svg>
         </div>
-        <h4>Privacy & Security</h4>
-        <p>Self-developed DNS protection<br><strong>Zero</strong> Log Policy</p>
+        <h4 data-i18n="feat_privacy_title">Privacy & Security</h4>
+        <p data-i18n="feat_privacy_desc">Self-developed DNS protection<br><strong>Zero</strong> Log Policy</p>
       </div>
 
       <div class="feature-card">
@@ -1721,8 +1926,8 @@
             <path d="M12.5 3a17 17 0 0 1 0 18"></path>
           </svg>
         </div>
-        <h4>Global Connectivity</h4>
-        <p>Owned AS and core nodes<br><strong>50+</strong> Global Regions Covered</p>
+        <h4 data-i18n="feat_global_title">Global Connectivity</h4>
+        <p data-i18n="feat_global_desc">Owned AS and core nodes<br><strong>50+</strong> Global Regions Covered</p>
       </div>
 
       <div class="feature-card">
@@ -1734,8 +1939,8 @@
             <path d="M16 9h2"></path>
           </svg>
         </div>
-        <h4>Cross-Platform</h4>
-        <p>Supports mainstream operating systems<br>Seamless access anytime, anywhere</p>
+        <h4 data-i18n="feat_cross_title">Cross-Platform</h4>
+        <p data-i18n="feat_cross_desc">Supports mainstream operating systems<br>Seamless access anytime, anywhere</p>
       </div>
 
       <div class="feature-card">
@@ -1745,8 +1950,8 @@
             <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"></path>
           </svg>
         </div>
-        <h4>Plug & Play</h4>
-        <p>Smart strategy auto-routing<br>One-click connection, no configuration</p>
+        <h4 data-i18n="feat_plug_title">Plug & Play</h4>
+        <p data-i18n="feat_plug_desc">Smart strategy auto-routing<br>One-click connection, no configuration</p>
       </div>
 
       <div class="feature-card">
@@ -1758,8 +1963,8 @@
             </path>
           </svg>
         </div>
-        <h4>Personal Support</h4>
-        <p>24/7 service team<br>Quick response to every issue</p>
+        <h4 data-i18n="feat_support_title">Personal Support</h4>
+        <p data-i18n="feat_support_desc">24/7 service team<br>Quick response to every issue</p>
       </div>
     </div>
   </section>
@@ -1770,9 +1975,9 @@
     <!-- 生态协同 -->
     <div class="row align-items-center feature-row mb-6">
       <div class="col-md-5 order-1 order-md-2 mt-md-0 mt-5">
-        <span class="badge badge-pill badge-primary mb-4">Ecosystem Synergy</span>
-        <h2 class="mb-4">Unified Ecosystem, Smooth Experience</h2>
-        <p class="text-muted mb-5">
+        <span class="badge badge-pill badge-primary mb-4" data-i18n="eco_synergy_badge">Ecosystem Synergy</span>
+        <h2 class="mb-4" data-i18n="eco_synergy_title">Unified Ecosystem, Smooth Experience</h2>
+        <p class="text-muted mb-5" data-i18n="eco_synergy_desc">
           No matter what device you use, HzExtension intelligently identifies and syncs connection configurations in the
           cloud. Seamlessly sync data, preferences, and connection status across all terminals, truly achieving "set
           once, use everywhere".
@@ -1791,9 +1996,9 @@
           alt="Cloud intelligence optimization">
       </div>
       <div class="col-md-5 order-1 order-md-2 mt-md-0 mt-5">
-        <span class="badge badge-pill badge-primary mb-4">Cloud Intelligence</span>
-        <h2 class="mb-4">Understanding Your Connection Better</h2>
-        <p class="text-muted mb-5">
+        <span class="badge badge-pill badge-primary mb-4" data-i18n="cloud_intel_badge">Cloud Intelligence</span>
+        <h2 class="mb-4" data-i18n="cloud_intel_title">Understanding Your Connection Better</h2>
+        <p class="text-muted mb-5" data-i18n="cloud_intel_desc">
           HzExtension's intelligent routing and self-learning algorithms automatically optimize connection strategies
           based on real-time network conditions, providing the best network performance for shopping, work,
           entertainment, and other scenarios.
@@ -1804,9 +2009,9 @@
     <!-- 安全信任 -->
     <div class="row align-items-center feature-row mb-6">
       <div class="col-md-5 order-1 order-md-2 mt-md-0 mt-5">
-        <span class="badge badge-pill badge-primary mb-4">Security Trust</span>
-        <h2 class="mb-4">Securing Your Digital Trust at the Source</h2>
-        <p class="text-muted mb-5">
+        <span class="badge badge-pill badge-primary mb-4" data-i18n="security_trust_badge">Security Trust</span>
+        <h2 class="mb-4" data-i18n="security_trust_title">Securing Your Digital Trust at the Source</h2>
+        <p class="text-muted mb-5" data-i18n="security_trust_desc">
           We use end-to-end encryption and multi-factor authentication to provide the highest level of protection for
           your personal data and communication privacy. Wherever you are, HzExtension is your trusted network partner.
         </p>
@@ -1932,6 +2137,7 @@
           #3d5afe);
       background-size: 300% 300%;
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: gradientFlow 10s linear infinite;
     }
@@ -2128,8 +2334,9 @@
 
   <section class="download" id="download">
     <div class="section-title">
-      <h3>Cross-Platform Clients</h3>
-      <p>Support for all major platforms, enjoy high-speed experience anytime, anywhere</p>
+      <h3 data-i18n="download_title">Cross-Platform Clients</h3>
+      <p data-i18n="download_subtitle">Support for all major platforms, enjoy high-speed experience anytime, anywhere
+      </p>
     </div>
     <div class="client-grid">
       <div class="client-card" id="iosClient">
@@ -2142,9 +2349,9 @@
           <path d="M12 4a2 2 0 0 0 2 -2a2 2 0 0 0 -2 2" />
         </svg>
         <h4>iOS</h4>
-        <p>Client for iPhone and iPad</p>
+        <p data-i18n="client_ios_desc">Client for iPhone and iPad</p>
         <a href="https://apps.apple.com/us/app/sing-box-vt/id6673731168" class="button primary-button" target="_blank"
-          rel="noopener noreferrer">Download</a>
+          rel="noopener noreferrer" data-i18n="download">Download</a>
       </div>
       <div class="client-card" id="androidClient">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -2159,9 +2366,9 @@
           <path d="M15 18l0 3"></path>
         </svg>
         <h4>Android</h4>
-        <p>Client for Android phones and tablets</p>
+        <p data-i18n="client_android_desc">Client for Android phones and tablets</p>
         <a href="https://hzextension.cc/assets/clients/SFA.apk" class="button primary-button" target="_blank"
-          rel="noopener noreferrer">Download</a>
+          rel="noopener noreferrer" data-i18n="download">Download</a>
       </div>
       <div class="client-card" id="windowsClient">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -2174,9 +2381,9 @@
           <path d="M4 12l16 0"></path>
         </svg>
         <h4>Windows</h4>
-        <p>Client for Windows systems</p>
+        <p data-i18n="client_windows_desc">Client for Windows systems</p>
         <a href="https://hzextension.cc/assets/clients/clash-verge-rev-setup.exe" class="button primary-button"
-          target="_blank" rel="noopener noreferrer">Download</a>
+          target="_blank" rel="noopener noreferrer" data-i18n="download">Download</a>
       </div>
       <div class="client-card" id="macosClient">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -2186,9 +2393,9 @@
           <path d="M5 6m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z"></path>
         </svg>
         <h4>MacOS</h4>
-        <p>Client for Mac computers</p>
+        <p data-i18n="client_macos_desc">Client for Mac computers</p>
         <a href="https://apps.apple.com/us/app/sing-box-vt/id6673731168" class="button primary-button" target="_blank"
-          rel="noopener noreferrer">Download</a>
+          rel="noopener noreferrer" data-i18n="download">Download</a>
       </div>
     </div>
   </section>
@@ -2197,61 +2404,69 @@
   <section class="solutions" id="pricing">
     <div class="solutions-container">
       <div class="section-title">
-        <h3>Tailored Solutions for Different Scenarios</h3>
-        <p>From personal use to team collaboration, there is always a plan for you</p>
+        <h3 data-i18n="pricing_title">Tailored Solutions for Different Scenarios</h3>
+        <p data-i18n="pricing_subtitle">From personal use to team collaboration, there is always a plan for you</p>
       </div>
 
       <div class="pricing-toggle-container">
-        <span class="toggle-label">Monthly</span>
+        <span class="toggle-label" data-i18n="monthly">Monthly</span>
         <label class="switch">
           <input type="checkbox" id="pricingToggle">
           <span class="slider round"></span>
         </label>
-        <span class="toggle-label">Yearly <span class="badge badge-save">Save 20%</span></span>
+        <span class="toggle-label"><span data-i18n="yearly">Yearly</span> <span class="badge badge-save"
+            data-i18n="save_20">Save 20%</span></span>
       </div>
 
       <div class="plan-grid" id="plansGrid">
         <div class="plan-card">
-          <h4>Free Plan</h4>
-          <p class="plan-desc">For testing connection quality</p>
-          <div class="plan-price" data-monthly="$0<span>/mo</span>" data-yearly="$0<span>/yr</span>">$0<span>/mo</span>
+          <h4 data-i18n="free_plan">Free Plan</h4>
+          <p class="plan-desc" data-i18n="free_desc">For testing connection quality</p>
+          <div class="plan-price" data-monthly="$0<span data-i18n='pricing_suffix_mo'>/mo</span>"
+            data-yearly="$0<span data-i18n='pricing_suffix_yr'>/yr</span>">$0<span
+              data-i18n="pricing_suffix_mo">/mo</span>
           </div>
           <ul>
-            <li>2GB Data / Month</li>
-            <li>Basic Nodes</li>
-            <li>Community Support</li>
-            <li>1 Device</li>
+            <li data-i18n="data_2gb">2GB Data / Month</li>
+            <li data-i18n="basic_nodes">Basic Nodes</li>
+            <li data-i18n="community_support">Community Support</li>
+            <li data-i18n="device_1">1 Device</li>
           </ul>
-          <a href="javascript:void(0)" onclick="navigateTo('shop')" class="button plan-button">Subscribe</a>
+          <a href="javascript:void(0)" onclick="navigateTo('shop')" class="button plan-button"
+            data-i18n="subscribe">Subscribe</a>
         </div>
 
         <div class="plan-card featured">
-          <div class="popular-badge">Most Popular</div>
-          <h4>Personal</h4>
-          <p class="plan-desc">For high-speed needs</p>
-          <div class="plan-price" data-monthly="$1.49<span>/mo</span>" data-yearly="$14.90<span>/yr</span>">
-            $1.49<span>/mo</span></div>
+          <div class="popular-badge" data-i18n="most_popular">Most Popular</div>
+          <h4 data-i18n="personal_plan">Personal</h4>
+          <p class="plan-desc" data-i18n="personal_desc">For high-speed needs</p>
+          <div class="plan-price" data-monthly="$1.49<span data-i18n='pricing_suffix_mo'>/mo</span>"
+            data-yearly="$14.90<span data-i18n='pricing_suffix_yr'>/yr</span>">
+            $1.49<span data-i18n="pricing_suffix_mo">/mo</span></div>
           <ul>
-            <li>95GB Data / Month</li>
-            <li>Premium Global Nodes</li>
-            <li>Low Latency Guarantee</li>
-            <li>3 Devices</li>
+            <li data-i18n="data_95gb">95GB Data / Month</li>
+            <li data-i18n="premium_nodes">Premium Global Nodes</li>
+            <li data-i18n="low_latency">Low Latency Guarantee</li>
+            <li data-i18n="device_3">3 Devices</li>
           </ul>
-          <a href="javascript:void(0)" onclick="navigateTo('shop')" class="button plan-button">Subscribe</a>
+          <a href="javascript:void(0)" onclick="navigateTo('shop')" class="button plan-button"
+            data-i18n="subscribe">Subscribe</a>
         </div>
 
         <div class="plan-card">
-          <h4>Enterprise</h4>
-          <p class="plan-desc">For teams and heavy users</p>
-          <div class="plan-price" data-monthly="$5.99<span>/mo</span>" data-yearly="$59.90<span>/yr</span>">
-            $5.99<span>/mo</span></div>
+          <h4 data-i18n="enterprise_plan">Enterprise</h4>
+          <p class="plan-desc" data-i18n="enterprise_desc">For teams and heavy users</p>
+          <div class="plan-price" data-monthly="$5.99<span data-i18n='pricing_suffix_mo'>/mo</span>"
+            data-yearly="$59.90<span data-i18n='pricing_suffix_yr'>/yr</span>">
+            $5.99<span data-i18n="pricing_suffix_mo">/mo</span></div>
           <ul>
-            <li>Unlimited Data</li>
-            <li>Dedicated IP Nodes</li>
-            <li>Priority Support</li>
-            <li>Unlimited Devices</li>
+            <li data-i18n="unlimited_data">Unlimited Data</li>
+            <li data-i18n="dedicated_nodes">Dedicated IP Nodes</li>
+            <li data-i18n="priority_support">Priority Support</li>
+            <li data-i18n="device_unlimited">Unlimited Devices</li>
           </ul>
-          <a href="javascript:void(0)" onclick="navigateTo('shop')" class="button plan-button">Subscribe</a>
+          <a href="javascript:void(0)" onclick="navigateTo('shop')" class="button plan-button"
+            data-i18n="subscribe">Subscribe</a>
         </div>
       </div>
     </div>
@@ -2662,11 +2877,12 @@
 
   <section class="cta">
     <div class="cta-container">
-      <h3>Ready to Start Your Journey?</h3>
-      <p>Join over 10,000 users today and experience the difference.</p>
+      <h3 data-i18n="cta_title">Ready to Start Your Journey?</h3>
+      <p data-i18n="cta_subtitle">Join over 10,000 users today and experience the difference.</p>
 
       <div class="cta-actions">
-        <a href="javascript:void(0)" onclick="navigateTo('register')" class="button cta-button">Get Started Now</a>
+        <a href="javascript:void(0)" onclick="navigateTo('register')" class="button cta-button"
+          data-i18n="cta_button">Get Started Now</a>
       </div>
 
       <div class="guarantee-badge">
@@ -2675,7 +2891,7 @@
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           <path d="M9 12l2 2 4-4" />
         </svg>
-        <span>3-Day Money-Back Guarantee</span>
+        <span data-i18n="cta_guarantee">3-Day Money-Back Guarantee</span>
       </div>
     </div>
   </section>
@@ -2794,37 +3010,40 @@
 
   <section class="faq" id="faq">
     <div class="section-title">
-      <h3>Frequently Asked Questions</h3>
-      <p>Got questions? We've got answers.</p>
+      <h3 data-i18n="faq_title">Frequently Asked Questions</h3>
+      <p data-i18n="faq_subtitle">Got questions? We've got answers.</p>
     </div>
     <div class="faq-container">
       <div class="faq-item">
         <div class="faq-question">
-          <h4>What is the refund policy?</h4>
+          <h4 data-i18n="faq_q1">What is the refund policy?</h4>
           <span class="toggle-icon">+</span>
         </div>
         <div class="faq-answer">
-          <p>We offer a 3-day money-back guarantee. If you are not satisfied with our service, contact support for a
+          <p data-i18n="faq_a1">We offer a 3-day money-back guarantee. If you are not satisfied with our service,
+            contact support for a
             full refund.</p>
         </div>
       </div>
       <div class="faq-item">
         <div class="faq-question">
-          <h4>How many devices can I use?</h4>
+          <h4 data-i18n="faq_q2">How many devices can I use?</h4>
           <span class="toggle-icon">+</span>
         </div>
         <div class="faq-answer">
-          <p>It depends on your plan. The Personal plan supports 3 devices, Personal supports 5, and Enterprise
+          <p data-i18n="faq_a2">It depends on your plan. The Personal plan supports 3 devices, Personal supports 5, and
+            Enterprise
             supports 24.</p>
         </div>
       </div>
       <div class="faq-item">
         <div class="faq-question">
-          <h4>Do you keep logs?</h4>
+          <h4 data-i18n="faq_q3">Do you keep logs?</h4>
           <span class="toggle-icon">+</span>
         </div>
         <div class="faq-answer">
-          <p>No, we have a strict zero-log policy. We do not track, collect, or share your private data.</p>
+          <p data-i18n="faq_a3">No, we have a strict zero-log policy. We do not track, collect, or share your private
+            data.</p>
         </div>
       </div>
     </div>
@@ -2835,13 +3054,13 @@
       <img src="./images/logo.png" alt="Logo">
     </div>
     <div class="footer-links">
-      <a href="#">About Us</a>
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Service</a>
-      <a href="#">FAQ</a>
-      <a href="#">Contact Us</a>
+      <a href="#" data-i18n="footer_about">About Us</a>
+      <a href="#" data-i18n="footer_privacy">Privacy Policy</a>
+      <a href="#" data-i18n="footer_terms">Terms of Service</a>
+      <a href="#" data-i18n="footer_faq">FAQ</a>
+      <a href="#" data-i18n="footer_contact">Contact Us</a>
     </div>
-    <p class="copyright" id="copyrightText">© 2025 HzExtension. All Rights Reserved.</p>
+    <p class="copyright" id="copyrightText" data-i18n="copyright">© 2025 HzExtension. All Rights Reserved.</p>
   </footer>
 
   <script>
@@ -3077,6 +3296,281 @@
     // 添加主题切换事件
     themeToggle.addEventListener('click', toggleTheme);
     mobileThemeToggle.addEventListener('click', toggleTheme);
+
+    // ================= 多语言支持 (Multi-language Support) =================
+    const translations = {
+      en: {
+        nav_features: "Features",
+        nav_clients: "Clients",
+        nav_pricing: "Pricing",
+        nav_support: "Support",
+        login: "Login",
+        register: "Register",
+        hero_title: "HZ-EXTENSION",
+        hero_subtitle: "High-performance global network access<br>Custom 1200Mbps dedicated lines for enterprises and developers",
+        get_started: "Get Started",
+        download_clients: "Download Clients",
+        stats_title: "Global Scale & Reliability",
+        stats_subtitle: "Providing exceptional speed and uptime for thousands of developers and businesses worldwide.",
+        active_users: "Active Users",
+        global_nodes: "Global Nodes",
+        avg_latency: "Avg. Latency (ms)",
+        uptime: "Uptime (%)",
+        features_title: "Core Advantages",
+        features_subtitle: "Exceptional global network infrastructure to power your unlimited business potential",
+        feat_fast_title: "Fast & Stable",
+        feat_fast_desc: "Direct connection to core backbone<br><strong>99.9%</strong> Uptime Guarantee",
+        feat_privacy_title: "Privacy & Security",
+        feat_privacy_desc: "Self-developed DNS protection<br><strong>Zero</strong> Log Policy",
+        feat_global_title: "Global Connectivity",
+        feat_global_desc: "Owned AS and core nodes<br>50+ Global Regions Covered",
+        feat_cross_title: "Cross-Platform",
+        feat_cross_desc: "Supports mainstream operating systems<br>Seamless access anytime, anywhere",
+        feat_plug_title: "Plug & Play",
+        feat_plug_desc: "Smart strategy auto-routing<br>One-click connection, no configuration",
+        feat_support_title: "Personal Support",
+        feat_support_desc: "24/7 service team<br>Quick response to every issue",
+        eco_synergy_badge: "Ecosystem Synergy",
+        eco_synergy_title: "Unified Ecosystem, Smooth Experience",
+        eco_synergy_desc: "No matter what device you use, HzExtension intelligently identifies and syncs connection configurations in the cloud. Seamlessly sync data, preferences, and connection status.",
+        cloud_intel_badge: "Cloud Intelligence",
+        cloud_intel_title: "Understanding Your Connection Better",
+        cloud_intel_desc: "HzExtension's intelligent routing and self-learning algorithms automatically optimize connection strategies based on real-time network conditions.",
+        security_trust_badge: "Security Trust",
+        security_trust_title: "Securing Your Digital Trust at the Source",
+        security_trust_desc: "We use end-to-end encryption and multi-factor authentication to provide the highest level of protection for your personal data and communication privacy.",
+        download_title: "Cross-Platform Clients",
+        download_subtitle: "Support for all major platforms, enjoy high-speed experience anytime, anywhere",
+        client_ios_desc: "Client for iPhone and iPad",
+        client_android_desc: "Client for Android phones and tablets",
+        client_windows_desc: "Client for Windows systems",
+        client_macos_desc: "Client for Mac computers",
+        download: "Download",
+        pricing_title: "Tailored Solutions for Different Scenarios",
+        pricing_subtitle: "From personal use to team collaboration, there is always a plan for you",
+        monthly: "Monthly",
+        yearly: "Yearly",
+        save_20: "Save 20%",
+        free_plan: "Free Plan",
+        personal_plan: "Personal",
+        enterprise_plan: "Enterprise",
+        free_desc: "For testing connection quality",
+        personal_desc: "For high-speed needs",
+        enterprise_desc: "For teams and heavy users",
+        subscribe: "Subscribe",
+        most_popular: "Most Popular",
+        pricing_suffix_mo: "/mo",
+        pricing_suffix_yr: "/yr",
+        data_2gb: "2GB Data / Month",
+        data_95gb: "95GB Data / Month",
+        unlimited_data: "Unlimited Data",
+        basic_nodes: "Basic Nodes",
+        premium_nodes: "Premium Global Nodes",
+        dedicated_nodes: "Dedicated IP Nodes",
+        community_support: "Community Support",
+        priority_support: "Priority Support",
+        low_latency: "Low Latency Guarantee",
+        device_1: "1 Device",
+        device_3: "3 Devices",
+        device_unlimited: "Unlimited Devices",
+        cta_title: "Ready to Start Your Journey?",
+        cta_subtitle: "Join over 10,000 users today and experience the difference.",
+        cta_button: "Get Started Now",
+        cta_guarantee: "3-Day Money-Back Guarantee",
+        faq_title: "Frequently Asked Questions",
+        faq_subtitle: "Got questions? We've got answers.",
+        faq_q1: "What is the refund policy?",
+        faq_a1: "We offer a 3-day money-back guarantee. If you are not satisfied with our service, contact support for a full refund.",
+        faq_q2: "How many devices can I use?",
+        faq_a2: "It depends on your plan. The Personal plan supports 3 devices, Personal supports 5, and Enterprise supports 24.",
+        faq_q3: "Do you keep logs?",
+        faq_a3: "No, we have a strict zero-log policy. We do not track, collect, or share your private data.",
+        footer_about: "About Us",
+        footer_privacy: "Privacy Policy",
+        footer_terms: "Terms of Service",
+        footer_faq: "FAQ",
+        footer_contact: "Contact Us",
+        copyright: "© 2025 HzExtension. All Rights Reserved."
+      },
+      zh: {
+        nav_features: "功能特性",
+        nav_clients: "客户端下载",
+        nav_pricing: "价格方案",
+        nav_support: "技术支持",
+        login: "登录",
+        register: "注册",
+        hero_title: "HZ-EXTENSION",
+        hero_subtitle: "打造高性能全局网络托管<br>为企业和开发者量身定制的 1200Mbps 单线接入峰值",
+        get_started: "立即开始",
+        download_clients: "下载客户端",
+        stats_title: "全球规模与可靠性",
+        stats_subtitle: "为全球数千名开发者和企业提供卓越的速度和在线率保证。",
+        active_users: "活跃用户",
+        global_nodes: "全球节点",
+        avg_latency: "平均延迟 (ms)",
+        uptime: "在线率 (%)",
+        features_title: "核心优势",
+        features_subtitle: "卓越的全球网络基础设施，助力您的无限业务潜力",
+        feat_fast_title: "极速稳定",
+        feat_fast_desc: "直连核心骨干网络<br><strong>99.9%</strong> 在线率保证",
+        feat_privacy_title: "隐私安全",
+        feat_privacy_desc: "自主研发 DNS 保护<br><strong>零</strong> 日志策略",
+        feat_global_title: "全球互联",
+        feat_global_desc: "自备 AS 和核心节点<br>覆盖 <strong>50+</strong> 全球地区",
+        feat_cross_title: "跨平台支持",
+        feat_cross_desc: "支持主流操作系统<br>随时随地无缝访问",
+        feat_plug_title: "即插即用",
+        feat_plug_desc: "智能策略自动路由<br>一键连接，无需配置",
+        feat_support_title: "专属支持",
+        feat_support_desc: "24/7 服务团队<br>快速响应每个问题",
+        eco_synergy_badge: "生态协同",
+        eco_synergy_title: "统一生态，畅快体验",
+        eco_synergy_desc: "无论您使用何种设备，HzExtension 都能在云端智能识别并同步连接配置。在所有终端之间无缝同步数据、偏好和连接状态。",
+        cloud_intel_badge: "云端智能",
+        cloud_intel_title: "更懂您的连接需求",
+        cloud_intel_desc: "HzExtension 的智能路由和自学习算法可根据实时网络状况自动优化连接策略，为办公、开发、娱乐提供最佳性能。",
+        security_trust_badge: "安全信任",
+        security_trust_title: "从源头保障您的数字信任",
+        security_trust_desc: "我们采用端到端加密和多因素身份验证，为您的个人数据和通信隐私提供最高级别的保护。",
+        download_title: "跨平台客户端",
+        download_subtitle: "支持所有主流平台，随时随地享受高速体验",
+        client_ios_desc: "适用于 iPhone 和 iPad",
+        client_android_desc: "适用于安卓手机和平板",
+        client_windows_desc: "适用于 Windows 系统",
+        client_macos_desc: "适用于 MacOS 系统",
+        download: "立即下载",
+        pricing_title: "量身定制的解决方案",
+        pricing_subtitle: "从个人使用到团队协作，总有一款方案适合您",
+        monthly: "月付",
+        yearly: "年付",
+        save_20: "节省 20%",
+        free_plan: "免费方案",
+        personal_plan: "个人方案",
+        enterprise_plan: "企业方案",
+        free_desc: "用于测试连接质量",
+        personal_desc: "满足高速上网需求",
+        enterprise_desc: "适合团队和高强度用户",
+        subscribe: "立即订阅",
+        most_popular: "最受欢迎",
+        pricing_suffix_mo: "/月",
+        pricing_suffix_yr: "/年",
+        data_2gb: "2GB 每月流量",
+        data_95gb: "95GB 每月流量",
+        unlimited_data: "无限流量",
+        basic_nodes: "基础节点",
+        premium_nodes: "全球优质专业节点",
+        dedicated_nodes: "独享 IP 节点",
+        community_support: "社区支持",
+        priority_support: "优先技术支持",
+        low_latency: "低延迟保证",
+        device_1: "1 台设备",
+        device_3: "3 台设备",
+        device_unlimited: "不限制设备数",
+        cta_title: "准备好开启您的旅程了吗？",
+        cta_subtitle: "立即加入超过 10,000 名用户，体验与众不同。",
+        cta_button: "立即开始使用",
+        cta_guarantee: "3 天无理由退款保证",
+        faq_title: "常见问题",
+        faq_subtitle: "有问题？我们为您解答。",
+        faq_q1: "退款政策是什么？",
+        faq_a1: "我们提供 3 天无理由退款保证。如果您对我们的服务不满意，请联系支持团队进行全额退款。",
+        faq_q2: "我可以使用多少台设备？",
+        faq_a2: "这取决于您的方案。个人方案支持3台设备，企业方案支持24台。",
+        faq_q3: "你们会保存日志吗？",
+        faq_a3: "不会。我们实行严格的零日志政策，不会追踪、收集或共享您的任何私人数据。",
+        footer_about: "关于我们",
+        footer_privacy: "隐私政策",
+        footer_terms: "服务条款",
+        footer_faq: "常见问题",
+        footer_contact: "联系我们",
+        copyright: "© 2025 HzExtension. All Rights Reserved."
+      }
+    };
+
+    function updateLanguage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      // 更新价格卡片的 data 属性
+      const moSuffix = lang === 'zh' ? '<span>/月</span>' : '<span>/mo</span>';
+      const yrSuffix = lang === 'zh' ? '<span>/年</span>' : '<span>/yr</span>';
+
+      document.querySelectorAll('.plan-price').forEach(el => {
+        // 先获取原始价格数值（通过正则表达式提取数字部分）
+        const moAttr = el.getAttribute('data-monthly');
+        const yrAttr = el.getAttribute('data-yearly');
+
+        if (moAttr) {
+          const priceVal = moAttr.split('<')[0]; // 提取 $0, $1.49 等
+          el.setAttribute('data-monthly', priceVal + moSuffix);
+        }
+        if (yrAttr) {
+          const priceVal = yrAttr.split('<')[0];
+          el.setAttribute('data-yearly', priceVal + yrSuffix);
+        }
+      });
+
+      // 重新触发当前价格显示
+      const pricingToggle = document.getElementById('pricingToggle');
+      const prices = document.querySelectorAll('.plan-price');
+      if (pricingToggle && prices.length > 0) {
+        const isYearly = pricingToggle.checked;
+        prices.forEach(price => {
+          if (isYearly) {
+            price.innerHTML = price.getAttribute('data-yearly');
+          } else {
+            price.innerHTML = price.getAttribute('data-monthly');
+          }
+        });
+      }
+
+      localStorage.setItem('ez-language-preference', lang);
+
+      // 更新自定义下拉框显示
+      const langText = lang === 'zh' ? '中文' : 'English';
+      document.getElementById('currentLangText').textContent = langText;
+
+      // 更新选项激活状态
+      document.querySelectorAll('.lang-option, .mobile-lang-btn').forEach(opt => {
+        if (opt.getAttribute('data-value') === lang) {
+          opt.classList.add('active');
+        } else {
+          opt.classList.remove('active');
+        }
+      });
+    }
+
+    const langSelectorContainer = document.getElementById('langSelectorContainer');
+    const langTrigger = document.getElementById('langTrigger');
+    const langOptions = document.querySelectorAll('.lang-option');
+
+    langTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      langSelectorContainer.classList.toggle('active');
+    });
+
+    langOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        const val = option.getAttribute('data-value');
+        updateLanguage(val);
+        langSelectorContainer.classList.remove('active');
+      });
+    });
+
+    // 点击外部关闭下拉框
+    document.addEventListener('click', () => {
+      langSelectorContainer.classList.remove('active');
+    });
+
+    // 初始语言检测
+    const savedLang = localStorage.getItem('ez-language-preference');
+    const browserLangStr = (navigator.language || navigator.userLanguage).startsWith('zh') ? 'zh' : 'en';
+    const initialLang = savedLang || browserLangStr;
+    updateLanguage(initialLang);
 
     // 动态设置网站名称和版权信息
     document.addEventListener('DOMContentLoaded', function () {
