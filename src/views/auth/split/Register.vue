@@ -65,7 +65,7 @@
 
           <div class="auth-header">
 
-          <div class="auth-logo auth-title-logo" @click="goTo('/')">
+          <div class="auth-logo auth-title-logo" @click="goTo('/')" v-if="showAuthLogo">
             <img
               :src="logoPath"
               alt="Logo"
@@ -818,6 +818,10 @@ export default {
 
       return color.toLowerCase() === 'black' ? 'black' : 'white';
 
+    });
+
+    const showAuthLogo = computed(() => {
+      return AUTH_CONFIG.showLogo !== false;
     });
 
 
@@ -2271,17 +2275,14 @@ export default {
       codeSent,
 
       cooldown,
-
       sendVerificationCode,
-
       handleRegister,
-
+      showAuthLogo,
+      logoPath,
+      handleLogoError,
       isValidEmail,
-
       showPassword,
-
       showConfirmPassword,
-
       config,
 
       emailPrefix,
@@ -2451,7 +2452,7 @@ export default {
 
     bottom: 0;
 
-    background: rgba(0, 0, 0, 0.2);
+    background: transparent;
 
     z-index: 1;
 

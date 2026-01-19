@@ -426,8 +426,8 @@
     .floating-card {
       position: absolute;
       width: 100px;
-      opacity: 0.9;
-      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+      opacity: 1;
+      filter: drop-shadow(0 10px 25px rgba(53, 92, 194, 0.25));
     }
 
     /* 卡片位置 */
@@ -464,7 +464,8 @@
     .drone {
       position: absolute;
       width: 60px;
-      opacity: 0.95;
+      opacity: 1;
+      filter: drop-shadow(0 10px 20px rgba(53, 92, 194, 0.2));
     }
 
     /* 无人机位置及动画 */
@@ -772,7 +773,7 @@
       /* 略微缩小内边距 */
       border-radius: 18px;
       /* 略微缩小圆角 */
-      font-size: 0. nine rem;
+      font-size: 0.9rem;
       /* 可根据原来大小略微缩小 */
       font-weight: 500;
       text-decoration: none;
@@ -1347,6 +1348,34 @@
         opacity: 1;
       }
     }
+
+    /* ================= 视觉增强 (Visual Enhancements) ================= */
+
+
+
+
+
+    /* 4. 导航栏增强 (Navbar Polish) */
+    header {
+      /* Existing styles conflict slightly so we use important or rely on cascade */
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05), inset 0 -1px 0 rgba(255, 255, 255, 0.15) !important;
+    }
+
+    :root.dark-theme header {
+      border-bottom: 2px solid rgba(255, 255, 255, 0.03) !important;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), inset 0 -1px 0 rgba(255, 255, 255, 0.05) !important;
+    }
+
+    /* 5. 3D Tilt 效果 CSS */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transform: perspective(1000px);
+    }
+
+    .tilt-content {
+      transform: translateZ(20px);
+    }
   </style>
 </head>
 
@@ -1355,6 +1384,9 @@
   <!-- <div class="preloader" id="preloader">
     <div class="loader"></div>
   </div> -->
+
+
+
 
   <!-- 放置在body开始处，初始应用正确主题以避免闪烁 -->
   <script>
@@ -1438,6 +1470,8 @@
       <div class="ambient-orb orb-3"></div>
     </div>
 
+
+
     <div class="container" style="position: relative; z-index: 2;">
 
       <!-- 动态渐变标题 -->
@@ -1446,7 +1480,7 @@
       </h1>
 
       <!-- 副标题 -->
-      <p class="hero-subtitle mb-4" ; font-size: 1rem; line-height: 1.8;">
+      <p class="hero-subtitle mb-4" style="font-size: 1rem; line-height: 1.8;">
         Building a High-Performance Global Interconnected Network<br>
         1200Mbps Dedicated Access Channel Built for Enterprises and Developers<br>
       </p>
@@ -1511,9 +1545,6 @@
            M649.3,259.4c0.2-1.8,1.2-2.4,2.7-1.8c1.3,0.5,1.8,1.6,1.4,2.9c-0.4,1.1-1.3,1.5-2.6,1.1C649.9,261.2,649.5,260.4,649.3,259.4z
            M137.9,232c0.9,0.7,1.1,1.7,0.7,2.8c-0.5,1.1-1.5,1.3-2.6,0.8c-1-0.5-1.2-1.5-0.6-2.5C135.9,232,136.8,231.6,137.9,232z" />
       </svg>
-    </div>
-
-    </svg>
     </div>
 
     <!-- Bar Chart Decoration -->
@@ -1727,7 +1758,7 @@
             </path>
           </svg>
         </div>
-        <h4>Professional Support</h4>
+        <h4>Personal Support</h4>
         <p>24/7 service team<br>Quick response to every issue</p>
       </div>
     </div>
@@ -2196,12 +2227,12 @@
 
         <div class="plan-card featured">
           <div class="popular-badge">Most Popular</div>
-          <h4>Professional</h4>
+          <h4>Personal</h4>
           <p class="plan-desc">For high-speed needs</p>
           <div class="plan-price" data-monthly="$1.49<span>/mo</span>" data-yearly="$14.90<span>/yr</span>">
             $1.49<span>/mo</span></div>
           <ul>
-            <li>100GB Data / Month</li>
+            <li>95GB Data / Month</li>
             <li>Premium Global Nodes</li>
             <li>Low Latency Guarantee</li>
             <li>3 Devices</li>
@@ -2644,7 +2675,7 @@
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           <path d="M9 12l2 2 4-4" />
         </svg>
-        <span>30-Day Money-Back Guarantee</span>
+        <span>3-Day Money-Back Guarantee</span>
       </div>
     </div>
   </section>
@@ -2783,7 +2814,7 @@
           <span class="toggle-icon">+</span>
         </div>
         <div class="faq-answer">
-          <p>It depends on your plan. The Personal plan supports 3 devices, Professional supports 5, and Enterprise
+          <p>It depends on your plan. The Personal plan supports 3 devices, Personal supports 5, and Enterprise
             supports 24.</p>
         </div>
       </div>
@@ -2830,7 +2861,48 @@
 
       // 设置滚动触发动画
       setupScrollAnimations();
+
+      // 初始化 3D 倾斜效果
+      initTiltEffect();
     });
+
+    // 3D 倾斜效果逻辑
+    function initTiltEffect() {
+      // 选择所有要应用效果的卡片
+      const cards = document.querySelectorAll('.feature-card, .plan-card, .client-card, .cta-container');
+
+      cards.forEach(card => {
+        card.classList.add('tilt-card');
+
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+      });
+
+      function handleMouseMove(e) {
+        const card = this;
+        const rect = card.getBoundingClientRect();
+
+        // 计算鼠标相对卡片中心的位置
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        // 计算旋转角度 (系数 20 控制旋转幅度)
+        const rotateX = ((y - centerY) / centerY) * -5; // 上下移动导致绕X轴旋转
+        const rotateY = ((x - centerX) / centerX) * 5;  // 左右移动导致绕Y轴旋转
+
+        // 应用变换
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        card.style.transition = 'transform 0.1s ease-out'; // 移动时快速响应
+      }
+
+      function handleMouseLeave(e) {
+        // 复位
+        this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        this.style.transition = 'transform 0.5s ease-out'; // 离开时平滑复位
+      }
+    }
 
     // 设置滚动动画
     function setupScrollAnimations() {
@@ -3239,11 +3311,19 @@
             let current = 0;
             const updateCounter = () => {
               current += increment;
+              const label = counter.nextElementSibling.innerText;
+              let suffix = '+';
+              if (label.includes('%')) {
+                suffix = '%';
+              } else if (label.toLowerCase().includes('ms')) {
+                suffix = 'ms';
+              }
+
               if (current < target) {
-                counter.textContent = Math.ceil(current) + (counter.nextElementSibling.innerText.includes('%') ? '%' : '+');
+                counter.textContent = Math.ceil(current) + suffix;
                 requestAnimationFrame(updateCounter);
               } else {
-                counter.textContent = target + (counter.nextElementSibling.innerText.includes('%') ? '%' : '+');
+                counter.textContent = target + suffix;
               }
             };
             updateCounter();

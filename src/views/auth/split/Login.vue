@@ -31,15 +31,15 @@
 
         <div class="auth-form-container" v-else>
           <div class="auth-header">
-          <!-- 用 logo 替代标题 -->
-          <div class="auth-logo auth-title-logo" @click="goTo('/')">
-            <img
-              :src="logoPath"
-              alt="Logo"
-              @error="handleLogoError"
-            />
-          </div>
-
+            <div class="auth-logo" v-if="showAuthLogo">
+              <img
+                :src="logoPath"
+                alt="Logo"
+                @error="handleLogoError"
+                @click="goTo('/')"
+              />
+            </div>
+            <h1 class="auth-title">{{ $t('auth.loginTitle') }}</h1>
             <p class="auth-subtitle">{{ $t('auth.loginSubtitle') }}</p>
           </div>
 
@@ -227,6 +227,10 @@ export default {
       return color.toLowerCase() === 'black' ? 'black' : 'white';
     });
 
+    const showAuthLogo = computed(() => {
+      return AUTH_CONFIG.showLogo !== false;
+    });
+
     const leftSideStyles = computed(() => {
       const backgroundImage = AUTH_LAYOUT_CONFIG?.splitLayout?.leftContent?.backgroundImage || '';
 
@@ -316,14 +320,6 @@ export default {
       } catch (error) {
         console.error("登录状态检查失败", error);
       }
-      const updateLogo = () => {
-        const isDark = document.body.classList.contains('dark-theme');
-        logoPath.value = isDark ? '/images/logo-dark.png' : '/images/logo.png';
-      };
-      updateLogo();
-      window.addEventListener('theme-changed', updateLogo);
-      onUnmounted(() => window.removeEventListener('theme-changed', updateLogo));
-
     });
 
     const validateForm = () => {
@@ -393,6 +389,7 @@ export default {
 
       logoPath,
       handleLogoError,
+      showAuthLogo,
       leftSideStyles,
       configLoading,
       showCaptchaModal,
@@ -456,15 +453,15 @@ export default {
     display: none;
   }
 
-.left-content-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.2); // 可以根据需要调整透明度
-  z-index: 1;  // 改为 0，让它在背景下方
-}
+  .left-content-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 1;
+  }
 
   .site-name {
     position: absolute;
@@ -508,9 +505,9 @@ export default {
 }
 
 .auth-split-right {
-  flex: 0.8;           // ✅ 增大右侧占比
+  flex: 1;
   min-width: 320px;
-  max-width: 600px;     // ✅ 允许更宽内容
+  max-width: 520px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -518,7 +515,6 @@ export default {
   background-color: var(--background-color);
   overflow-y: auto;
   height: 100%;
-  padding: 60px 40px;   // ✅ 内边距稍微加大
 
   @media (max-width: 992px) {
     width: 100%;
@@ -527,7 +523,7 @@ export default {
     justify-content: center;
     overflow-y: visible;
     display: flex;
-    padding: 60px 20px;  // ✅ 保证手机/小屏适配
+    padding: 60px 0;
     min-height: 100vh;
   }
 }
@@ -547,9 +543,9 @@ export default {
 }
 
 .auth-form-container {
-  padding: 40px;       // ✅ 统一内边距
+  padding: 40px 40px;
   width: 100%;
-  max-width: 480px;    // ✅ 放宽表单宽度
+  max-width: 420px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -571,7 +567,7 @@ export default {
   }
 
   .auth-title {
-    font-size: 2rem;    // ✅ 放大标题
+    font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: var(--primary-text-color);
@@ -582,10 +578,9 @@ export default {
   }
 
   .auth-subtitle {
-    font-size: 1.1rem;  // ✅ 副标题稍大
+    font-size: 1rem;
     color: var(--secondary-text-color);
-    margin-bottom: 1.0rem;
-    white-space: pre-line;
+    margin-bottom: 1.5rem;
 
     @media (min-width: 993px) {
       text-align: left;
@@ -919,30 +914,14 @@ export default {
   }
 
   img {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    border-radius: 0;
-    object-fit: contain;
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+    border-radius: 12px;
+    object-fit: cover;
     cursor: pointer;
     user-select: none;
-  }
-}
-
-.auth-title-logo {
-  text-align: center;       // 居中显示
-  margin-bottom: 1.0rem;      // 与原标题相似的下间距
-
-  img {
-    width: 100%;            // 自适应父容器宽度
-    max-width: 250px;       // 最大宽度，保证不会过大
-    height: auto;           // 高度自适应
-    cursor: pointer;
-    object-fit: contain;
-  }
-
-  @media (min-width: 993px) {
-    text-align: left;       // 大屏幕左对齐
   }
 }
 
